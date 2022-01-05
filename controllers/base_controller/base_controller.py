@@ -1,28 +1,44 @@
 """base_controller controller."""
-
-# You may need to import some classes of the controller module. Ex:
-#  from controller import Robot, Motor, DistanceSensor
 from controller import Robot
+from controller import Receiver
+import threading
+import struct
+import modules.communication as comm
 
-# create the Robot instance.
+orders = []
+battery = 100
+BASE_COORDS = {"0":[1,2,3]}
+
+
+SUPERVISOR_EMITTER_CHANNEL = 0
+
 robot = Robot()
-state = "check_new_orders"
-# get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())
+receiver = robot.getDevice("receiver")
+receiver.setChannel(SUPERVISOR_EMITTER_CHANNEL)
+receiver.enable(timestep)
 
-# You should insert a getDevice-like function in order to get the
-# instance of a device of the robot. Something like:
-#  motor = robot.getDevice('motorname')
-#  ds = robot.getDevice('dsname')
-#  ds.enable(timestep)
+state = "check_new_orders"
 
-# Main loop:
-# - perform simulation steps until Webots is stopping the controller
+def update_orders():
+    global battery, orders
+    while True:
+        if receiver.getQueueLength() > 0:
+            x = receiver.getData()
+            # [ "chd" , ORDER_ID , WEIGHT , DESTINATION , BASE ]
+            dataList = struct.unpack("chd",x)
+            receiver.nextPacket()
+
+
+
+th = threading.Thread(target=update_orders, args=())
+th.start()
+
 while robot.step(timestep) != -1:
     if state== "check_new_orders":
         #code
         pass
-    elif state== "move_over_box":
+    elif state== "move_near_base":
         #code
         pass
     elif state== "land_on_box":
