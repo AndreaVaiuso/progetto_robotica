@@ -11,7 +11,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 1 0 0 4.71238898038469
-  position -0.05257071274482747 2138.2381438252587 -0.021412705101959053
+  position -0.05257071274482747 2410.056905075405 -0.02141270510200898
   near 3
 }
 Mavic2Pro {
@@ -29210,19 +29210,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -591.45 0 -255.99
-  name "building(40)"
-  corners [
-    0 0
-    0.25 10.06
-    -10.02 10.31
-    -10.19 3.63
-    -10.27 0.26
-  ]
-  wallType "glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -594.3 0 -431.18
   name "building(41)"
   corners [
@@ -29484,89 +29471,6 @@ SimpleBuilding {
   wallType "old building"
 }
 SimpleBuilding {
-  translation -391.36 0 -32.94
-  name "building(61)"
-  corners [
-    0 0
-    -0.31 31.77
-    -11.91 31.77
-    -11.87 -0.32
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation -359.71 0 -55.31
-  name "building(62)"
-  corners [
-    0 0
-    -0.05 39.59
-    -11.65 39.6
-    -10.94 -0.09
-  ]
-  wallType "red and white building"
-}
-SimpleBuilding {
-  translation -369.05 0 2.33
-  name "building(63)"
-  corners [
-    0 0
-    2.37 42.76
-    -0.52 45.8
-    -11.86 33.34
-    -10.94 -0.09
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 266.89 0 403.23
-  name "building(64)"
-  corners [
-    0 0
-    -20.55 30.88
-    72.75 69.39
-    89.53 58.69
-    89.89 55.94
-  ]
-  wallType "red and white building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 286.07 0 371.79
-  name "building(65)"
-  corners [
-    0 0
-    37.48 34.72
-    71.64 71.15
-    67.59 73.86
-    -12.46 21.81
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 248.04 0 338.47
-  name "building(66)"
-  corners [
-    0 0
-    -17.95 25.34
-    16.1 47.43
-    29.25 26.18
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation 237.12 0 327.67
-  name "building(67)"
-  corners [
-    0 0
-    -19.96 28.94
-    -46.07 13.14
-    -25.11 -25.27
-  ]
-  wallType "brick building"
-}
-SimpleBuilding {
   translation -185.94 0 196.29
   name "building(68)"
   corners [
@@ -29637,320 +29541,6 @@ SimpleBuilding {
     -15.37 -10.6
   ]
   wallType "old house"
-}
-SimpleBuilding {
-  translation -215.68 0 94.15
-  name "building(83)"
-  corners [
-    0 0
-    -26.21 36.91
-    -38 28.61
-    -12.32 -9.98
-  ]
-  wallType "arcade-style building"
-}
-SimpleBuilding {
-  translation -317.63 0 61.46
-  name "building(84)"
-  corners [
-    0 0
-    -6.57 10.49
-    -35.17 -6.2
-    -26.35 -17.49
-  ]
-  wallType "transparent highrise"
-}
-SimpleBuilding {
-  translation -238.53 0 -30.08
-  name "building(85)"
-  corners [
-    0 0
-    0.57 30.41
-    -9.98 30.22
-    -10 -0.18
-  ]
-  wallType "arcade-style building"
-}
-SimpleBuilding {
-  translation -268.91 0 -44.46
-  name "building(86)"
-  corners [
-    0 0
-    0 30.96
-    -11.69 32.43
-    -11.68 0.63
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -298.44 0 -56.56
-  name "building(87)"
-  corners [
-    0 0
-    1.38 31.83
-    -10.54 30.49
-    -10.86 1.2
-  ]
-  wallType "old office building"
-}
-SimpleBuilding {
-  translation -328.08 0 -69.28
-  name "building(88)"
-  corners [
-    0 0
-    0.28 31.25
-    -10.26 30.23
-    -10.02 1.22
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -383.11 0 -83.09
-  name "building(89)"
-  corners [
-    0 0
-    -15.52 13.12
-    -22.06 5.75
-    -7.63 -8.5
-  ]
-  wallType "old brick building"
-}
-SimpleBuilding {
-  translation -439.63 0 -107.25
-  name "building(90)"
-  corners [
-    0 0
-    -8.52 10.16
-    18.98 41.62
-    25.75 36.44
-  ]
-  wallType "old building"
-}
-SimpleBuilding {
-  translation -448.17 0 -111.59
-  name "building(91)"
-  corners [
-    0 0
-    -7.92 7.96
-    -23.72 -9.62
-    -15.83 -15.34
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
-  translation -458.17 0 -79.95
-  name "building(92)"
-  corners [
-    0 0
-    -5.07 7.92
-    -42.54 -13.31
-    -37.96 -21.04
-    -2.18 -2.27
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -436.02 0 -52.72
-  name "building(93)"
-  corners [
-    0 0
-    -8.41 4.87
-    -19.2 -13.74
-    -10.64 -17.75
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -460.96 0 -32.52
-  name "building(94)"
-  corners [
-    0 0
-    -32.9 22.29
-    -37.99 11.32
-    -19.76 3.61
-    -6.52 -8.48
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -530.13 0 -32.98
-  name "building(95)"
-  corners [
-    0 0
-    11.02 36.46
-    21.09 32.45
-    11.43 -2.31
-  ]
-  wallType "blue glass building"
-}
-SimpleBuilding {
-  translation -513.78 0 -61.98
-  name "building(96)"
-  corners [
-    0 0
-    -8.11 18.27
-    -17.51 15.86
-    -10.51 -2.7
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -521.87 0 -91.42
-  name "building(97)"
-  corners [
-    0 0
-    5.24 17.39
-    -4.25 20.57
-    -8.92 1.8
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
-  translation -552.24 0 -70.76
-  name "building(98)"
-  corners [
-    0 0
-    -18.06 15.58
-    -22.65 8.53
-    -5.68 -8.75
-  ]
-  wallType "office building"
-}
-SimpleBuilding {
-  translation -495.59 0 -132.24
-  name "building(99)"
-  corners [
-    0 0
-    -12.21 15.13
-    -19.32 9.15
-    -7.93 -6.55
-  ]
-  wallType "brick building"
-}
-SimpleBuilding {
-  translation -518.54 0 -122.33
-  name "building(100)"
-  corners [
-    0 0
-    3.48 7.6
-    -14.45 15.93
-    -17.96 9.72
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -553.1 0 -151.7
-  name "building(101)"
-  corners [
-    0 0
-    13.78 37.35
-    7.87 40.87
-    3.53 35.49
-    -9.75 1.22
-    -2.74 -2.56
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -561.71 0 -162.01
-  name "building(102)"
-  corners [
-    0 0
-    -3.49 8.59
-    -44.02 -8.88
-    -40.21 -19.69
-  ]
-  wallType "office building"
-}
-SimpleBuilding {
-  translation -567.7 0 -107.3
-  name "building(103)"
-  corners [
-    0 0
-    -32.96 10.01
-    -30.04 17.88
-    1.55 7.28
-  ]
-  wallType "highrise"
-}
-SimpleBuilding {
-  translation -611.72 0 -156.73
-  name "building(104)"
-  corners [
-    0 0
-    -29.69 29.05
-    -36.77 20.83
-    -6.53 -7.92
-  ]
-  wallType "old brick building"
-}
-SimpleBuilding {
-  translation -644.55 0 -121.54
-  name "building(105)"
-  corners [
-    0 0
-    -19.03 38.71
-    -27.25 32.44
-    -9.94 -4.08
-  ]
-  wallType "highrise"
-}
-SimpleBuilding {
-  translation -647.86 0 -51.19
-  name "building(106)"
-  corners [
-    0 0
-    -5.41 7.99
-    -26.53 -7.45
-    -18.31 -17.34
-  ]
-}
-SimpleBuilding {
-  translation -683.8 0 -68.53
-  name "building(107)"
-  corners [
-    0 0
-    -12.04 20.99
-    -21.38 15.24
-    -8.22 -6.01
-  ]
-  wallType "transparent highrise"
-}
-SimpleBuilding {
-  translation -675.24 0 7.68
-  name "building(108)"
-  corners [
-    0 0
-    -7.32 6
-    -24.21 -12.99
-    -18 -18.46
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -562.05 0 -19.04
-  name "building(109)"
-  corners [
-    0 0
-    -6.78 6.29
-    -33.45 -24.87
-    -26.64 -32.83
-  ]
-  wallType "residential building"
-}
-SimpleBuilding {
-  translation -606.74 0 -61.23
-  name "building(110)"
-  corners [
-    0 0
-    -48.01 44.62
-    -40.66 52.28
-    8.15 10.47
-  ]
-  wallType "glass highrise"
 }
 SimpleBuilding {
   translation -558.8 0 4.57
@@ -30077,26 +29667,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -752.16 0 -124.2
-  name "building(121)"
-  corners [
-    0 0
-    6.07 6.98
-    31.44 -12.85
-    36.39 -5.57
-    34.32 -2.62
-    47.71 13.86
-    54.89 8
-    41.67 -8.87
-    39.81 -7.53
-    32.86 -15.09
-    40.21 -21.75
-    34.07 -28.96
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -726.68 0 173.01
   name "building(122)"
   corners [
@@ -30154,26 +29724,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -722.21 0 -79.96
-  name "building(126)"
-  corners [
-    0 0
-    -8.08 11.33
-    -11.19 9.34
-    -12.91 11.16
-    -22.13 4.86
-    -18.15 -1.53
-    -26.5 -7.09
-    -20.44 -13.7
-    -17.55 -12.92
-    -14.1 -16.41
-    -1.08 -6.56
-    -2.67 -3.44
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -716.52 0 22.38
   name "building(127)"
   corners [
@@ -30205,25 +29755,6 @@ SimpleBuilding {
     -8.64 26.67
     -11.8 1.37
   ]
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -695.2 0 -169.6
-  name "building(129)"
-  corners [
-    0 0
-    -6.85 6.45
-    -2.72 11.98
-    -7.01 15.43
-    2.05 26.6
-    8.89 20.87
-    4.54 16.45
-    8.42 12.68
-    10.82 8.38
-    8.42 7.22
-    6.02 6.57
-  ]
-  wallType "glass building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -30280,16 +29811,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -614.75 0 -88.51
-  name "building(134)"
-  corners [
-    0 0
-    5.85 7.29
-    -20.15 28.75
-    -24.97 22.01
-  ]
-}
-SimpleBuilding {
   translation -658.5 0 80.77
   name "building(135)"
   corners [
@@ -30326,59 +29847,6 @@ SimpleBuilding {
   ]
   wallType "arcade-style building"
   roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -580.09 0 -136.08
-  name "building(137)"
-  corners [
-    0 0
-    -10.99 3.99
-    -5.03 19.63
-    3.47 16.52
-    3.01 13.76
-    4.21 11.57
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -739.59 0 -315.32
-  name "building(138)"
-  corners [
-    0 0
-    -10.47 6.48
-    -2.92 17.02
-    -5.77 19.39
-    5.89 36.26
-    9.48 38.14
-    23.23 56.87
-    -8.26 85.29
-    -0.08 94.53
-    10.14 85.42
-    9.07 83.28
-    24.11 69.21
-    26.31 70.46
-    37.51 61.87
-    23.82 46.38
-    27 42.59
-    20.38 30.46
-    18.06 30.73
-    7.1 13.56
-    7.93 12.47
-  ]
-  wallType "glass highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -595.04 0 -151.09
-  name "building(139)"
-  corners [
-    0 0
-    7.67 7.71
-    0.5 15.41
-    -8.97 7.41
-  ]
-  wallType "classic building"
 }
 SimpleBuilding {
   translation -627.25 0 302.7
@@ -30463,22 +29931,6 @@ SimpleBuilding {
     -2.06 -3.86
   ]
   wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 102.82 0 300.67
-  name "building(145)"
-  corners [
-    0 0
-    -36.39 54.05
-    -41.21 50.85
-    -38.38 47.67
-    -41.11 45.18
-    -38.24 39.78
-    -59.52 28.74
-    -30.67 -18.89
-  ]
-  wallType "residential building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -30582,30 +30034,6 @@ SimpleBuilding {
     0 0, 7.92 6.48, 21.14 -8.65, 40.31 9.21, 40.54 13.95, 21.72 6.95, 18.93 13.56, 14.36 11.22, 9.63 18.66, 12.71 20.23, 12.35 22.15, 15.43 23.92, 17.74 19.77, 58.87 30.83, 74.15 -9.75, 54.44 -14.83, 48.18 -18.49, 46.53 -21.86, 37.33 -40.08, 35.31 -40.86, 33.59 -46.06, 26.79 -43.17, 24.93 -41.16, 26.02 -36.52, 37.73 -14.7, 45.33 -8.65, 49.7 -7.28, 47.97 -0.54, 43.47 -0.19, 40.21 -3.37, 13.8 -35.02, 22.8 -47.54, 28.22 -51.31, 27.2 -54.56, 32.69 -61.66, 46.26 -72.71, 50.47 -74.57, 69.69 -77.45, 69.66 -82.29, 45.52 -79.17, 34.01 -69.81, 29.77 -72.68, 21.47 -63.15, -3.66 -34.35, -14.8 -22.19, -11.23 -18.47, -9.28 -19.95, -7.58 -18.95, -7.73 -16.48, -2.99 -12.41, -1.58 -13.35, 0.43 -11.82, 3.18 -15.96, 8.89 -11.56
   ]
   wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 27.76 0 336.07
-  name "building(153)"
-  corners [
-    0 0
-    31 15.14
-    28.56 22.48
-    -5.38 13.43
-  ]
-  wallType "factory building"
-}
-SimpleBuilding {
-  translation -305.67 0 39.31
-  name "building(154)"
-  corners [
-    0 0
-    -6.25 8.81
-    -35.98 -10.96
-    -33.5 -18.23
-    -26.76 -18.32
-  ]
-  wallType "transparent highrise"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -30768,26 +30196,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 75.15 0 176.28
-  name "building(166)"
-  corners [
-    0 0
-    -8.52 12.86
-    -16.86 7.81
-    -14.93 3.29
-    -18.51 0.95
-    -25.62 10.29
-    -29.9 7.93
-    -23.36 -1.13
-    -27.14 -3.75
-    -33.67 4.66
-    -38.43 1.31
-    -23.73 -16.43
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -11.44 0 434.04
   name "building(167)"
   corners [
@@ -30818,178 +30226,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -188.21 0 303.16
-  name "building(168)"
-  corners [
-    0 0
-    -5.42 24.92
-    -17.01 23.05
-    -11.86 -2.43
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation -244.91 0 67.52
-  name "building(169)"
-  corners [
-    0 0
-    -8.3 -6.26
-    -39.83 29.75
-    -31.56 37.46
-    -26.95 33.54
-    -27.29 40.09
-    -18.23 47.48
-    12.85 -0.55
-    6.97 -5.55
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 254.58 0 396.46
-  name "building(170)"
-  corners [
-    0 0
-    -33 -19.35
-    -53.42 16.01
-    -32.95 24.43
-    -27.93 14.79
-    -33.27 11.36
-    -33.45 6.22
-    -35.38 5.21
-    -34.03 -0.88
-    -12.76 9.78
-    -14.19 12.26
-    -19.6 12.72
-    -24.41 18.61
-    -27.02 17.45
-    -31.9 27.51
-    -17.43 31.1
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -191.07 0 -5.57
-  name "Giovanni Falcone"
-  corners [
-    0 0
-    -26.13 29.14
-    3.01 54.87
-    9.34 47.64
-    -0.35 38.24
-    4.72 33.55
-    13.66 41.49
-    30.21 25.67
-    17.46 14.1
-    18.08 10.88
-    15.57 9.17
-    13.47 8.58
-    15.75 5.06
-    11.16 1.65
-    7.33 5.24
-  ]
-  wallType "concrete building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -255.19 0 397.84
-  name "building(171)"
-  corners [
-    0 0
-    -10.43 0.92
-    -4.99 74.2
-    -10.69 77.79
-    -14.06 74.16
-    -33.53 88.21
-    -26.97 98.16
-    -4.52 82.33
-    -5.82 79.59
-    -1.12 76.85
-    0.38 75.03
-    5.3 74.38
-  ]
-  wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -440.69 0 274.87
-  name "building(172)"
-  corners [
-    0 0
-    -5.56 -0.2
-    -7.04 4.39
-    -2.59 7.05
-    -15.61 29.07
-    -24.71 23.32
-    -13.35 4.28
-    -10.89 -1.59
-    -4.15 -25.65
-    5.76 -23.22
-  ]
-  wallType "tall house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -574.32 0 260.75
-  name "building(173)"
-  corners [
-    0 0
-    -10.89 22.28
-    -19.47 17.72
-    -17.91 13.87
-    -19.18 13.1
-    -13.91 0.18
-    -12.01 1.08
-    -9.25 -3.28
-  ]
-  wallType "glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -205.14 0 492.37
-  name "building(174)"
-  corners [
-    0 0
-    -12.46 3.31
-    34.56 45.2
-    38.46 41.57
-    35.75 39.22
-    37.69 32.95
-    29.14 22.96
-    35.75 21.24
-    30.88 2.7
-    11.93 9.59
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -203.6 0 232.48
-  name "building(175)"
-  corners [
-    0 0
-    -2.18 10.78
-    -12.35 9.17
-    -10.29 0.89
-    -6.06 1.81
-    -4.8 -0.73
-  ]
-  wallType "glass highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -478.8 0 284.43
-  name "building(176)"
-  corners [
-    0 0
-    -3.23 3.38
-    -6.86 0.04
-    -4.14 -3.35
-  ]
-  wallType "old office building"
-}
-SimpleBuilding {
   translation -279.44 0 438.86
   name "building(177)"
   corners [
@@ -31010,30 +30246,6 @@ SimpleBuilding {
     -4.33 -1.97
   ]
   wallType "old brick building"
-}
-SimpleBuilding {
-  translation 468.2 0 520.77
-  name "building(179)"
-  corners [
-    0 0
-    7.53 5.03
-    17.4 -7.24
-    44.24 -5.28
-    45.15 -11.59
-    21.89 -14.54
-    11.38 -16.44
-    4.44 -7.95
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 238.42 0 442.05
-  name "building(180)"
-  corners [
-    0 0, -14.63 31.76, -12.65 32.46, -13.7 35.66, -16.46 35.06, -18.35 42.26, -16.87 45.62, 19.08 59.93, 48.31 72.45, 49.91 62.81, 52.02 62.71, 53.36 62.18, 54.82 66.88, 74.13 52.21, 76.1 53.13, 78.13 51.73, 76.16 43.69, 79.41 35.85, 65.25 28.71, 61.45 30.64, 63.39 33.34, 61.82 34.54, 66.7 40.74, 59.71 47.39, 56.95 47.24, 52.03 49.59, 37.73 44.12, 19.02 32.45, 13.22 40.46, 7.66 36.36, 4.42 37.52, 4.79 41.64, -2.46 38.4, -0.28 33.66, 2.68 35.94, 6.82 27.56, 17.49 31.09, 20.3 29.02, 36.97 37.76, 41.48 33.4, 45.9 33.92, 56.77 26
-  ]
-  roofShape "flat roof"
 }
 SimpleBuilding {
   translation -228.76 0 289.36
@@ -31130,20 +30342,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -168.88 0 79.1
-  name "building(186)"
-  corners [
-    0 0
-    -19.12 22.78
-    -41.39 4.93
-    -34.22 -5.84
-    -37.17 -8.11
-    -25.66 -20.36
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -439.98 0 428.55
   name "building(187)"
   corners [
@@ -31234,30 +30432,6 @@ SimpleBuilding {
   wallType "old office building"
 }
 SimpleBuilding {
-  translation 82.75 0 183.8
-  name "building(192)"
-  corners [
-    0 0
-    25.82 23.59
-    9.86 49.76
-    -2.32 42.98
-    -0.23 37.8
-    -6.32 37.91
-    -11.07 43.72
-    -15.03 41.98
-    -34.54 68.32
-    -40.97 63.09
-    -21.37 37.53
-    -24.43 35.59
-    -19.44 28.9
-    -16.61 31.73
-    -13.52 25.56
-    -16.21 21.39
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -95.08 0 433.94
   name "building(193)"
   corners [
@@ -31299,15 +30473,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 211.87 0 370.65
-  name "building(195)"
-  corners [
-    0 0, -22.6 35.56, -106.46 13.57, -178.62 -4.73, -238.27 -15.69, -231.3 -28.24, -228.73 -26.46, -229.33 -22.13, -224.47 -23.44, -221.98 -27.56, -158.82 -8.9, -144.12 -8.11, -142.65 -13.3, -120.44 -7, -116.38 -2.07, -95.67 0.74, -94.87 4.05, -86.73 3.68, -85.66 2.13, -72.77 6.01, -73.01 10.34, -63.37 12.78, -59.86 9.71, -38.49 14.6, -32.48 7.07, -36.74 3.52, -25.46 -17.64
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -712.91 0 392.16
   name "building(196)"
   corners [
@@ -31317,24 +30482,6 @@ SimpleBuilding {
     10.73 21.3
   ]
   wallType "old brick building"
-}
-SimpleBuilding {
-  translation 133.87 0 519.11
-  name "building(197)"
-  corners [
-    0 0
-    -11.99 21.91
-    -39.93 8.33
-    -37.13 3.98
-    -30.39 4.22
-    -23.27 -9.93
-    -12.58 -4.63
-    -18.77 9.77
-    -15.04 13.64
-    -5.64 -2.71
-  ]
-  wallType "stone brick"
-  roofShape "flat roof"
 }
 SimpleBuilding {
   translation -392.61 0 202.3
@@ -31455,34 +30602,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 145.21 0 326.44
-  name "building(204)"
-  corners [
-    0 0
-    -8.38 16.74
-    0.5 22.01
-    5.39 14.1
-    9.22 17.28
-    7.78 23.14
-    10.21 23.19
-    11.85 18.22
-    15.79 20.95
-    14.5 24.82
-    18.56 27.01
-    15.69 32.63
-    7.06 26.47
-    5.18 32.11
-    10 34.97
-    9.15 39.4
-    4.94 39.33
-    3.63 45.09
-    14 46.72
-    29.43 19.98
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -114.59 0 443.61
   name "building(205)"
   corners [
@@ -31506,175 +30625,6 @@ SimpleBuilding {
     4.72 17.54
   ]
   wallType "tall house"
-}
-SimpleBuilding {
-  translation -219.21 0 214.98
-  name "building(207)"
-  corners [
-    0 0
-    -3.29 16.84
-    -18.29 13.8
-    -16.14 -1.39
-  ]
-  wallType "arcade-style building"
-}
-SimpleBuilding {
-  translation -26.15 0 421.3
-  name "building(208)"
-  corners [
-    0 0, -5.44 6.56, -11.42 3.12, -18.97 8.22, -21.67 6.15, -25.74 9.29, -32.92 -0.11, -28.55 -6.45, -39.12 -10.92, -38.71 -13.89, -40.79 -17.26, -34.91 -21.2, -42.58 -29.3, -47.13 -26.76, -47.29 -30.81, -54.35 -33.67, -56.8 -29.55, -58.8 -29.94, -58.94 -35.3, -55.97 -35.84, -54.75 -38.07, -58.97 -40.05, -61.22 -40.57, -61.96 -38.8, -63.75 -38.23, -66.35 -31.38, -71.89 -33.03, -72.61 -39.11, -75.8 -39.4, -76.09 -43.45, -82.83 -43.81, -89.46 -43.69, -99.81 -41.61, -109.29 -40.71, -109.68 -51.66, -114.77 -52.22, -112.99 -59.21, -100.37 -56.25, -95.07 -54.61, -66.6 -50.9, -58.62 -46.83, -48.6 -43.91, -38.1 -35.29
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 147.46 0 361.72
-  name "building(209)"
-  corners [
-    0 0
-    -5.55 7.12
-    -23.73 2.58
-    -12.36 -14.67
-    -4.04 -9.41
-    -8.7 -2.5
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -279.22 0 218.12
-  name "building(210)"
-  corners [
-    0 0
-    -29.22 -6.36
-    -30.09 -4.57
-    -43.88 -7.45
-    -52.98 29.77
-    -35.88 33.41
-    -29.65 9.75
-    -6.21 14.9
-    -4.29 7.56
-    -1.66 8.03
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -508.73 0 416.24
-  name "building(211)"
-  corners [
-    0 0, -7.91 1.83, -14.15 -42.65, -22.97 -42.47, -22.06 -50.44, -14.96 -50.15, -14.5 -62.01, -23.29 -63.11, -22.48 -69.97, -14.96 -69.84, -13.88 -81.44, -22.43 -82.96, -19.89 -90.91, -12.7 -90.53, -10.98 -100.56, -18.84 -101.82, -15.62 -118.79, -12.12 -118.03, -11.3 -121.12, -6.84 -121.13, -6.3 -117.76, 0.63 -117.55, -0.25 -111.63, 3.68 -111.05, 3.15 -105.55, -3.26 -106.18, -4.69 -98.04, 0.6 -96.92, 0.62 -93.05, -3.4 -93.37, -4.61 -88.15, -6.58 -87.93, -6.94 -81.65, -0.55 -80.25, -2.74 -67.39, -8.39 -67.75, -9.12 -60.28, -5.8 -59.71, -5.8 -49.56, -7.89 -47.87, -8 -41.51, -5.52 -41.73, -5.09 -32.26, -6.98 -31.18, -6.01 -23.25, -4.13 -23.21, -2.74 -14.24, -4.84 -12.65, -2.67 -4.27, -0.7 -4.49
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 136.87 0 322.4
-  name "building(212)"
-  corners [
-    0 0
-    -24.98 41.13
-    -57.82 32.55
-    -35.75 -0.97
-    -20.4 8.08
-    -20.46 -1.25
-    -26.54 -1.8
-    -24.81 -5.78
-    -31.52 -8.34
-    -27.15 -17.27
-    -20.34 -13.92
-    -21.61 -11.28
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -434.94 0 454.36
-  name "building(213)"
-  corners [
-    0 0
-    2.4 8.55
-    -8.84 11.75
-    -11.25 3.19
-  ]
-  wallType "old office building"
-}
-SimpleBuilding {
-  translation -121.2 0 453.16
-  name "building(214)"
-  corners [
-    0 0
-    -13.27 2.42
-    3.12 89.59
-    9.88 89.32
-    10.07 84.11
-    18.74 81.01
-  ]
-  wallType "old house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -673.49 0 260.1
-  name "building(215)"
-  corners [
-    0 0
-    3.84 9.47
-    -23.28 22.17
-    -27.81 13.21
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -489.42 0 275.3
-  name "building(216)"
-  corners [
-    0 0
-    -2.73 8.99
-    -7.01 8.22
-    -7.54 9.67
-    -18.97 6.8
-    -18.51 5.18
-    -22.86 3.98
-    -19.71 -4.74
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 237.4 0 511.43
-  name "building(217)"
-  corners [
-    0 0
-    -23.19 -9.27
-    -42.68 26.86
-    -20.21 37.51
-    -23.25 42.85
-    -14.03 50.13
-    33.27 16.23
-    30.42 10.96
-    6.04 0.63
-    2.06 10.98
-    12.86 15.87
-    -10.65 34.55
-    -14.06 32.58
-    -12.13 30.54
-    -25.13 22.66
-    -20.53 16.66
-    -17.26 17.41
-  ]
-  wallType "glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 65.49 0 276.78
-  name "building(218)"
-  corners [
-    0 0
-    -31.34 -18.34
-    -64.27 34.32
-    -31.17 47.13
-  ]
-  wallType "old building"
 }
 SimpleBuilding {
   translation -360.9 0 87.24
@@ -31801,1123 +30751,6 @@ SimpleBuilding {
     26.5 52.21
   ]
   wallType "stone brick"
-}
-SimpleBuilding {
-  translation 180.56 0 274.48
-  name "building(226)"
-  corners [
-    0 0
-    21.11 20.94
-    0.25 60.26
-    -28.22 42.97
-    -17.97 26.92
-    -11.73 30.25
-    -15.96 38.07
-    -10.04 41.51
-    -7.98 37.55
-    -1.01 44.34
-    1.87 37.84
-    -3.06 34.52
-    0.18 26.68
-    -14.79 22.2
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -460.39 0 76.29
-  name "building(227)"
-  corners [
-    0 0
-    3.69 3.51
-    0.6 14.42
-    -23.44 29.58
-    -28.18 37.99
-    -27.59 40.25
-    -33.38 53.16
-    -35.84 52.79
-    -39.51 60.58
-    -30.07 65.59
-    -26.89 61.55
-    -16.2 68.09
-    -21.62 77.99
-    -42.62 67.19
-    -47.05 75.49
-    -57.13 70.59
-    -33.92 23.69
-  ]
-  wallType "tall house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 383.5 0 553.56
-  name "building(228)"
-  corners [
-    0 0
-    7.61 -3.73
-    11.51 -6.01
-    4.26 -17.76
-    8.42 -20.16
-    9.8 -17.27
-    21.96 -25.1
-    12.85 -41.48
-    5.05 -37.14
-    7.66 -33.66
-    -5.98 -26.3
-    -7.86 -29.61
-    -15.06 -25.11
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -493.27 0 182.87
-  name "building(229)"
-  corners [
-    0 0
-    -0.96 5.66
-    2.54 6.24
-    1.09 10.43
-    -40.89 1.69
-    -34.16 -20.39
-    -23.76 -17.02
-    -27.56 -5.74
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -196.88 0 347.9
-  name "building(230)"
-  corners [
-    0 0
-    -3.93 18.69
-    -15.36 15.71
-    -10.24 -7.97
-    -4.58 -6.9
-    -5.26 -0.23
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -529.72 0 71.18
-  name "building(231)"
-  corners [
-    0 0
-    2.38 8.91
-    -4.6 10.39
-    -30.84 26.19
-    -36.18 17.9
-    -8.72 1.59
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -500.22 0 154.81
-  name "building(232)"
-  corners [
-    0 0
-    -2.43 4.15
-    -6.69 2.78
-    -9.3 11.33
-    -4.84 13.35
-    -3.49 9.82
-    11.1 13.74
-    9.93 19.63
-    15.04 21.55
-    16.07 17.06
-    59.86 29.01
-    61.89 23.13
-    23.23 12.24
-    24.31 5.37
-    20.68 4.88
-  ]
-  wallType "glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 231.96 0 439.42
-  name "building(233)"
-  corners [
-    0 0, -21.27 44.09, -56.96 27.75, -50.2 13.28, -30.6 24.33, -20.65 9.22, -44.43 0.32, -43.41 -2.58, -88.12 -17.82, -90.29 -12.17, -93.59 -13.61, -91.52 -21.5, -93.58 -22.1, -93.91 -18.9, -97.35 -19.94, -97.27 -24.24, -100.59 -24.44, -102.03 -21.27, -135.65 -29.37, -142.62 -11.29, -147.27 -13.87, -142.99 -29.23, -148.09 -30.56, -153.33 -15.79, -184.36 -29.82, -227.05 -49.2, -230.36 -50.09, -234.26 -48.77, -235.94 -54.91, -238.72 -54.96, -240.59 -58.6, -243.51 -57.69, -243.02 -54.2, -247.07 -52.33, -250.37 -45.72, -248.65 -41.52, -244.28 -38.24, -226.27 -30.98, -223.56 -28.01, -180.26 -11.68, -131.35 9.06, -75.72 35.34, -93.65 70.85, -202.1 14.68, -200.38 11.52, -208.19 6.94, -198.52 -7.91, -203.04 -10.76, -216.23 7.35, -237.89 -11.66, -233.68 -14.78, -236.13 -17.47, -229.7 -21.1, -234.45 -26.6, -239.44 -25.59, -245.78 -20, -265.87 -41.62, -254.41 -47.67, -254.96 -63.66, -249.99 -65.36, -246.2 -66.42, -244.47 -69.72, -204.87 -63.46, -183.65 -58.09, -135.43 -45.84, -80.47 -31.66, -55.85 -22.88, -25.5 -9.98
-  ]
-  wallType "old house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -627.82 0 424.92
-  name "building(234)"
-  corners [
-    0 0
-    8.71 16.5
-    -0.27 21.6
-    -3.4 17.14
-    -10.86 20.88
-    -15.97 13.47
-    -15.65 7.56
-  ]
-  wallType "concrete building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -468.58 0 367.26
-  name "building(235)"
-  corners [
-    0 0
-    0.2 8.16
-    -17.71 8.62
-    -17.91 0.45
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
-  translation -302.57 0 308.48
-  name "building(236)"
-  corners [
-    0 0
-    -13.91 -1.8
-    -15.5 0.06
-    -21.79 -0.39
-    -30.54 49.16
-    -35.56 51.3
-    -46.48 49.21
-    -48.43 52.73
-    -45.67 53.34
-    -46.4 57.1
-    -44.53 57.8
-    -45.05 62.13
-    -38.99 63.46
-    -8.86 56.65
-    -9.8 53.64
-    -7.79 52.67
-    -8.63 49.88
-    -6.49 48.03
-    -7.54 44.56
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 173.35 0 439.33
-  name "building(237)"
-  corners [
-    0 0
-    -8.58 20.48
-    -71.03 -6.47
-    -66.31 -16.6
-    -48.87 -11.94
-    -43.02 -12.92
-    -30.57 -7.71
-    -31.51 -3.38
-    -14.03 -2.98
-    -11.92 -5.16
-  ]
-  wallType "concrete building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -418.15 0 205.51
-  name "building(238)"
-  corners [
-    0 0
-    -2.77 11.67
-    -26.42 5.01
-    -22.8 -6.43
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -49.45 0 204.89
-  name "building(240)"
-  corners [
-    0 0
-    -27.86 37.26
-    -17.54 45.2
-    3.43 15.71
-    6.87 17.67
-    4.67 20.82
-    27.36 35.61
-    31.62 38.77
-    23.24 52.15
-    48.17 67.85
-    37.66 85.62
-    32.99 82.53
-    10.79 51.76
-    15.1 44.97
-    7.1 38.89
-    -3.36 55.08
-    20.58 88.23
-    43.33 104.2
-    76.9 48.76
-    68.95 42.84
-    44.76 28.72
-    43.05 29.67
-    9.42 8.08
-    8.86 4.69
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -615.44 0 354.84
-  name "building(241)"
-  corners [
-    0 0
-    -10.93 1.2
-    -3.17 58.74
-    7.54 58.29
-  ]
-  wallType "blue glass building"
-}
-SimpleBuilding {
-  translation 26.55 0 142.12
-  name "building(242)"
-  corners [
-    0 0, -23.35 -17.14, -30.57 -4.46, -28.67 -1.94, -46.43 20.25, -48.98 19.5, -55.06 27.75, -51.04 30.66, -52.12 32.16, -48.37 35.24, -50.39 39.03, -55.15 37.61, -60.5 44.99, -65.23 42.24, -71.16 51.56, -14.73 86.19, 7.49 101.17, 27.4 67.54, 31.16 60.41, 29.81 56.56, 27 55.18, 24.8 53.98, 21.88 54.1, 19.13 54.85, 15.23 60.04, -6.59 45.79, 19.08 12.12, 7.77 4.43, -7.48 23.02, -11.82 19.38, -34.5 54.21, -41.64 49.92, -45.97 54.87, -51.41 50.77, -45.05 42.91, -46.54 41.72, -43.91 38.48, -37.78 42.32, -32.14 33.79, -42.39 27.3, -41.29 25.27, -35.37 26.26, -22.63 7.28, -23.69 1.84, -21.59 -0.97, -14.42 3.87, -16.31 5.35, -8.9 6.73, -8.5 9.31, -6.12 10.43
-  ]
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 326.22 0 482.15
-  name "building(243)"
-  corners [
-    0 0
-    -5.12 2.29
-    -0.94 11.68
-    4.18 9.39
-  ]
-  wallType "old building"
-}
-SimpleBuilding {
-  translation -325.81 0 271.16
-  name "building(244)"
-  corners [
-    0 0
-    -13.25 -2.24
-    -25.68 74.93
-    -13.18 75.37
-    -6.71 28.57
-    26.99 32.84
-    29.1 25.76
-    49 27.89
-    51.54 15.48
-    30.11 12.88
-    29.09 20.09
-    -4.37 15.61
-  ]
-  wallType "stone brick"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -223.71 0 45.77
-  name "building(245)"
-  corners [
-    0 0
-    -6.33 7.56
-    -14.94 0.18
-    -7.08 -6.34
-  ]
-  wallType "old office building"
-}
-SimpleBuilding {
-  translation -408.44 0 249
-  name "building(246)"
-  corners [
-    0 0
-    -3.06 9.83
-    -25.23 4.38
-    -22.24 -6.85
-  ]
-  wallType "red and white building"
-}
-SimpleBuilding {
-  translation -464.02 0 318.05
-  name "building(247)"
-  corners [
-    0 0
-    -1.51 9.39
-    -19.93 6.41
-    -18.43 -2.98
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -102.28 0 483.34
-  name "building(248)"
-  corners [
-    0 0
-    47.11 -12.42
-    72.15 10.51
-    -10.45 103.59
-    -29.12 87.89
-    -19.59 79.6
-    -12.26 86.84
-    44.51 25.78
-    52.6 22.84
-    59.75 18.74
-    55.96 16.37
-    59.51 11.25
-    50.84 3.59
-    3.22 12.56
-  ]
-  wallType "stone brick"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -274.97 0 331.99
-  name "building(249)"
-  corners [
-    0 0
-    11.67 3.65
-    7.9 22.94
-    12.31 23.68
-    11.24 27.88
-    1.43 25.82
-    0.82 28.7
-    -9.44 26.63
-    -8.32 19.87
-    -4.35 20.49
-  ]
-  wallType "residential building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -649.19 0 361.05
-  name "building(250)"
-  corners [
-    0 0
-    -10.71 -0.19
-    -11.06 19.69
-    4.05 20.09
-    4.19 12.16
-    -0.08 12.09
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -444.64 0 201.6
-  name "building(251)"
-  corners [
-    0 0
-    -1.45 3.41
-    -6.24 2.14
-    -8.03 6.63
-    -23.48 2.27
-    -23.08 -2.35
-    -40.22 -7.17
-    -39.2 -11.02
-    -42.59 -12.26
-    -41.56 -16.22
-    -37.19 -15.28
-    -36.7 -18.4
-    -20.62 -14.13
-    -21 -10.92
-    -4.29 -5.45
-    -5.43 -1.07
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -197.9 0 214.3
-  name "building(252)"
-  corners [
-    0 0
-    -5.43 -1.24
-    -8.1 9.04
-    -2.16 9.57
-  ]
-  wallType "blue glass building"
-}
-SimpleBuilding {
-  translation -210.7 0 299.29
-  name "building(253)"
-  corners [
-    0 0
-    -3.74 23.98
-    -21.26 20.74
-    -20.08 16.46
-    -14.82 16.27
-    -12.32 8.25
-    -17.97 6.63
-    -17.47 1.78
-    -11.96 3.4
-    -9.79 -1.7
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -589.72 0 63.16
-  name "building(254)"
-  corners [
-    0 0
-    5.33 7.52
-    13.88 2.29
-    19.5 -1.05
-    27.58 -3.48
-    25 -8.91
-    54.88 -15.58
-    51.55 -27.35
-    21.56 -20.36
-    22.7 -12.6
-    15.41 -11.33
-  ]
-  wallType "red and white building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -526.32 0 220.98
-  name "building(255)"
-  corners [
-    0 0
-    -7.41 22.31
-    -11.76 21.12
-    -14.14 29.42
-    -10.64 30.6
-    -12.13 36.51
-    -17.52 41.49
-    -19.89 39.81
-    -16.03 34.63
-    -25.75 32.31
-    -12.53 -8.39
-    -3.5 -5.56
-    -4.42 -1.53
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 96.34 0 571.62
-  name "building(256)"
-  floorHeight 3.2
-  floorNumber 8
-  corners [
-    0 0
-    8.93 4.87
-    19.25 -16.62
-    14.61 -19.34
-    17.41 -26.06
-    -47.76 -58.9
-    -47.24 -60.59
-    -60.21 -70.58
-    -67.84 -61.7
-    -57.09 -52.51
-    8.2 -17.95
-  ]
-  wallType "concrete building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -255.93 0 290.43
-  name "building(257)"
-  corners [
-    0 0
-    -11.45 -2.15
-    -14.69 16.69
-    -2.56 19.41
-  ]
-  wallType "glass highrise"
-}
-SimpleBuilding {
-  translation 87.37 0 242.14
-  name "building(258)"
-  corners [
-    0 0
-    -15.59 23.18
-    -31.05 15.24
-    -22.64 3.15
-    -16.85 7.26
-    -14.23 3.19
-    -15.4 0.28
-    -11.29 -6.54
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -577.84 0 467.48
-  name "building(259)"
-  corners [
-    0 0
-    3.06 10.89
-    -9.17 15.14
-    -6.46 16.91
-    -8.75 19.97
-    -11.54 18.2
-    -37.6 48.18
-    -38.25 56.6
-    -48.86 55.55
-    -47.6 42.76
-    -12.58 4.68
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -463.16 0 233.63
-  name "building(260)"
-  corners [
-    0 0
-    -3.69 9.4
-    -11.26 6.94
-    -9.37 1.82
-    -6.12 2.3
-    -4.77 -1.29
-  ]
-  wallType "glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -409.99 0 283.84
-  name "building(262)"
-  corners [
-    0 0
-    -4.38 8.66
-    -0.69 10.55
-    -11.65 32.19
-    -18.96 28.44
-    -7.48 5.79
-    -22.08 -1.66
-    -18.29 -9.17
-    -11.39 -5.64
-    -10.59 -7.21
-    -6.88 -5.31
-    -7.6 -3.88
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -511.25 0 269.24
-  name "building(263)"
-  corners [
-    0 0
-    -6.46 6.6
-    -9.07 4.49
-    -10.89 5.74
-    -18.9 -1.71
-    -17.57 -3.66
-    -21.11 -7
-    -14.57 -13.33
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 124.82 0 265.16
-  name "building(264)"
-  corners [
-    0 0
-    -15.84 24.84
-    -44.84 5.98
-    -37.53 -6.23
-    -26.78 -0.81
-    -22.55 -8.41
-    -9.55 -4.51
-    -7.51 -13.25
-    -27.84 -21.84
-    -8.42 -49.4
-    17.29 -26.27
-    11.71 -17.47
-    1.54 -24.32
-    3.98 -30.95
-    0.15 -33.35
-    -4.72 -33.66
-    -9.45 -29.41
-    -6.4 -26.24
-    -7.38 -20.59
-    5.2 -12.36
-    -2.52 -1.83
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -216.6 0 336.92
-  name "building(265)"
-  corners [
-    0 0
-    -4.79 26.6
-    -23.02 24.71
-    -19.62 13.99
-    -15.52 13.85
-    -13.58 4.76
-    -18.32 3.67
-    -16.89 -2.53
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -271.16 0 455.61
-  name "building(266)"
-  corners [
-    0 0
-    -27.97 2.58
-    -22.07 21.87
-    0.84 7.77
-  ]
-}
-SimpleBuilding {
-  translation -555.41 0 324.34
-  name "building(267)"
-  corners [
-    0 0
-    -3.74 7.93
-    -11.31 5.21
-    -13.26 9.4
-    -20.09 7.56
-    -20.38 4.8
-    -24.87 2.14
-    -25.01 0.24
-    -29.09 -1.64
-    -26.53 -5.37
-    -21.71 -2.8
-    -19.29 -8.34
-  ]
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -284.8 0 244.29
-  name "building(268)"
-  corners [
-    0 0
-    -1.56 9.84
-    -26.52 4.54
-    -23.1 -8.6
-    -16.62 -7.1
-    -16.5 -5.71
-    -9.62 -4.2
-    -8.55 -1.54
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -653.89 0 339.19
-  name "building(269)"
-  corners [
-    0 0
-    -6.7 1.22
-    -9.73 -2.32
-    -10.39 12.72
-    -25.35 11.24
-    -23.73 2.81
-    -20.11 2.2
-    -19.42 -6.26
-    -10.44 -7.44
-    -11.44 -10.82
-    -7 -12.62
-  ]
-  wallType "old house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -626.14 0 119.3
-  name "building(270)"
-  corners [
-    0 0
-    -7.43 8.47
-    -24.92 -7.64
-    -14.93 -15.63
-  ]
-  wallType "stone wall"
-}
-SimpleBuilding {
-  translation -409.56 0 372.22
-  name "building(271)"
-  corners [
-    0 0
-    2.23 9.65
-    -14.82 13.62
-    -13.73 18.32
-    -31.27 22.4
-    -33.34 13.44
-    -16.24 9.47
-    -17.49 4.08
-    -0.78 0.18
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -91.91 0 448.76
-  name "building(272)"
-  corners [
-    0 0
-    -6.69 0.86
-    -2.15 21.8
-    3.14 21.21
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -177.65 0 268.4
-  name "building(274)"
-  corners [
-    0 0
-    -5.53 11.81
-    -24.06 3.31
-    -21.57 -7.41
-    -10.7 -5.62
-  ]
-  wallType "glass highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -384.35 0 415.45
-  name "building(275)"
-  corners [
-    0 0
-    1.64 5.97
-    -15.89 10.8
-    -17.51 4.83
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -301.03 0 122.12
-  name "building(276)"
-  corners [
-    0 0
-    -9.49 35.69
-    -4.84 38.13
-    -15.18 75.06
-    -0.97 77.67
-    3.45 62.32
-    0.44 60.88
-    3.59 54.82
-    17.88 60.91
-    15.1 68.92
-    10.97 68.01
-    5.91 87.66
-    19.71 89.99
-    30.95 48.92
-    24.91 47
-    25.98 40.63
-    1.79 31.16
-    8.08 4.45
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -450.33 0 94.75
-  name "building(277)"
-  corners [
-    0 0
-    -4.22 14.55
-    -10.09 13.15
-    -6.19 -1.62
-  ]
-  wallType "office building"
-}
-SimpleBuilding {
-  translation -265.72 0 143.88
-  name "building(278)"
-  corners [
-    0 0
-    -23.23 -16.12
-    -26.23 -11.31
-    -23.49 -9.59
-    -26.93 -3.26
-    -3.13 12.31
-    -0.03 9.86
-    -1.51 7.75
-    0.75 4.59
-    -1.84 2.33
-  ]
-  wallType "residential building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -175.08 0 274.05
-  name "building(279)"
-  corners [
-    0 0, -6.53 13.58, 60.3 45.63, 111.15 68.65, 133.44 78.83, 144.18 66.79, 157.87 43.25, 145.94 36.03, 141.7 44.18, 134.53 42.5, 132.92 45.92, 140.88 52.39, 136.81 57.21, 125.32 50.12, 115.39 47.94, 114.65 52.71, 130.23 60.32, 129.3 62.86, 133.67 65.82, 130.29 69.54, 117.97 65.21, 119.24 61.57, 116.72 60.19, 116.89 57.19, 114.9 56.82, 113.17 60.91, 106.55 59.12, 109.69 51.29, 78.39 36.83, 75.77 41.46, 69.94 38.91, 71.92 33.49, 68.97 31.21, 67.62 32.64, 64.08 32.02, 61.25 35.52, 49.49 30.65, 52.47 25.25, 47.89 20.84, 44.76 22.89, 37.83 20.55, 37.63 19.1, 35.88 18.07, 36.69 16.08
-  ]
-  wallType "glass highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -388.14 0 354.24
-  name "building(280)"
-  corners [
-    0 0
-    -18.31 -3.06
-    -20.03 7.38
-    -3.8 10.1
-    -6.74 27.85
-    3.01 29.48
-    6.06 11.06
-    -1.62 9.78
-  ]
-  wallType "tall house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 104.48 0 506.82
-  name "building(281)"
-  corners [
-    0 0
-    -8.74 11.98
-    -28.97 -2.42
-    -25.98 -10.69
-    -32.72 -11.28
-    -40.57 -2.26
-    -40.15 0.72
-    -41.73 3.07
-    -50.96 -4.35
-    -48.02 -9.77
-    -52.96 -11.76
-    -55.91 -6.96
-    -69.9 -17.77
-    -76.7 -24.04
-    -74.27 -27.16
-    -96.55 -44.17
-    -98.77 -32.57
-    -71.15 -8.47
-    -77.66 -0.82
-    -117.66 -34.95
-    -120.32 -33.31
-    -131.04 -42.92
-    -131.17 -46.5
-    -94.97 -54.91
-    -48.78 -27.14
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 149.3 0 245.58
-  name "building(282)"
-  corners [
-    0 0
-    22.44 20.63
-    -6.16 66.48
-    -32 49.79
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -548.37 0 299.17
-  name "building(283)"
-  corners [
-    0 0
-    -4.17 8.79
-    -19.73 2.15
-    -21.16 5.05
-    -26.59 2.37
-    -19.96 -9.47
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -547.64 0 460.05
-  name "building(284)"
-  corners [
-    0 0
-    4.77 13.98
-    23.02 9.09
-    37.37 67.89
-    44.7 64.54
-    39.59 40.31
-    42.23 38.1
-    40.03 15.3
-    57.74 12.14
-    72.12 69.55
-    87.25 65.12
-    77.3 21.18
-    73.32 20.93
-    73.05 16.58
-    69.07 16.68
-    64.83 2.36
-    46.42 6.21
-    44.09 1.12
-    35.24 2.88
-    31.93 -6.04
-  ]
-  wallType "old house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -432.45 0 330.28
-  name "building(285)"
-  corners [
-    0 0
-    -1.82 3.36
-    -6.77 12.41
-    -7.71 11.88
-    -9.73 15.58
-    -18.02 11.02
-    -16.37 7.99
-    -17.75 7.22
-    -12.26 -2.84
-    -10.2 -1.7
-    -8.56 -4.71
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -387.76 0 308.38
-  name "building(286)"
-  corners [
-    0 0
-    -9.97 -4.69
-    -16.8 11.74
-    -9.6 16.38
-    -10.88 22.27
-    9.89 28.12
-    12.36 21.82
-    10.56 20.29
-    11.67 17.73
-    -5.46 12.59
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -656.18 0 157.45
-  name "San Raffaele Arcangelo"
-  corners [
-    0 0, -10.34 1.97, -15.58 10.74, -13.89 20.98, -11.24 23.05, -13.18 26.63, -6.14 29.71, -4.56 37.94, -10.47 39.59, -10.15 43.76, -7.2 43.27, -1.83 65.68, 7.82 64.5, 2.96 37.14, 7.8 36.01, 11.48 39.17, 9.51 44.24, 10.56 46.27, 8.87 50.28, 12.71 53.3, 15.04 49.99, 18.36 51.11, 33.23 27.6, 35.35 28.71, 39.1 21.52, 28.1 15.28, 25.31 21.55, 27.8 24.68, 20.52 35.16, 9.67 27.99, 14.31 22.96, 12.2 21.31, 11.18 18.6, 7.18 17.46, 6.16 7.77
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -254.59 0 21.08
-  name "building(287)"
-  corners [
-    0 0
-    -38.52 40.92
-    -44.6 33.93
-    -24.67 14.61
-    -25.39 12.56
-    -11.51 -3.32
-    -16.14 -7.7
-    -21.35 -9.94
-    -23.16 -4.17
-    -46.43 -14.04
-    -93.98 -12.52
-    -94.65 -22.86
-    -42.72 -24.19
-    -13.93 -11.21
-    -12.63 -12.48
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -285.03 0 331.14
-  name "building(288)"
-  corners [
-    0 0
-    -12.47 -2.22
-    -16.7 17.83
-    -4.12 19.94
-  ]
-  wallType "old house"
-}
-SimpleBuilding {
-  translation 202.55 0 496.57
-  name "building(289)"
-  corners [
-    0 0
-    -18.27 35.29
-    -52.6 19.92
-    -35.19 -15.74
-  ]
-  wallType "highrise"
-}
-SimpleBuilding {
-  translation -213.01 0 196.3
-  name "building(290)"
-  corners [
-    0 0
-    -0.23 6.78
-    -11.17 4.92
-    -16.21 2.61
-    -22.35 -1.06
-    -19.37 -6.68
-    -11.8 -2.54
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -551.83 0 349.94
-  name "building(291)"
-  corners [
-    0 0
-    -3.83 8.44
-    -3.25 9.14
-    -7.26 17.93
-    -3.02 20.5
-    -7.29 29.28
-    -27.06 19.55
-    -18.52 1.13
-    -31.34 -5.46
-    -27.8 -11.68
-    -23.96 -10.66
-    -20.88 -10.78
-    -18.48 -15.63
-    -13.14 -12.88
-    -14.52 -7.57
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 609.91 0 153.93
-  name "building(292)"
-  corners [
-    0 0
-    -16.69 0.2
-    -18.31 2.37
-    -17.3 6.76
-    -12.92 15.09
-    -9.53 17.34
-    -2.32 17.46
-    14.91 33.85
-    15.6 42.11
-    17.8 46.02
-    19.78 47.24
-    24.49 46.73
-    27.39 43.58
-    27.25 32.3
-    26.16 27.82
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 23.37 0 -452.13
-  name "building(293)"
-  corners [
-    0 0
-    15.17 14.34
-    67.62 -42.24
-    52.92 -56.57
-  ]
-  wallType "glass building"
-}
-SimpleBuilding {
-  translation 280.4 0 -383.35
-  name "building(294)"
-  corners [
-    0 0
-    11.77 19.44
-    2.22 25.41
-    -10.04 6.45
-  ]
-  wallType "classic building"
 }
 SimpleBuilding {
   translation 189.82 0 -503.38
@@ -34194,28 +32027,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -666.15 0 -222.54
-  name "building(373)"
-  corners [
-    0 0
-    -6.08 -0.42
-    -6.58 6.87
-    -0.51 7.29
-  ]
-  wallType "red and white building"
-}
-SimpleBuilding {
-  translation -669.21 0 -212.98
-  name "building(374)"
-  corners [
-    0 0
-    3.21 3.47
-    -0.35 6.81
-    -3.58 3.34
-  ]
-  wallType "glass building"
-}
-SimpleBuilding {
   translation -381.43 0 115.41
   name "building(375)"
   corners [
@@ -34543,24 +32354,6 @@ SimpleBuilding {
   wallType "gray glass building"
 }
 SimpleBuilding {
-  translation -640.41 0 -125.82
-  name "building(398)"
-  corners [
-    0 0
-    -1.69 3.32
-    -0.24 4
-    -2.61 8.97
-    -5.3 7.64
-    -2.43 1.57
-    -11.77 -2.85
-    -10.52 -5.28
-    -13.97 -7.31
-    -12.86 -8.97
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -730.15 0 0.62
   name "building(399)"
   corners [
@@ -34715,17 +32508,6 @@ SimpleBuilding {
   wallType "construction building"
 }
 SimpleBuilding {
-  translation 195.73 0 445.63
-  name "building(410)"
-  corners [
-    0 0
-    -1.73 4.5
-    -6.1 2.15
-    -4.81 -1.74
-  ]
-  wallType "red and white building"
-}
-SimpleBuilding {
   translation -99.8 0 497.42
   name "building(411)"
   corners [
@@ -34735,17 +32517,6 @@ SimpleBuilding {
     -3.07 -15.25
   ]
   wallType "glass highrise"
-}
-SimpleBuilding {
-  translation -379.41 0 -43.12
-  name "building(412)"
-  corners [
-    0 0
-    -0.13 11.5
-    -4.95 11.24
-    -4.84 -0.37
-  ]
-  wallType "gray glass building"
 }
 SimpleBuilding {
   translation 478.15 0 -21.77
@@ -34781,17 +32552,6 @@ SimpleBuilding {
   wallType "old building"
 }
 SimpleBuilding {
-  translation -602.03 0 -159.61
-  name "building(416)"
-  corners [
-    0 0
-    -3.38 4.42
-    -6.19 2.27
-    -2.83 -2.16
-  ]
-  wallType "old building"
-}
-SimpleBuilding {
   translation 595.17 0 81.14
   name "building(417)"
   corners [
@@ -34799,17 +32559,6 @@ SimpleBuilding {
     -4.08 5.24
     -9.2 1.11
     -5.01 -4.1
-  ]
-  wallType "construction building"
-}
-SimpleBuilding {
-  translation 88.43 0 516.4
-  name "building(418)"
-  corners [
-    0 0
-    -2.29 4.57
-    -15.1 -2.12
-    -13.01 -6.58
   ]
   wallType "construction building"
 }
@@ -34902,17 +32651,6 @@ SimpleBuilding {
   wallType "red and white building"
 }
 SimpleBuilding {
-  translation -556.92 0 -161.3
-  name "building(427)"
-  corners [
-    0 0
-    -1.98 3.3
-    -4.87 1.51
-    -2.72 -1.64
-  ]
-  wallType "construction building"
-}
-SimpleBuilding {
   translation 556.33 0 300.89
   name "building(428)"
   corners [
@@ -34968,17 +32706,6 @@ SimpleBuilding {
   wallType "factory building"
 }
 SimpleBuilding {
-  translation 97.08 0 423.21
-  name "building(433)"
-  corners [
-    0 0
-    -2.15 6.05
-    -6.47 4.22
-    -4.54 -1.72
-  ]
-  wallType "residential building"
-}
-SimpleBuilding {
   translation -627.74 0 213.74
   name "building(434)"
   corners [
@@ -35012,17 +32739,6 @@ SimpleBuilding {
   wallType "orange building"
 }
 SimpleBuilding {
-  translation 231.04 0 405.81
-  name "building(437)"
-  corners [
-    0 0
-    -2.46 3.37
-    -4.68 2.07
-    -2.27 -1.57
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
   translation 216.63 0 -382.46
   name "building(438)"
   corners [
@@ -35043,17 +32759,6 @@ SimpleBuilding {
     -5.15 -0.91
   ]
   wallType "transparent highrise"
-}
-SimpleBuilding {
-  translation -6.31 0 232.22
-  name "building(440)"
-  corners [
-    0 0
-    -0.88 1.22
-    -33.7 -19.72
-    -33.15 -20.71
-  ]
-  wallType "concrete building"
 }
 SimpleBuilding {
   translation -429.32 0 500.8
@@ -35132,17 +32837,6 @@ SimpleBuilding {
   wallType "brick building"
 }
 SimpleBuilding {
-  translation -585.08 0 -181.59
-  name "building(448)"
-  corners [
-    0 0
-    -2.48 5.92
-    -6.93 3.93
-    -4.42 -1.68
-  ]
-  wallType "highrise"
-}
-SimpleBuilding {
   translation -560.86 0 -403.22
   name "building(449)"
   corners [
@@ -35198,17 +32892,6 @@ SimpleBuilding {
   wallType "office building"
 }
 SimpleBuilding {
-  translation -613.66 0 -90.16
-  name "building(454)"
-  corners [
-    0 0
-    -26.92 21.77
-    -28.95 19.43
-    -1.66 -2.14
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
   translation -467.88 0 230.29
   name "building(456)"
   corners [
@@ -35229,27 +32912,6 @@ SimpleBuilding {
     -1.46 -2.75
   ]
   wallType "orange building"
-}
-SimpleBuilding {
-  translation -624.6 0 -162.81
-  name "building(458)"
-  corners [
-    0 0
-    -5.52 5.38
-    -9.4 1.38
-    -3.88 -3.99
-  ]
-  wallType "stone brick"
-}
-SimpleBuilding {
-  translation -511.94 0 -64.46
-  name "building(459)"
-  corners [
-    0 0
-    -0.63 1.6
-    -10.58 -2.04
-    -10.16 -3.47
-  ]
 }
 SimpleBuilding {
   translation -598.41 0 -29.09
@@ -35307,39 +32969,6 @@ SimpleBuilding {
   wallType "transparent highrise"
 }
 SimpleBuilding {
-  translation -643.11 0 -114.13
-  name "building(465)"
-  corners [
-    0 0
-    -1.95 4.21
-    -5.64 2.36
-    -3.7 -1.73
-  ]
-  wallType "stone brick"
-}
-SimpleBuilding {
-  translation 105.75 0 420.21
-  name "building(466)"
-  corners [
-    0 0
-    -3.81 12.39
-    -8.21 10.04
-    -4.09 -1.38
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation -379.54 0 -31.63
-  name "building(467)"
-  corners [
-    0 0
-    -0.27 23.85
-    -5.03 20.75
-    -4.82 -0.25
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
   translation 548.37 0 318.71
   name "building(468)"
   corners [
@@ -35351,39 +32980,6 @@ SimpleBuilding {
   wallType "office building"
 }
 SimpleBuilding {
-  translation -547.76 0 -150.27
-  name "building(469)"
-  corners [
-    0 0
-    -2.91 1.11
-    -4.51 -2.92
-    -1.55 -4.16
-  ]
-  wallType "glass building"
-}
-SimpleBuilding {
-  translation 348.82 0 497.42
-  name "building(470)"
-  corners [
-    0 0
-    -7.98 5.39
-    -9.3 2.17
-    -1.42 -3.03
-  ]
-  wallType "highrise"
-}
-SimpleBuilding {
-  translation -452.67 0 -37.84
-  name "building(471)"
-  corners [
-    0 0
-    -2.01 1.33
-    -4.88 -2.31
-    -2.91 -3.88
-  ]
-  wallType "old house"
-}
-SimpleBuilding {
   translation -27.79 0 176.64
   name "building(472)"
   corners [
@@ -35393,19 +32989,6 @@ SimpleBuilding {
     -1.93 -1.29
   ]
   wallType "tall house"
-}
-SimpleBuilding {
-  translation -565.48 0 -109.84
-  name "building(473)"
-  corners [
-    0 0
-    -33.06 10.67
-    -34.28 7.62
-    -25.55 4.81
-    -0.84 -3.15
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
 }
 SimpleBuilding {
   translation -642.4 0 446.81
@@ -35431,32 +33014,6 @@ SimpleBuilding {
     -1.12 -5.02
   ]
   wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 239.96 0 406.24
-  name "building(476)"
-  corners [
-    0 0
-    -0.81 1.32
-    -1.57 2.57
-    -3.88 1.09
-    -2.53 -1.48
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -518.48 0 -41.88
-  name "building(477)"
-  corners [
-    0 0
-    0.34 3.8
-    -10.26 5.7
-    -13.13 6.31
-    -13.42 -0.66
-  ]
-  wallType "old brick building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -35496,19 +33053,6 @@ SimpleBuilding {
     -6.44 -5.68
   ]
   wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -618.2 0 -146.87
-  name "building(481)"
-  corners [
-    0 0
-    2.35 2.39
-    -4.32 9.26
-    -8.14 5.37
-    -1.29 -1.39
-  ]
-  wallType "transparent highrise"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -35590,32 +33134,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -554.21 0 -164.63
-  name "building(488)"
-  corners [
-    0 0
-    -2.2 3.64
-    -2.71 3.33
-    -5.44 1.69
-    -3.24 -1.96
-  ]
-  wallType "stone brick"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -457.54 0 -40.16
-  name "building(489)"
-  corners [
-    0 0
-    2.87 3.65
-    -1.49 7.11
-    -6.18 1.32
-    -1.61 -2.04
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 541.55 0 -426.72
   name "building(490)"
   corners [
@@ -35686,20 +33204,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -477.59 0 28.01
-  name "building(495)"
-  corners [
-    0 0
-    -7.49 3.69
-    -9.37 0.56
-    -9.98 0.96
-    -12.79 -3.84
-    -4.54 -8.62
-  ]
-  wallType "residential building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -264.77 0 330.4
   name "building(496)"
   corners [
@@ -35753,34 +33257,6 @@ SimpleBuilding {
     -4.67 -4.36
   ]
   wallType "glass highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -487.1 0 -138.31
-  name "building(500)"
-  corners [
-    0 0
-    -4.32 4.6
-    -5.61 3.5
-    -6.28 4.34
-    -13.36 -2.03
-    -11.03 -4.53
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -465.96 0 -96.81
-  name "building(501)"
-  corners [
-    0 0
-    -3.01 7.49
-    -10.28 3.8
-    -8.79 1.3
-    -6.86 -2.89
-    -5.66 -5.51
-  ]
-  wallType "old building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -35937,36 +33413,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -465.39 0 -24.18
-  name "building(513)"
-  corners [
-    0 0
-    -2.76 2.35
-    -6.13 4.55
-    -9.58 6.21
-    -11.38 3.93
-    -10.35 3.43
-    -2.05 -2.68
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -447.43 0 -104.96
-  name "building(514)"
-  corners [
-    0 0
-    -1.64 1.96
-    -5.68 6.06
-    -7.03 4.67
-    -5.42 3.05
-    -6.22 2.1
-    -2.17 -2.1
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 556.6 0 284.02
   name "building(515)"
   corners [
@@ -36011,22 +33457,6 @@ SimpleBuilding {
     -1.63 -1.11
   ]
   wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -383.56 0 7.35
-  name "building(518)"
-  corners [
-    0 0
-    -1.99 0.05
-    -1.89 2.83
-    -10.39 2.88
-    -10.64 -0.93
-    -14.47 -0.73
-    -14.71 -6.1
-    -0.24 -6.44
-  ]
-  wallType "classic building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -36095,23 +33525,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 187.24 0 439.96
-  name "building(524)"
-  corners [
-    0 0
-    4.44 2.33
-    3.68 3.92
-    2.39 7.82
-    -3.84 6.92
-    -7.52 6.39
-    -5.34 1.13
-    -6.78 0.56
-    -5.76 -2.14
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 621.08 0 517.09
   name "building(525)"
   corners [
@@ -36121,149 +33534,6 @@ SimpleBuilding {
     -3.09 -3.58
   ]
   wallType "residential building"
-}
-SimpleBuilding {
-  translation 396.35 0 512.08
-  name "building(526)"
-  corners [
-    0 0
-    -10.96 -16.56
-    -21.33 -11.56
-    -27.94 -7.06
-    -24.33 -1.33
-    -14.13 -6.96
-    -11.68 -3.04
-    -21.88 3.04
-    -17.55 9.99
-    -13.05 7.38
-    -14.34 4.82
-    -9.23 1.77
-    -7.79 4.33
-  ]
-  wallType "red and white building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 375.65 0 523.95
-  name "building(527)"
-  corners [
-    0 0
-    -10.54 -16.3
-    -8.89 -17.31
-    -11.34 -22.28
-    -2.95 -26.6
-    -0.63 -23.43
-    9.74 -28.43
-    0.93 -37.4
-    -7.81 -36.69
-    -11.33 -40.34
-    -10.14 -42.62
-    -13.34 -47.85
-    -31.28 -36.82
-    -25.99 -28.54
-    -17.29 -32.96
-    -13.53 -27.33
-    -22.69 -21.74
-    -17.63 -12.49
-    -7.21 4.49
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 367.51 0 537.32
-  name "building(528)"
-  corners [
-    0 0
-    -14.52 -26.26
-    -29.87 -15.9
-    -32 -13.26
-  ]
-  wallType "office building"
-}
-SimpleBuilding {
-  translation 352.99 0 511.06
-  name "building(529)"
-  corners [
-    0 0
-    -5.5 -12
-    -28.3 3.89
-    -29.81 7.92
-    -17.48 13
-    -15.35 10.36
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 479.58 0 504.32
-  name "building(530)"
-  corners [
-    0 0
-    -21.89 -4.78
-    -27.19 6.66
-    -30.11 12.55
-    -38.34 9.58
-    -42.53 11.59
-    -35.3 21.52
-    -29.05 19.7
-    -25.67 21.25
-    -17.41 5.94
-    -6.94 8.5
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 533.64 0 518.16
-  name "building(531)"
-  corners [
-    0 0
-    6.54 4.02
-    1.93 6.52
-    8.7 18.43
-    24.03 8.57
-    18.39 -1.05
-    9.54 -5.42
-    3.93 -6.46
-    -2.89 -7.75
-    -3.96 -3.43
-    0.55 -1.45
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 512.44 0 515.48
-  name "building(532)"
-  corners [
-    0 0
-    0 7.99
-    2.42 13.51
-    3.58 13.43
-    4.44 6.28
-    14.29 7.19
-    14.55 4.77
-    19.68 5.81
-    21.2 2.67
-    21.75 1.22
-    17.24 -0.76
-    18.31 -5.08
-    0.91 -6.31
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 457.69 0 499.54
-  name "building(533)"
-  corners [
-    0 0
-    -33.52 -8.53
-    -36.07 2.27
-    -5.3 11.44
-  ]
-  wallType "classic building"
 }
 SimpleBuilding {
   translation 587.05 0 488.35
@@ -36354,35 +33624,6 @@ SimpleBuilding {
     -13.2 14.61
   ]
   wallType "old house"
-}
-SimpleBuilding {
-  translation -411.77 0 -87.25
-  name "building(540)"
-  corners [
-    0 0
-    8.02 -6.81
-    3.85 -11.88
-    -2.18 -12.34
-    -6.79 -7.79
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -400.28 5 -109.78
-  name "building(541)"
-  corners [
-    0 0
-    0.98 4
-    -9.46 8.22
-    -30.42 -1.7
-    -32.01 -7.96
-    -31.24 -9.66
-    -25.71 -11.77
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-  bottom TRUE
 }
 SimpleBuilding {
   translation 84.17 0 -80.99
