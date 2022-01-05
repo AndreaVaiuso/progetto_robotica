@@ -1,24 +1,30 @@
 """base_controller controller."""
-from controller import Robot
-from controller import Receiver
+from controller import Robot,Receiver, Emitter 
 import threading
+import random
 import struct
 import modules.communication as comm
 
+DRONE_ID = int(random.randrange(1,1000000000000000))
 orders = []
 battery = 100
 BASE_COORDS = {"0":[1,2,3]}
 
 
 SUPERVISOR_EMITTER_CHANNEL = 0
+GENERAL_CHANNEL = 1
+
 
 robot = Robot()
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
+emitter = robot.getDevice("emitter")
 receiver.setChannel(SUPERVISOR_EMITTER_CHANNEL)
 receiver.enable(timestep)
-
 state = "check_new_orders"
+
+def score_calculator(datalist):
+    pass 
 
 def update_orders():
     global battery, orders
@@ -28,6 +34,11 @@ def update_orders():
             # [ "chd" , ORDER_ID , WEIGHT , DESTINATION , BASE ]
             dataList = struct.unpack("chd",x)
             receiver.nextPacket()
+        score = score_calculator(dataList) # fare la funzione 
+        message = struct.pack("chd", DRONE_ID, score)
+        emitter.setChannel(GENERAL_CHANNEL)
+        emitter.send(message)
+        
 
 
 
