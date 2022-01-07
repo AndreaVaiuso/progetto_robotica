@@ -29,7 +29,7 @@ current_order =''
 score_dict={}
 
 def score_calculator(dataList):
-    return canale_di_ricezione
+    return canale_di_ricezione 
 
 def send_score(dataList):
     score = score_calculator(dataList)
