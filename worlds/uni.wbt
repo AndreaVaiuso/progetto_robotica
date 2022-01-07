@@ -10,8 +10,8 @@ WorldInfo {
   lineScale 7
 }
 Viewpoint {
-  orientation 0.9999000083324557 0.009999333396659874 0.009999333396659874 4.712288983717812
-  position -0.04859265750282471 4.186799503014367 -0.027184883262836208
+  orientation 0.24327720053723917 -0.9332408914480113 -0.2643437955165307 4.560831640318403
+  position 3.6966653622279737 2.1072009556785445 0.4347539945450863
   near 3
 }
 TexturedBackground {
@@ -34261,8 +34261,8 @@ DEF water Transform {
   ]
 }
 Mavic2Pro {
-  translation 0.09 0 0
-  rotation 1 0 0 3.14159
+  translation 0.09 0.25 -1.83669e-06
+  rotation -1 0 0 1.57081
   name "Mavic 2 PRO_0"
   controller "base_controller"
   bodySlot [
