@@ -23,6 +23,13 @@ state = "check_new_orders"
 current_order =''
 score_dict={}
 
+def get_bearing_in_degrees(values):
+    rad = math.atan2(values[0],values[2])
+    bearing = (rad - 1.5708) / math.pi * 180.0
+    if bearing < 0.0:
+        bearing = bearing + 360.0
+    return bearing
+
 def near(value,target,error=0.5):
     if value - error < target and value + error > target:
         return True
@@ -120,6 +127,7 @@ while robot.step(timestep) != -1:
     altitude = drone_gps.getValues()[1]
     roll_acceleration = drone_gyroscope.getValues()[0]
     pitch_acceleration = drone_gyroscope.getValues()[1]
+    bearing = get_bearing_in_degrees(drone_compass.getValues())
 
     roll_disturbance = 0
     pitch_disturbance = 0
@@ -127,9 +135,18 @@ while robot.step(timestep) != -1:
     target_altitude = 0
 
     if state == "test":
-        target_altitude = 10
+        target_altitude = 1.5
+        print("compass:",bearing)
         if near(altitude,target_altitude):
             print("La mia posizione è: ",drone_gps.getValues())
+            state = "test2"
+    elif state == "test2":
+        x1,y1 = [20,15]
+        x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
+        turn_angle = (90 - math.degrees(math.atan2((y2-y1)/(x2-x1)))) + bearing
+        if not near(turn_angle,0):
+            yaw_disturbance = 1.3
+
     elif state== "check_new_orders":
         if len(orders) != 0:
             state = "move_near_base"
