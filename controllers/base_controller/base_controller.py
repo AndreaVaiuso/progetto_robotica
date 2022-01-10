@@ -127,10 +127,9 @@ while robot.step(timestep) != -1:
     target_altitude = 0
 
     if state == "test":
-        print("test")
         target_altitude = 10
         if near(altitude,target_altitude):
-            print("La mia posizione è: ",drone_gps.getValue())
+            print("La mia posizione è: ",drone_gps.getValues())
     elif state== "check_new_orders":
         if len(orders) != 0:
             state = "move_near_base"
