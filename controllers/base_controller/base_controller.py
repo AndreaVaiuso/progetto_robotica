@@ -24,7 +24,7 @@ current_order =''
 score_dict={}
 
 def get_bearing_in_degrees(values):
-    rad = math.atan2(values[0],values[2])
+    rad = math.atan2(values[0],values[1])
     bearing = (rad - 1.5708) / math.pi * 180.0
     if bearing < 0.0:
         bearing = bearing + 360.0
@@ -118,7 +118,8 @@ k_vertical_p = 3
 k_roll_p = 50
 k_pitch_p = 30
 
-state = "test"
+state = "test1"
+
 
 while robot.step(timestep) != -1:
     t = robot.getTime()
@@ -132,21 +133,34 @@ while robot.step(timestep) != -1:
     roll_disturbance = 0
     pitch_disturbance = 0
     yaw_disturbance = 0
-    target_altitude = 0
+    target_altitude = 0    
 
-    if state == "test":
+    if state == "test1":
         target_altitude = 1.5
-        print("compass:",bearing)
         if near(altitude,target_altitude):
             print("La mia posizione è: ",drone_gps.getValues())
             state = "test2"
     elif state == "test2":
+        target_altitude =1.5
         x1,y1 = [20,15]
         x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
-        turn_angle = (90 - math.degrees(math.atan2((y2-y1)/(x2-x1)))) + bearing
-        if not near(turn_angle,0):
-            yaw_disturbance = 1.3
-
+        print(f'coefficiente angolare : {str((y2-y1)/(x2-x1))}')
+        print(f'arctan : {str(math.atan((y2-y1)/(x2-x1)))}')
+        print(f'arctan_degrees : {str(math.degrees(math.atan((y2-y1)/(x2-x1))))}')
+        print(f'bearing : {bearing}')
+        target_angle = (90 - math.degrees(math.atan((y2-y1)/(x2-x1))))+15
+        print(f'{target_angle} Angolo')
+        if not near(bearing,target_angle):
+            yaw_disturbance = 0.3
+        else :
+            #fare la funzione di stabilizzazione 
+            print("Rotazione Complatata !")
+            yaw_disturbance = 0.0
+            state= 'test3'
+    elif state=='test3':
+        target_altitude = 1.5
+        print(f'braring : {bearing}')
+        
     elif state== "check_new_orders":
         if len(orders) != 0:
             state = "move_near_base"
