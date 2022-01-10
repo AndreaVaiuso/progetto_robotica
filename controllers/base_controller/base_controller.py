@@ -148,12 +148,11 @@ while robot.step(timestep) != -1:
         print(f'arctan : {str(math.atan((y2-y1)/(x2-x1)))}')
         print(f'arctan_degrees : {str(math.degrees(math.atan((y2-y1)/(x2-x1))))}')
         print(f'bearing : {bearing}')
-        target_angle = (90 - math.degrees(math.atan((y2-y1)/(x2-x1))))+15
+        target_angle = (90 - math.degrees(math.atan((y2-y1)/(x2-x1))))
         print(f'{target_angle} Angolo')
         if not near(bearing,target_angle):
             yaw_disturbance = 0.3
         else :
-            #fare la funzione di stabilizzazione 
             print("Rotazione Complatata !")
             yaw_disturbance = 0.0
             state= 'test3'
