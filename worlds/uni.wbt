@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.261432643206383 -0.9368965654640188 -0.23211591648969213 4.762844060971555
-  position 2.619250291351114 1.9390444113453011 0.5768907443511581
+  orientation 0.01906259930980663 0.8944182836081351 0.4468249671348179 3.2195766377660227
+  position 305.38461092020276 1427.7894638212836 -1341.2998966650346
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -2563,24 +2563,6 @@ Crossroad {
   ]
 }
 Crossroad {
-  translation 264.014264 0.01 -424.402273
-  name "crossroad(130)"
-  id "417694103"
-  shape [
-    -1.26867 0 -10.118818
-    -5.203651 0 -9.228869
-    -9.823084 0 -3.969512
-    -2.338714 0 2.78934
-    3.459314 0 -1.13276
-    -1.26867 0 -10.118818
-  ]
-  connectedRoadIDs [
-    "35672240_1"
-    "42227851"
-    "42344306"
-  ]
-}
-Crossroad {
   translation 398.958285 0.01 -142.421397
   name "crossroad(131)"
   id "417694110"
@@ -2883,25 +2865,6 @@ Crossroad {
     "521842169"
     "521842170_1"
     "521842171"
-  ]
-}
-Crossroad {
-  translation 501.139764 0.01 -190.084468
-  name "crossroad(147)"
-  id "5083986190"
-  shape [
-    2.740697 0 -3.533919
-    -4.470507 0 -0.120681
-    -2.77885 0 3.503997
-    -0.101132 0 4.470992
-    3.516114 0 2.763501
-    4.471553 0 0.072206
-    2.740697 0 -3.533919
-  ]
-  connectedRoadIDs [
-    "35672254_1"
-    "35672254_2"
-    "521842170_2"
   ]
 }
 Crossroad {
@@ -9302,42 +9265,6 @@ Road {
   ]
   splineSubdivision 0
 }
-Road {
-  translation -126.93438 0.01 -777.035213
-  name "Via Agostino Catalano"
-  id "42227851"
-  endJunction "417694103"
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    66.451912 0 64.16557
-    102.667868 0 99.134483
-    105.963219 0 102.315906
-    118.657763 0 112.471708
-    161.994466 0 147.137653
-    197.430978 0 176.048645
-    231.711948 0 201.921534
-    285.530532 0 241.387242
-    310.310395 0 262.888679
-    340.246703 0 297.112066
-    361.752776 0 324.176846
-    372.479072 0 336.410625
-    383.435276 0 346.03375
-  ]
-  endingAngle [
-    -0.850085
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
 PedestrianCrossing {
   translation -60.482467 -0.07 -712.869643
   rotation 0 1 0 0.802915
@@ -9355,37 +9282,6 @@ PedestrianCrossing {
   rotation 0 1 0 0.896103
   name "pedestrian crossing(4)"
   size 7 2.8
-}
-Road {
-  translation 260.785125 0.01 -434.077704
-  name "Via Vincenzo Li Muli"
-  id "42344306"
-  startJunction "417694103"
-  width 4
-  numberOfLanes 1
-  speedLimit 27.777778
-  lines []
-  wayPoints [
-    0 0 0
-    -4.46257 0 -13.37115
-    -4.612912 0 -26.091485
-    2.492414 0 -41.708212
-    0.927415 0 -55.392272
-    -5.89146 0 -76.335896
-    -14.973374 0 -101.082653
-    -55.036097 0 -202.829683
-    -85.047127 0 -276.918784
-    -96.219736 0 -304.518893
-    -109.577119 0 -315.467086
-    -116.272215 0 -320.954646
-  ]
-  startingAngle [
-    2.919171
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
 }
 Road {
   translation 217.525945 0.01 370.273584
@@ -12739,51 +12635,6 @@ Road {
   splineSubdivision 0
 }
 Road {
-  translation 552.174503 0.01 -439.978903
-  name "Via Quarto dei Mille"
-  id "44773892"
-  startJunction "567823685"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    144.699058 0 -71.531452
-    151.109629 0 -73.100862
-    262.867006 0 -100.546405
-  ]
-  startingAngle [
-    -2.029911
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 614.800518 0.01 -311.91397
-  name "Via Maggiore Giuseppe Amari"
-  id "44773933"
-  startJunction "567823863"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    146.153586 0 -70.257164
-  ]
-  startingAngle [
-    -2.018891
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  splineSubdivision 0
-}
-Road {
   translation -151.403871 0.01 378.542529
   name "road(110)"
   id "86125104"
@@ -14463,36 +14314,6 @@ Road {
   splineSubdivision 0
 }
 Road {
-  translation 494.095144 0.01 22.163023
-  name "road(126)"
-  id "521842171"
-  startJunction "5083986191"
-  endJunction "5083986189"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    62.687447 0 -86.158093
-  ]
-  startingAngle [
-    -2.512591
-  ]
-  endingAngle [
-    -2.512591
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
   translation 460.930644 0.01 -8.41659
   name "road(127)"
   id "521842172"
@@ -14511,32 +14332,6 @@ Road {
   ]
   startingAngle [
     -2.417122
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 428.49877 0.01 -151.785263
-  name "Via Generale Maleter"
-  id "521842173"
-  startJunction "5083986197"
-  endJunction "5083986198"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    33.059026 0 66.970049
-  ]
-  startingAngle [
-    -0.458546
-  ]
-  endingAngle [
-    -0.458546
   ]
   startLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
@@ -14571,51 +14366,6 @@ Road {
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
     "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 587.816072 0.01 -39.662185
-  name "road(129)"
-  id "521842178"
-  startJunction "5083986188"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    1.874999 0 6.286677
-    65.034156 0 101.104428
-    82.850773 0 125.381861
-    104.963234 0 160.891383
-  ]
-  startingAngle [
-    -0.866943
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 393.239309 0.01 -336.599849
-  name "road(130)"
-  id "524624511"
-  startJunction "5105059160"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    16.389173 0 35.190666
-  ]
-  startingAngle [
-    -0.435854
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
 }
@@ -16757,99 +16507,6 @@ Road {
   ]
   endingAngle [
     2.326778
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 264.574564 0.01 -423.573983
-  name "Corso Pisani"
-  id "35672240_1"
-  startJunction "417694103"
-  endJunction "567823855"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    10.243638 0 15.143142
-    25.494649 0 40.675062
-    50.552232 0 80.230791
-    80.306924 0 124.676367
-    81.89401 0 127.31384
-  ]
-  startingAngle [
-    -0.594748
-  ]
-  endingAngle [
-    -0.541701
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 639.601114 0.01 -252.105949
-  name "Corso Calatafimi"
-  id "96933811_2"
-  startJunction "528583049"
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    106.203566 0 216.712052
-    161.096731 0 329.421271
-    184.135031 0 376.532098
-    190.786358 0 390.130073
-  ]
-  startingAngle [
-    -0.45567
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 634.234732 0.01 -253.966958
-  name "Via Carmelo Onorato"
-  id "35672254_1"
-  startJunction "528583049"
-  endJunction "5083986190"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    -129.488843 0 62.151634
-  ]
-  startingAngle [
-    1.123295
-  ]
-  endingAngle [
-    1.123295
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
@@ -23004,29 +22661,6 @@ Road {
   ]
   splineSubdivision 0
 }
-Road {
-  translation 13.378959 0.01 -1529.489337
-  name "Corso Calatafimi(1)"
-  id "96933811_1"
-  endJunction "567823685"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0, 6.34048 0 15.305593, 8.033829 0 18.669064, 50.337837 0 102.579401, 53.497723 0 108.960118, 55.886074 0 113.800803, 74.29369 0 150.671697, 86.561721 0 175.257976, 115.393281 0 233.111765, 123.878733 0 250.148241, 126.986238 0 256.361249, 145.425023 0 294.00387, 160.555177 0 324.894729, 165.049915 0 334.219933, 173.818978 0 352.164682, 200.512353 0 406.759907, 204.270765 0 414.440429, 232.345864 0 471.857893, 233.769841 0 474.777796, 276.53604 0 562.261205, 283.774697 0 577.055627, 292.46959 0 594.831854, 299.590169 0 609.404832, 306.330346 0 622.286986, 327.433786 0 666.185248, 332.399418 0 676.509575, 361.3647 0 735.765373, 364.919953 0 743.029719, 380.329142 0 774.546537, 383.07042 0 780.156173, 413.482422 0 842.348913, 419.232924 0 854.107885, 423.719664 0 863.291999, 454.207297 0 925.634538, 533.452593 0 1087.689674
-  ]
-  endingAngle [
-    -0.454811
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
 PedestrianCrossing {
   translation 63.716797 -0.07 -1426.909936
   rotation 0 1 0 0.45982
@@ -23118,39 +22752,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  translation 351.856899 0.01 -297.218698
-  name "Via Lorenzo Ingria"
-  id "44773932_1"
-  startJunction "567823855"
-  endJunction "5105059160"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    3.327716 0 -13.011096
-    8.5227 0 -23.601132
-    16.147811 0 -31.656944
-    36.090465 0 -41.27027
-  ]
-  startingAngle [
-    -2.801294
-  ]
-  endingAngle [
-    -2.01998
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
   translation 395.153593 0.01 -341.963196
   name "Via Lorenzo Ingria(1)"
   id "44773932_2"
@@ -23169,70 +22770,6 @@ Road {
   ]
   endingAngle [
     -2.020087
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 550.345937 0.01 -434.612931
-  name "Corso Calatafimi(2)"
-  id "96933811_3"
-  startJunction "567823685"
-  endJunction "567823863"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    59.092269 0 120.838605
-  ]
-  startingAngle [
-    -0.454824
-  ]
-  endingAngle [
-    -0.454824
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 612.952753 0.01 -306.587675
-  name "Corso Calatafimi(3)"
-  id "96933811_4"
-  startJunction "567823863"
-  endJunction "528583049"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    23.130772 0 47.296563
-  ]
-  startingAngle [
-    -0.454856
-  ]
-  endingAngle [
-    -0.454856
   ]
   startLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
@@ -25496,91 +25033,6 @@ Road {
   splineSubdivision 0
 }
 Road {
-  translation 428.343113 0.01 -353.526158
-  name "road(338)"
-  id "521842162_1"
-  startJunction "567823859"
-  endJunction "5105059166"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    18.715144 0 37.6226
-  ]
-  startingAngle [
-    -0.461601
-  ]
-  endingAngle [
-    -0.461601
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 450.622124 0.01 -308.741236
-  name "road(339)"
-  id "521842162_2"
-  startJunction "5105059166"
-  endJunction "567823862"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    7.497815 0 15.064125
-    27.785999 0 55.533035
-  ]
-  startingAngle [
-    -0.461827
-  ]
-  endingAngle [
-    -0.464709
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 378.220123 0.01 -346.489104
-  name "road(340)"
-  id "521842167_1"
-  endJunction "5083986183"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    38.931656 0 -20.940822
-  ]
-  endingAngle [
-    -2.064292
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
   translation 424.199035 0.01 -371.216239
   name "road(341)"
   id "521842167_2"
@@ -25629,111 +25081,6 @@ Road {
   ]
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 533.639252 0.01 -121.235689
-  name "road(343)"
-  id "521842170_2"
-  startJunction "5083986199"
-  endJunction "5083986190"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    -30.791997 0 -65.231531
-  ]
-  startingAngle [
-    2.700561
-  ]
-  endingAngle [
-    2.700561
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 494.814476 0.01 27.958465
-  name "Corso Pisani(1)"
-  id "35672240_3"
-  startJunction "5083986191"
-  endJunction "3630731630"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    4.54005 0 3.783983
-    25.36136 0 22.633827
-    55.03284 0 44.412456
-    88.289875 0 71.797594
-    99.18856 0 79.998784
-    119.786977 0 94.538004
-    135.184395 0 108.177808
-    145.575227 0 117.474938
-    166.977201 0 141.763317
-    185.938166 0 165.999414
-    197.345211 0 177.45442
-    207.561952 0 182.810447
-    212.606845 0 185.188153
-  ]
-  startingAngle [
-    -0.875979
-  ]
-  endingAngle [
-    -1.130363
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 461.11802 0.01 -2.602701
-  name "Corso Pisani(2)"
-  id "35672240_4"
-  startJunction "5083986193"
-  endJunction "5083986191"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    15.562275 0 15.453469
-    27.550434 0 25.439994
-  ]
-  startingAngle [
-    -0.788906
-  ]
-  endingAngle [
-    -0.876236
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
 }
@@ -28136,110 +27483,6 @@ Road {
   splineSubdivision 0
 }
 Road {
-  translation 350.748155 0.01 -289.146612
-  name "Corso Pisani(3)"
-  id "35672240_2"
-  startJunction "567823855"
-  endJunction "417694110"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    9.851041 0 16.393974
-    25.629002 0 45.390384
-    33.923797 0 76.980983
-    47.407442 0 142.806581
-  ]
-  startingAngle [
-    -0.455107
-  ]
-  endingAngle [
-    -0.202044
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 399.537354 0.01 -138.463534
-  name "Corso Pisani(4)"
-  id "35672240_5"
-  startJunction "417694110"
-  endJunction "5083986193"
-  speedLimit 13.888889
-  lines [
-    RoadLine {
-      type "continuous"
-    }
-  ]
-  wayPoints [
-    0 0 0
-    0.895338 0 6.119527
-    3.645515 0 24.341222
-    7.32204 0 41.658483
-    15.439278 0 68.290233
-    23.622294 0 90.607966
-    31.359407 0 104.305009
-    50.616483 0 124.969155
-    55.904727 0 130.223128
-  ]
-  startingAngle [
-    -0.145278
-  ]
-  endingAngle [
-    -0.788649
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
-  translation 487.276879 0.01 -96.247193
-  name "road(368)"
-  id "524624510_2"
-  startJunction "5083986201"
-  endJunction "5083986203"
-  width 4
-  numberOfLanes 1
-  speedLimit 13.888889
-  lines []
-  wayPoints [
-    0 0 0
-    21.354882 0 -9.492301
-  ]
-  startingAngle [
-    -1.989069
-  ]
-  endingAngle [
-    -1.989069
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2021b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-}
-Road {
   translation 515.941856 0.01 -108.989496
   name "road(369)"
   id "524624510_3"
@@ -29546,17 +28789,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 202.82 0 -559.08
-  name "building(301)"
-  corners [
-    0 0
-    -16.04 12.55
-    26.55 68.34
-    44.29 54.87
-  ]
-  wallType "transparent highrise"
-}
-SimpleBuilding {
   translation 146.66 0 -444.83
   name "building(302)"
   corners [
@@ -29791,15 +29023,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 388.61 0 -326.61
-  name "building(318)"
-  corners [
-    0 0, 3.17 5.44, 1.73 6.51, 4.82 11.62, -1.19 15.29, 0.43 18.27, 0.23 20.04, -0.87 20.77, -2.53 19.48, -3.44 18.37, -6.98 19.65, -10.4 23.8, -14.22 31.22, -13.83 37.29, -12.09 42.8, -11.1 44.08, -8.32 43.45, -6.58 44.58, -7.29 46.67, -8.9 47.82, -2.34 61.06, -0.31 59.92, 1.12 59.2, 2.52 60.73, 2.58 61.91, 0.71 63.56, 6.9 77.81, 8.25 77.5, 10.27 77.71, 11.18 78.31, 11.17 79.15, 9.29 80.22, 8.19 81.12, 13.02 97.03, 15.04 96.48, 16.12 97.09, 16.69 98.11, 16.34 98.94, 14.91 99.51, 17.89 115.21, 19.5 114.99, 21.34 114.94, 22.24 116.05, 22.05 117.14, 20.61 117.96, 19.77 118.45, 18.92 118.43, 21.85 132.8, 24.45 132.85, 26.04 133.3, 26.77 134.74, 25.07 135.97, 22.37 137.01, 24.84 153.38, 36.54 150.57, 25.25 125.87, 41.22 118.83, 51.6 143.09, 54.98 141.47, 48.1 127.96, 48.22 125.69, 50.32 125.31, 51.56 126.43, 57.62 139.24, 64.81 135.33, 70.06 146.37, 17.91 171.02, 12.95 147.95, 10.45 147.07, -1.17 98.63, -5.22 86.35, -14.44 67.25, -19.32 59, -24.05 51.5, -25.83 47.09, -27.59 38.31, -27.31 31.92, -26.58 24.02, -23.36 17.09, -19.41 11.77, -14.89 7.81, -8.96 4.05
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 379.23 0 -206.61
   name "building(319)"
   corners [
@@ -29855,869 +29078,6 @@ SimpleBuilding {
     -7.53 -6.87
   ]
   wallType "gray glass building"
-}
-SimpleBuilding {
-  translation 546.16 0 -269.78
-  name "building(322)"
-  corners [
-    0 0
-    6.05 12.29
-    -38.89 32.66
-    -44.6 20.8
-  ]
-  wallType "old office building"
-}
-SimpleBuilding {
-  translation 559.7 0 -256.11
-  name "building(323)"
-  corners [
-    0 0
-    11.4 25.73
-    -10.77 35.58
-    -23.07 10.66
-  ]
-  wallType "factory building"
-}
-SimpleBuilding {
-  translation 469.77 0 -515.67
-  name "Castello della Cuba (Cuba sottana)"
-  corners [
-    0 0
-    10.71 27.55
-    6.25 30.05
-    6.1 31.89
-    1.99 33.22
-    1.14 32.56
-    -4.27 33.98
-    -8.81 23.08
-    -11.17 22.72
-    -12.93 18.36
-    -11.83 17.41
-    -15.82 5.66
-    -11.91 3.67
-    -12.74 1.5
-    -6.67 -0.88
-    -4.86 0.56
-    -0.85 -0.88
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 481.95 0 -399.1
-  name "building(324)"
-  corners [
-    0 0
-    8.31 16.8
-    12.66 14.5
-    16.64 21.17
-    62.91 -1.46
-    90.35 53.73
-    100.01 49.04
-    64.16 -22.97
-    55.12 -17.29
-    51.38 -25.35
-  ]
-  wallType "red and white building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 572.2 0 -44.99
-  name "building(325)"
-  corners [
-    0 0
-    -16.17 -11.22
-    -56.12 43.55
-    -44.67 53.48
-    -38.41 46.24
-    -39.46 44.92
-    -37.15 42.04
-    -38.19 40.51
-    -34.54 34.95
-    -32.4 35.31
-    -26.89 28.17
-    -30.6 25.19
-    -26.51 19.31
-    -23.64 21.3
-    -13.6 7.54
-    -8.29 11.53
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 435.89 0 -328.34
-  name "building(326)"
-  corners [
-    0 0
-    5.48 12.75
-    -21.46 25.67
-    -25.79 15.22
-    -24.59 14.38
-    -26.37 11.76
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 544.37 0 -78.46
-  name "building(327)"
-  corners [
-    0 0, 4.28 7.96, 2.63 9.12, 4.51 12.62, 1.45 14.94, -0.35 13.29, -18.81 22.15, -17.99 24.87, -14.85 23.85, -13.29 27.11, -19.92 30.35, -20.43 40.94, -28.8 45.01, -27.39 51.08, -41.93 57.2, -43.1 55.88, -53.91 58.61, -57.42 50, -26.89 34.76, -28.77 30.95, -30.93 31.56, -34.05 25.56, -31.98 24.51, -34.91 19.38, -41.07 20.56, -39.92 22.75, -50.75 26.34, -49.43 30.68, -54.21 32.77, -61.09 20.21, -35.89 7.57, -31.1 11.22, -27.31 9.35, -28.66 6.94, -24.87 6.15, -21.18 10.1, -7.49 3.87, -11.84 -0.32, -3.8 -4.4, -1.94 -0.15
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 472.45 0 -18.45
-  name "building(328)"
-  corners [
-    0 0
-    -8.55 8.83
-    15.96 28.61
-    20.38 22.21
-    24.1 25.3
-    29.95 17.51
-    25.17 13.43
-    22.27 19.32
-    8.35 8.37
-    5.06 11.88
-    0.36 10.07
-    1.03 8.78
-    2.54 9.03
-    5.95 4.44
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 511.42 0 -156.47
-  name "building(329)"
-  corners [
-    0 0
-    -11.86 6.38
-    4.88 39.98
-    15.96 34.23
-  ]
-  wallType "old building"
-}
-SimpleBuilding {
-  translation 358.99 0 -338.85
-  name "building(330)"
-  corners [
-    0 0
-    -0.1 10.03
-    -2.42 16.15
-    -8.9 28.14
-    -13.34 25.78
-    -8.14 16.26
-    -10.88 15.17
-    -9.23 11.74
-    -5.59 12.01
-    -3.22 -0.33
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 577.57 0 -24.52
-  name "building(331)"
-  corners [
-    0 0, 19.51 15.29, 11.94 26.23, 20.31 32.81, 12.74 43.13, 3 37.28, -11.99 58.26, -12.02 59.64, -21.44 71.03, -0.45 83.85, 14.57 68.21, 12.05 66.64, 12.5 64.71, 2.76 58.24, 10.6 47.65, 20.53 54.48, 37.38 29.8, 44.62 40.65, 20.23 75.93, 4.7 96.41, -16.33 85.51, -36.8 73.94, -22.15 56.28, -24.88 54.71, 1.61 17.89, -7.32 9.28
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 530.44 0 -242.38
-  name "building(332)"
-  corners [
-    0 0
-    12.23 25.75
-    -9.12 36.38
-    -21.89 10.48
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
-  translation 494.54 0 -250.21
-  name "building(333)"
-  corners [
-    0 0
-    -9.38 4.39
-    10.89 46.41
-    18.25 43.29
-    12.96 31.02
-    14.09 29.66
-  ]
-  wallType "glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 425.11 0 -351.56
-  name "building(334)"
-  corners [
-    0 0
-    8.11 16.14
-    -18.83 29.72
-    -24.17 20.98
-    -24.54 17.94
-    -27.03 12.49
-    -9.65 4.15
-    -7.25 8.09
-    -3.02 6.22
-    -4.57 2.73
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 586.25 0 -342.09
-  name "building(335)"
-  corners [
-    0 0
-    10.26 23.23
-    4.08 25.54
-    -4.66 6.21
-    -7.46 8.1
-    -9.59 4.26
-  ]
-  wallType "old house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 534.49 0 -110
-  name "building(336)"
-  corners [
-    0 0
-    6.4 15.04
-    -4.35 20.25
-    -6.02 17.63
-    -27.58 25.57
-    -32.37 15.97
-    -10.87 5.97
-    -11.92 4.23
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 514.17 0 -428.23
-  name "building(337)"
-  corners [
-    0 0
-    -24.97 10.2
-    -29.13 -1.65
-    -27.37 -4.11
-    -30.57 -17.57
-    -19.74 -21.05
-    -20.96 -25.29
-    -13.04 -27.85
-    -6.99 -11.42
-    -4.4 -11.59
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 723.98 0 85.37
-  name "building(338)"
-  corners [
-    0 0
-    -16.31 6.7
-    -22.29 -5.66
-    -25.27 -4.75
-    -53.37 -67.45
-    -82.41 -54.19
-    -86.84 -64.45
-    -76.85 -68.28
-    -77.71 -70.65
-    -73.47 -72.51
-    -72.19 -70.55
-    -55.8 -77.73
-    -56.33 -79.61
-    -45.62 -84.95
-    -9.74 -10.56
-    -5.37 -11.8
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 599 0 75.6
-  name "building(339)"
-  corners [
-    0 0
-    -8.41 12.73
-    24.15 37.1
-    44.63 52.42
-    41.75 54.54
-    52.53 64.07
-    54.29 61.95
-    57.45 63.47
-    63.85 56.57
-    56.98 45.72
-    57.28 43.48
-    54.06 40.4
-    52.14 42.45
-    43.54 31.65
-    35.95 36.79
-    30.54 30.99
-    32.68 27.22
-    27.37 20.98
-    22.96 26.44
-    16.59 21.22
-    20.66 15.67
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 481.05 0 -239.52
-  name "building(340)"
-  corners [
-    0 0
-    16.98 37.32
-    8.3 41.12
-    2.61 28.14
-    -9.47 32.63
-    -3.3 46.03
-    -11.58 50.38
-    -29.05 13.67
-    -20.71 9.73
-    -13.66 24.32
-    -1.77 18.45
-    -8.61 3.51
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 444.76 0 -496.33
-  name "building(341)"
-  corners [
-    0 0
-    33.07 83.84
-    19.73 90.36
-    -17.74 -0.86
-    -10.59 -3.43
-    -7.91 2.88
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 708.18 0 109.86
-  name "building(342)"
-  corners [
-    0 0
-    -11.69 6.57
-    -31.55 -24.22
-    -20.13 -30.73
-  ]
-  wallType "factory building"
-}
-SimpleBuilding {
-  translation 499.2 0 -123.5
-  name "building(343)"
-  corners [
-    0 0
-    5.36 12.96
-    -13.3 21.29
-    -20.29 8.83
-  ]
-  wallType "stone brick"
-}
-SimpleBuilding {
-  translation 507.04 0 10.39
-  name "building(344)"
-  corners [
-    0 0
-    -6.52 9.61
-    26.75 33.67
-    40.89 13.81
-    37.38 11.37
-    34.63 14.24
-    31.85 13.76
-    26.9 19.51
-    24.78 17.85
-    32.06 7.92
-    28.33 5.37
-    20.63 14.86
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 437.68 0 -127.94
-  name "building(345)"
-  corners [
-    0 0
-    12.02 26.6
-    5.1 28.31
-    4.93 31.44
-    -1.11 32.2
-    -7.07 10.47
-    -20.78 12.5
-    -20.68 0.5
-    -24.68 1.3
-    -26.93 -11.18
-    -8.6 -18.85
-    -3.39 -9.25
-    -4.2 0.47
-    -1.18 -0.02
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 341.26 0 -568.5
-  name "building(346)"
-  corners [
-    0 0, -43.81 17.38, -90.97 35.79, -85.42 50.7, -67.33 43.99, -69.3 39.96, -77 42.96, -78.46 40.44, -65.88 35.48, -63.63 41.79, -52.48 38.64, -47.56 52.46, -57.62 55.31, -56.59 58.14, -79.75 64.32, -77.93 71.38, -77.37 73.25, -75.9 78.12, -75.04 84.08, -73.99 97.51, -38.68 80.19, -41.96 71.05, -40.42 68.7, -41.33 65.66, -45.77 66.98, -46.14 63.95, -43.33 63.02, -40.92 60.8, -30.74 57.3, -24.77 73.2, -33.15 77.8, -27.67 90.44, 24.15 64.88, 25.19 67.05, 42.79 57.64, 34.8 40.74, 60.47 26.81, 64.31 17.26, 69.4 14.54, 67.32 10.82, 69.29 9.03, 70.98 11.11, 77.71 8.42, 77.31 6.25, 87.4 1.89, 88.91 2.03, 98.34 -1.37, 98.15 -3.54, 103.48 -6.15, 103.95 -2.47, 110.02 -4.84, 108.83 -10.38, 117.09 -14.45, 119.43 -1, 116.49 0.9, 117.08 3.83, 106.12 9.36, 108.27 14.91, 112.84 12.83, 116.74 23.17, 110.35 25.33, 111.16 28.16, 114.82 27.68, 117.13 31.4, 111.81 33.79, 113.02 38.46, 133.92 31.59, 137.5 41.82, 126.56 46.05, 127.69 48.99, 140.57 45.22, 141.7 47.84, 147.66 46.21, 150.45 52.64, 132.25 58.8, 132.33 60.64, 136 60.17, 138.57 66.7, 151.14 62.28, 181.45 137.53, 192.96 132.87, 155.46 49.59, 120.44 -27.48, 85.9 -10.57, 42.32 12.11, 5.05 31.02, -20.58 42.67, -37.38 49.18, -42.05 33.52, -35.52 29.75, -36.02 27.26, -39.37 28.28, -40.15 23.94, -34.31 22.2, -31.61 27.88, -19.36 22.91, -21.2 17.36, -16.64 15.71, -14.38 21.27, 4.92 14.15
-  ]
-  wallType "old brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 610.13 0 -82.79
-  name "building(347)"
-  corners [
-    0 0
-    5.61 14.28
-    -28.27 20.46
-    -31.93 5.31
-  ]
-  wallType "glass building"
-}
-SimpleBuilding {
-  translation 557.43 0 -480.81
-  name "building(348)"
-  corners [
-    0 0
-    -13.32 6.61
-    -1.16 31.31
-    24.99 18.33
-    22.4 13.06
-    43.99 2.35
-    47.89 0.42
-    49.77 4.24
-    58.53 -0.1
-    56.95 -3.34
-    68.3 -8.98
-    62.91 -19.97
-    51.64 -14.38
-    46.92 -23.98
-    41.04 -21.07
-    47.45 -8.02
-    41.2 -4.91
-    34.64 -18.25
-    25.12 -13.52
-    32.06 0.56
-    24.71 4.21
-    17.66 -10.11
-    11.73 -7.16
-    18.94 7.49
-    6.68 13.57
-  ]
-  wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 661.18 0 35.34
-  name "building(349)"
-  corners [
-    0 0
-    22.81 34.84
-    5.36 42.48
-    -0.62 34.59
-    6.52 30.3
-    4.3 24.99
-    1.25 26.4
-    -0.93 22.91
-    0.65 21.46
-    -3.08 17.68
-    -10.3 21.96
-    -15.64 12.26
-  ]
-  wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 592.6 0 -120.19
-  name "building(350)"
-  corners [
-    0 0
-    5.52 14.69
-    -27.94 21.09
-    -31.8 5.52
-  ]
-  wallType "transparent highrise"
-}
-SimpleBuilding {
-  translation 473.92 0 -167.73
-  name "building(351)"
-  corners [
-    0 0
-    16.4 34.35
-    3.28 39.84
-    -12.79 5.39
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation 491.95 0 -91.94
-  name "building(352)"
-  corners [
-    0 0
-    4.13 10.67
-    -6.31 15.99
-    -11.95 5.94
-  ]
-  wallType "old brick building"
-}
-SimpleBuilding {
-  translation 448.73 0 -155.64
-  name "building(353)"
-  corners [
-    0 0
-    6.36 11.68
-    4.4 12.72
-    -7.57 19.06
-    -8.42 19.52
-    -14.23 6.88
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 598.83 0 -314.05
-  name "building(354)"
-  corners [
-    0 0
-    -5.84 3.15
-    7.64 31.48
-    13.34 28.88
-  ]
-  wallType "construction building"
-}
-SimpleBuilding {
-  translation 518.42 0 -591.71
-  name "building(355)"
-  corners [
-    0 0, 7.18 13.54, 1.98 16.15, 2.32 20.7, 8.64 16.8, 11.13 21.71, -1.48 29.06, -0.43 31.06, 1.84 35.39, 5.33 33.07, 8.59 37.45, 17.28 33.07, 20.8 41.02, 14.17 44.25, 17.43 48.86, 22.23 45.7, 30.39 64.55, 17.78 71.57, 21.92 80.72, 28.33 77.7, 31.52 85.98, 30.75 86.94, 33.42 93.91, 35.25 94.15, 37.93 100.69, 22.17 108.95, -2.69 59.45, -7.15 50.58, -23.46 16.99, -9.24 10.86, -7.12 12.63, -4.41 12.03, -6.72 8.53, -5.19 6.93, -8.35 3.42
-  ]
-  wallType "stone brick"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 499.88 0 -179.81
-  name "building(356)"
-  corners [
-    0 0
-    5.17 11.87
-    -6.16 17.49
-    -8.51 18.66
-    -14.11 6.12
-  ]
-  wallType "residential building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 458.72 0 -129.73
-  name "building(357)"
-  corners [
-    0 0
-    16.21 32.62
-    13.91 34.73
-    12.32 33.63
-    3.43 37.57
-    -11.83 5.52
-  ]
-  wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 436.99 0 -371.78
-  name "building(358)"
-  corners [
-    0 0
-    -9.57 5.34
-    13.69 53.11
-    24.13 47.9
-    28.08 55.75
-    17.31 61.83
-    43.4 114.62
-    49.16 111.7
-    50.74 113.13
-    55.73 110.95
-    30.59 60.12
-    40.58 54.79
-    19.46 13.54
-    10.02 17.69
-  ]
-  wallType "concrete building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 424.6 0 -106.55
-  name "building(359)"
-  corners [
-    0 0, -11.02 1.75, -5.33 27.04, 0.6 26.82, 3.58 46.44, 16.36 66.68, 12.76 69.43, 31.02 90.29, 35.78 94.6, 46.43 82.78, 41.77 79.24, 39.34 82.44, 17.12 54.25, 24.6 51.36, 23.87 43.78, 12.49 48.34, 11.96 41.29, 18.34 40.55, 17.67 35.34, 12.28 36.22, 9.06 29.24, 12.12 26.6, 9.82 17.04, 6.15 17.19, 2.74 3.07, 0.49 2.17
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 470.81 0 -83.02
-  name "building(360)"
-  corners [
-    0 0
-    6.72 15.26
-    -3.5 21.13
-    8.75 46.53
-    -4.17 53.01
-    -5.75 50.71
-    -4.12 49.77
-    -9.55 40.7
-    -6.95 39.55
-    -14.76 25.03
-    -12.17 24.32
-    -22.26 4.68
-    -13.27 1.82
-    -10.88 6.18
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 720.73 0 -474.34
-  name "building(361)"
-  corners [
-    0 0
-    21.7 33.64
-    17.81 36.92
-    -4.98 3.86
-  ]
-  wallType "factory building"
-}
-SimpleBuilding {
-  translation 624.52 0 -349
-  name "building(362)"
-  corners [
-    0 0
-    8.41 17.54
-    60.57 -8.65
-    53.36 -24.57
-    17.97 -9.29
-    18.57 -7.81
-    7.79 -2.82
-    5.83 -3.47
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 757.59 0 -369.84
-  name "building(363)"
-  corners [
-    0 0
-    7.82 15.77
-    -2.96 20.71
-    -3.65 19.75
-    -35.44 35.12
-    -40.28 25.01
-    -35.7 23.12
-    -36.27 20.43
-    -14.32 9.85
-    -12.55 12.17
-    -8.66 9.95
-    -11.14 3.51
-    -0.76 -0.79
-  ]
-  wallType "office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 594.41 0 -439.64
-  name "building(364)"
-  corners [
-    0 0
-    10.07 17.39
-    0.08 21.63
-    -5.27 9.06
-    -10.35 12.05
-    -5.05 23.12
-    -19.07 29.1
-    -34.98 0.24
-    -21.68 -5.12
-    -15.1 5.02
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 776.8 0 -148.86
-  name "building(365)"
-  floorNumber 4
-  corners [
-    0 0, 3.63 11.4, -0.23 12.91, 3.15 24.2, 2.11 26.01, 4.5 33.19, 7.54 32.23, 6.44 19.58, 10.35 18.96, 7.27 7.92, 11.75 6.99, 13.55 9.05, 46.08 3.63, 49.69 27.21, 13.09 33.27, 15.68 49.03, 55.67 42.41, 70.19 108.29, 73.59 125.27, 61.05 127.19, 56.96 102.49, 22.2 94.68, 23.21 90.78, 21.34 90.19, 21.4 86.65, 12.79 86.25, 11.39 80.09, 13.81 78.81, 14.09 73.7, 19.69 73.55, 18.34 67.78, 10.07 69.53, 5.94 58.4, -10.53 65.44, -14.53 67.57, -14.21 74.02, -19.22 76.14, -17.92 81.28, -14.43 79, -8.58 93.69, -0.21 89.55, -1.17 86.81, 4.94 83.07, 6.81 86.89, 9.93 85.19, 10.96 86.77, -4.99 96.28, -21.24 105.08, -33.07 77.22, -35.77 77.67, -38.98 70.17, -0.19 53, -1.13 49.25, 7.49 45.81, 5.94 44.2, 2.35 44.58, -8.14 22.61, -6.93 21.81, -7.45 19.15, -20.12 24.42, -10.56 45.93, -43.11 62.14, -61.17 23.94, -58.18 22.6, -61.13 14.91, -34.94 1.26, -28.86 14.28
-  ]
-  wallType "old house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 716.84 0 -465.52
-  name "building(366)"
-  corners [
-    0 0
-    3.49 7.55
-    3.56 9.53
-    7.34 18.08
-    -0.87 21.38
-    -4.33 16.88
-    -46.53 36.85
-    -44.57 42.61
-    -53.1 47.29
-    -59.36 34.25
-    -61.33 34.21
-    -62.81 29.75
-    -54.61 26.64
-    -52.28 28.66
-    -6.22 6.98
-    -7.43 3.22
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 744.77 0 -408.34
-  name "building(367)"
-  corners [
-    0 0
-    -7.78 4.04
-    -6.74 7.69
-    -52.33 29.93
-    -54.71 26.81
-    -62.63 29.98
-    -53.51 47.9
-    -43.46 43.73
-    -46.49 37.44
-    -3.92 16.82
-    -1.12 23.03
-    8.15 18.69
-    1.69 5.95
-    2.89 5.26
-  ]
-  wallType "glass highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 730.43 0 -437.4
-  name "building(368)"
-  corners [
-    0 0
-    7.31 13.47
-    6.03 14.63
-    8.4 18.06
-    0.15 22.65
-    -3.37 17.22
-    -46.73 38.07
-    -43.61 43.97
-    -53.12 48.22
-    -62.23 30.06
-    -54.46 26.57
-    -51.15 30.65
-    -5.24 7.72
-    -6.66 3.51
-  ]
-  wallType "stone brick"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 609.15 0 -417.86
-  name "Istituto Comprensivo Lombardo Radice"
-  corners [
-    0 0
-    4.01 9.44
-    -8.53 16.37
-    -2 29.56
-    1.77 24.82
-    1.07 22.22
-    12.46 17.36
-    21.46 36.14
-    10.93 41.38
-    9.48 40
-    4.77 42.01
-    9.37 52.82
-    26.63 45.11
-    30.02 54.78
-    5.75 66.56
-    -2.33 50.76
-    -4.53 50.23
-    -16.41 28.18
-    -14.92 27.22
-    -21.75 10.82
-  ]
-  wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 643.77 0 -318
-  name "building(369)"
-  floorNumber 7
-  corners [
-    0 0
-    3.24 7.69
-    -2.27 11.58
-    1.14 20.78
-    8.81 16.52
-    13.17 25.9
-    -8.16 31.58
-    -20.41 7.92
-  ]
-  wallType "arcade-style building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 703.78 0 -504.43
-  name "building(370)"
-  corners [
-    0 0
-    12.88 26.97
-    -0.6 33.73
-    0.06 34.92
-    -34.04 51.87
-    -35.2 51.27
-    -48.28 57.35
-    -52.06 49.39
-    -65.71 53.68
-    -75.6 57.94
-    -78.11 55.13
-    -87.8 58.9
-    -90.63 57.57
-    -107.86 65.35
-    -113.55 53.81
-  ]
-  wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 615.79 0 -344.72
-  name "building(371)"
-  floorNumber 4
-  corners [
-    0 0
-    -6.33 2.65
-    2.5 23.08
-    8.99 20.52
-    7.96 16.87
-    12.72 14.2
-    8.87 5.29
-    3.9 6.62
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
 }
 SimpleBuilding {
   translation 588.91 0 486.87
@@ -31036,24 +29396,6 @@ SimpleBuilding {
   wallType "gray glass building"
 }
 SimpleBuilding {
-  translation -730.15 0 0.62
-  name "building(399)"
-  corners [
-    0 0
-    15.03 14.96
-    13.73 19.38
-    2.28 16.11
-    2.86 14.09
-    3.77 11.3
-    -4.54 8.91
-    -2.14 1.37
-    -3.77 0.77
-    -2.8 -2.79
-  ]
-  wallType "concrete building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation -124.21 0 -107.32
   name "building(400)"
   corners [
@@ -31072,28 +29414,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 672.49 0 156.97
-  name "building(404)"
-  corners [
-    0 0
-    -2.85 1.92
-    -14.77 -15
-    -10.79 -17.92
-  ]
-  wallType "highrise"
-}
-SimpleBuilding {
-  translation -579.8 0 374.52
-  name "building(405)"
-  corners [
-    0 0
-    -0.89 1.9
-    -3.84 0.5
-    -2.95 -1.39
-  ]
-  wallType "concrete building"
-}
-SimpleBuilding {
   translation -258.54 0 -167.59
   name "building(406)"
   corners [
@@ -31103,72 +29423,6 @@ SimpleBuilding {
     -2.23 -2.39
   ]
   wallType "orange building"
-}
-SimpleBuilding {
-  translation -365.39 0 473.24
-  name "building(407)"
-  corners [
-    0 0
-    -4.4 1.36
-    -8.08 -10.64
-    -3.69 -11.99
-  ]
-  wallType "red and white building"
-}
-SimpleBuilding {
-  translation 690.38 0 1.88
-  name "building(408)"
-  corners [
-    0 0
-    -4.31 2.05
-    -7.81 -4.8
-    -3.43 -6.88
-  ]
-  wallType "stone wall"
-}
-SimpleBuilding {
-  translation -614.63 0 5.84
-  name "building(409)"
-  corners [
-    0 0
-    -4.73 2.67
-    -9.77 -6.24
-    -5.05 -8.91
-  ]
-  wallType "construction building"
-}
-SimpleBuilding {
-  translation -99.8 0 497.42
-  name "building(411)"
-  corners [
-    0 0
-    -1.43 0.34
-    -4.3 -14.93
-    -3.07 -15.25
-  ]
-  wallType "glass highrise"
-}
-SimpleBuilding {
-  translation 478.15 0 -21.77
-  name "building(413)"
-  corners [
-    0 0
-    -3.11 3.81
-    -5.51 1.61
-    -2.2 -2.15
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation 618.59 0 -429.62
-  name "building(414)"
-  corners [
-    0 0
-    -7.46 3.64
-    -9.16 0.27
-    -1.8 -3.52
-  ]
-  wallType "brick building"
 }
 SimpleBuilding {
   translation 331.52 0 -247.81
@@ -31182,28 +29436,6 @@ SimpleBuilding {
   wallType "old building"
 }
 SimpleBuilding {
-  translation 595.17 0 81.14
-  name "building(417)"
-  corners [
-    0 0
-    -4.08 5.24
-    -9.2 1.11
-    -5.01 -4.1
-  ]
-  wallType "construction building"
-}
-SimpleBuilding {
-  translation 724.28 0 16.72
-  name "building(419)"
-  corners [
-    0 0
-    -7.23 3.33
-    -8.8 -0.1
-    -1.58 -3.42
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
   translation 583.27 0 209.62
   name "building(420)"
   corners [
@@ -31211,39 +29443,6 @@ SimpleBuilding {
     -4.91 3.56
     -6.84 0.9
     -1.93 -2.67
-  ]
-  wallType "old building"
-}
-SimpleBuilding {
-  translation 545 0 17.77
-  name "building(421)"
-  corners [
-    0 0
-    -2.07 3.02
-    -6.56 -0.06
-    -4.47 -3.08
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation 649.87 0 -429.23
-  name "building(422)"
-  corners [
-    0 0
-    -4.12 2.04
-    -6.34 -2.45
-    -2.22 -4.49
-  ]
-  wallType "office building"
-}
-SimpleBuilding {
-  translation 654.01 0 -89.79
-  name "building(423)"
-  corners [
-    0 0
-    -4.4 2.16
-    -5.92 -1.15
-    -1.61 -3.28
   ]
   wallType "old building"
 }
@@ -31259,28 +29458,6 @@ SimpleBuilding {
   wallType "glass highrise"
 }
 SimpleBuilding {
-  translation -104.32 0 298.94
-  name "building(425)"
-  corners [
-    0 0
-    -1.68 2.82
-    -9.63 -1.87
-    -7.96 -4.7
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -77.6 0 502.97
-  name "building(426)"
-  corners [
-    0 0
-    -4.6 1.15
-    -6.66 -7.63
-    -2.22 -8.55
-  ]
-  wallType "red and white building"
-}
-SimpleBuilding {
   translation 556.33 0 300.89
   name "building(428)"
   corners [
@@ -31290,50 +29467,6 @@ SimpleBuilding {
     -0.04 -5.3
   ]
   wallType "concrete building"
-}
-SimpleBuilding {
-  translation -673.61 0 258.82
-  name "building(429)"
-  corners [
-    0 0
-    -6.6 3.12
-    -8.89 -1.89
-    -2.24 -4.93
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation 481.46 0 -18.52
-  name "building(430)"
-  corners [
-    0 0
-    -2.94 3.83
-    -6.41 0.57
-    -3.31 -3.24
-  ]
-  wallType "blue glass building"
-}
-SimpleBuilding {
-  translation 630.45 0 -435.41
-  name "building(431)"
-  corners [
-    0 0
-    -5.6 2.74
-    -7.29 -0.67
-    -1.69 -3.31
-  ]
-  wallType "arcade-style building"
-}
-SimpleBuilding {
-  translation -627.74 0 213.74
-  name "building(434)"
-  corners [
-    0 0
-    -2.19 3.1
-    -4.3 1.6
-    -2.12 -1.5
-  ]
-  wallType "stone wall"
 }
 SimpleBuilding {
   translation -117.15 0 -67.18
@@ -31369,82 +29502,6 @@ SimpleBuilding {
   wallType "orange building"
 }
 SimpleBuilding {
-  translation -655.24 0 -4.39
-  name "building(439)"
-  corners [
-    0 0
-    -0.47 2.61
-    -5.61 1.69
-    -5.15 -0.91
-  ]
-  wallType "transparent highrise"
-}
-SimpleBuilding {
-  translation -429.32 0 500.8
-  name "building(441)"
-  corners [
-    0 0
-    -4.2 1.04
-    -5.53 -4.33
-    -1.33 -5.37
-  ]
-}
-SimpleBuilding {
-  translation -647.88 0 158.16
-  name "building(442)"
-  corners [
-    0 0
-    -1.31 1.8
-    -3.5 0.19
-    -2.12 -1.66
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation -562.02 0 407.44
-  name "building(443)"
-  corners [
-    0 0
-    -3.97 0.78
-    -4.23 -2.28
-    -2.59 -5.94
-  ]
-  wallType "stone wall"
-}
-SimpleBuilding {
-  translation -625.8 0 354.83
-  name "building(444)"
-  corners [
-    0 0
-    -3.13 0.22
-    -3.18 -1.78
-    -0.36 -2.39
-  ]
-  wallType "glass building"
-}
-SimpleBuilding {
-  translation -142.48 0 271.94
-  name "building(445)"
-  corners [
-    0 0
-    -4.36 7.33
-    -9.3 4.37
-    -4.95 -2.95
-  ]
-  wallType "gray glass building"
-}
-SimpleBuilding {
-  translation 646.93 0 -435.82
-  name "building(446)"
-  corners [
-    0 0
-    -4.39 2.21
-    -6.94 -2.87
-    -2.54 -5.07
-  ]
-  wallType "stone wall"
-}
-SimpleBuilding {
   translation -560.86 0 -403.22
   name "building(449)"
   corners [
@@ -31456,17 +29513,6 @@ SimpleBuilding {
   wallType "red and white building"
 }
 SimpleBuilding {
-  translation 325.21 0 -449.8
-  name "building(450)"
-  corners [
-    0 0
-    -5.4 2.91
-    -12.6 -9.86
-    -6.98 -12.82
-  ]
-  wallType "old house"
-}
-SimpleBuilding {
   translation 542.18 0 324.44
   name "building(451)"
   corners [
@@ -31476,94 +29522,6 @@ SimpleBuilding {
     0.2 -10.22
   ]
   wallType "old building"
-}
-SimpleBuilding {
-  translation -116.07 0 364.29
-  name "building(452)"
-  corners [
-    0 0
-    -0.25 1.68
-    -5.46 0.72
-    -5.21 -0.9
-  ]
-  wallType "residential building"
-}
-SimpleBuilding {
-  translation -308.5 0 446.77
-  name "building(453)"
-  corners [
-    0 0
-    -4.28 0.91
-    -5.44 -3.8
-    -1.17 -4.67
-  ]
-  wallType "office building"
-}
-SimpleBuilding {
-  translation -467.88 0 230.29
-  name "building(456)"
-  corners [
-    0 0
-    -1.19 4.59
-    -4.7 3.67
-    -3.5 -0.84
-  ]
-  wallType "glass highrise"
-}
-SimpleBuilding {
-  translation -631.06 0 326.15
-  name "building(457)"
-  corners [
-    0 0
-    -4.38 2.21
-    -5.81 -0.45
-    -1.46 -2.75
-  ]
-  wallType "orange building"
-}
-SimpleBuilding {
-  translation -598.41 0 -29.09
-  name "building(460)"
-  corners [
-    0 0
-    -5.25 3.24
-    -7.26 -0.02
-    -2 -3.25
-  ]
-  wallType "old brick building"
-}
-SimpleBuilding {
-  translation -698.46 0 -64.93
-  name "building(461)"
-  corners [
-    0 0
-    -3.25 4.92
-    -7.9 1.58
-    -4.55 -3.02
-  ]
-  wallType "residential building"
-}
-SimpleBuilding {
-  translation -341.29 0 506.33
-  name "building(462)"
-  corners [
-    0 0
-    -5.83 1.94
-    -9.88 -10.38
-    -4.06 -12.31
-  ]
-  wallType "arcade-style building"
-}
-SimpleBuilding {
-  translation -1.68 0 322.42
-  name "building(463)"
-  corners [
-    0 0
-    -2.08 3.92
-    -9.11 -1.49
-    -7.56 -3.8
-  ]
-  wallType "glass highrise"
 }
 SimpleBuilding {
   translation 50.03 0 13.23
@@ -31586,30 +29544,6 @@ SimpleBuilding {
     7.18 -9.79
   ]
   wallType "office building"
-}
-SimpleBuilding {
-  translation -27.79 0 176.64
-  name "building(472)"
-  corners [
-    0 0
-    -1.36 1.82
-    -3.22 0.54
-    -1.93 -1.29
-  ]
-  wallType "tall house"
-}
-SimpleBuilding {
-  translation -642.4 0 446.81
-  name "building(474)"
-  corners [
-    0 0
-    -2.91 1.38
-    -4.51 0.4
-    -6.72 -4.88
-    -3.08 -6.81
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
 }
 SimpleBuilding {
   translation 588.11 0 189.11
@@ -31635,71 +29569,6 @@ SimpleBuilding {
     -0.94 -1.24
   ]
   wallType "transparent highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -314.3 0 406.88
-  name "building(479)"
-  corners [
-    0 0
-    -4.15 1.21
-    -8.83 2.57
-    -10.39 -2.61
-    -1.51 -5.19
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -703.35 0 26.94
-  name "building(480)"
-  corners [
-    0 0
-    -2.43 7.9
-    -4.44 7.42
-    -9.72 5.92
-    -6.44 -5.68
-  ]
-  wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -684.86 0 469.41
-  name "building(482)"
-  corners [
-    0 0
-    -1.7 0.07
-    -4.91 0.19
-    -5.17 -6.86
-    -0.26 -7.04
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -568.52 0 493.55
-  name "building(483)"
-  corners [
-    0 0
-    -7.52 2.43
-    -10.49 -7.62
-    -5.13 -9.54
-    -3.66 -10.06
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -49.17 0 500.31
-  name "building(484)"
-  corners [
-    0 0
-    1.24 4.05
-    -4.04 4.54
-    -5.16 -0.57
-    -0.49 -1.65
-  ]
-  wallType "gray glass building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -31729,76 +29598,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 541.55 0 -426.72
-  name "building(490)"
-  corners [
-    0 0
-    -4.27 2.08
-    -2.54 5.61
-    -5.12 6.83
-    -8.07 0.74
-    -1.26 -2.58
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 641.22 0 -440.66
-  name "building(491)"
-  corners [
-    0 0
-    -7.81 3.84
-    -9.78 -0.17
-    -5.32 -2.34
-    -4.78 -1.3
-    -1.45 -2.92
-  ]
-  wallType "gray glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 447.13 0 -84.72
-  name "building(492)"
-  corners [
-    0 0
-    -10.76 2.12
-    -11.77 -2.16
-    -12.87 -6.52
-    -8.51 -7.18
-    -2.22 -8.12
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 736.5 0 58.2
-  name "building(494)"
-  corners [
-    0 0
-    -5.28 2.7
-    -7.55 -1.78
-    -12.24 0.61
-    -21.17 -16.93
-    -11.2 -21.99
-  ]
-  wallType "blue glass building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -264.77 0 330.4
-  name "building(496)"
-  corners [
-    0 0
-    2.46 0.52
-    1.9 3.14
-    0.01 2.75
-    -3.92 1.95
-    -3.37 -0.8
-  ]
-  wallType "stone wall"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 527.89 0 297.93
   name "building(497)"
   corners [
@@ -31810,20 +29609,6 @@ SimpleBuilding {
     -0.44 -6.34
   ]
   wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -106.87 0 303.24
-  name "building(498)"
-  corners [
-    0 0
-    -0.95 1.88
-    -4 0.23
-    -5.42 3.36
-    -9.09 1.46
-    -6.91 -2.82
-  ]
-  wallType "tall house"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -31855,48 +29640,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation 652.58 0 -443.29
-  name "building(504)"
-  corners [
-    0 0
-    -6.04 2.98
-    -7.16 0.59
-    -3.87 -1.01
-    -4.62 -2.54
-    -1.55 -3.68
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -665.73 0 369.03
-  name "building(505)"
-  corners [
-    0 0
-    -0.22 5.59
-    -4.21 5.38
-    -4.21 4.02
-    -8.08 3.74
-    -7.95 -0.25
-  ]
-  wallType "old building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -183.34 0 489.37
-  name "building(506)"
-  corners [
-    0 0
-    -5.68 1.76
-    -10 1.8
-    -11.54 -2.67
-    -7.59 -4.12
-    -1.53 -5.14
-  ]
-  wallType "factory building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 158.86 0 -438.65
   name "building(507)"
   corners [
@@ -31922,33 +29665,6 @@ SimpleBuilding {
     -5.33 -8.33
   ]
   wallType "brick building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -673.66 0 383.42
-  name "building(510)"
-  corners [
-    0 0
-    -1.3 0.12
-    -4.35 0.08
-    -9.21 0.52
-    -9.59 -3.65
-    -0.42 -4.5
-  ]
-  wallType "old office building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation -96.03 0 308.32
-  name "building(511)"
-  corners [
-    0 0
-    -2.75 5.19
-    -4.25 4.42
-    -3.91 3.71
-    -7.63 1.98
-    -5.3 -2.35
-  ]
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -31997,22 +29713,6 @@ SimpleBuilding {
   roofShape "flat roof"
 }
 SimpleBuilding {
-  translation -18.77 0 335.18
-  name "building(517)"
-  corners [
-    0 0
-    5.41 4.41
-    2.63 7.97
-    -0.67 5.66
-    -8.35 18.21
-    -14.36 15.8
-    -4.71 2.85
-    -1.63 -1.11
-  ]
-  wallType "construction building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
   translation 514.5 0 253.52
   name "building(519)"
   corners [
@@ -32026,22 +29726,6 @@ SimpleBuilding {
     -12.11 -1.44
   ]
   wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 595.13 0 -440.5
-  name "building(520)"
-  corners [
-    0 0
-    -3.86 1.86
-    -5.65 -1.59
-    -8.82 -0.09
-    -9.57 -1.62
-    -11.74 -0.66
-    -14.73 -6.71
-    -5.7 -11.09
-  ]
-  wallType "blue glass building"
   roofShape "flat roof"
 }
 SimpleBuilding {
@@ -32115,28 +29799,6 @@ SimpleBuilding {
   ]
   wallType "blue glass building"
   roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 499.56 0 -150.08
-  name "building(536)"
-  corners [
-    0 0
-    -5.84 -12.23
-    5.49 -17.86
-    11.86 -6.38
-  ]
-  wallType "classic building"
-}
-SimpleBuilding {
-  translation 446.89 0 -124.21
-  name "building(537)"
-  corners [
-    0 0
-    -5.72 -12.36
-    6.25 -18.71
-    11.83 -5.52
-  ]
-  wallType "red and white building"
 }
 SimpleBuilding {
   translation -386.75 5 -172.05
@@ -32259,110 +29921,6 @@ SimpleBuilding {
   name "building(546)"
   corners [
     0 0, -9.16 6.55, -2.15 17.45, -0.04 16.3, 35.58 46.66, 43.91 54.13, 48.26 50, 53.04 54.55, 57.19 52.35, 58.84 53.64, 65.84 46.44, 63.14 42.77, 74.92 30.61, 80.94 36.69, 64.22 52.55, 76.57 61.03, 67.94 69.71, 52.53 59.5, 49.7 62.98, 47.61 62.45, 42.39 68.67, 54.31 82.09, 66.49 70.95, 83.09 94.81, 78.25 97.76, 85.61 108.33, 109.72 91.67, 122.61 115.72, 134.64 108.95, 113.45 74.9, 93.94 87.52, 78.29 62.65, 79.58 56.54, 77.53 53.81, 92.47 38.83, 59.23 3.56, 34.21 -22.23, 7.89 5.93, 5.22 4.62, 3.87 5.18
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 661.64 0 -182.81
-  name "Istituto Maria Adelaide"
-  corners [
-    0 0, -9.98 4.41, -14.06 -3.28, -20.67 0.06, -10.75 18.4, -3.63 15.5, 13.22 46.17, 10.87 47.59, 9.17 46.87, 6.46 48.38, 8.8 52.48, 6.79 54.18, 9.28 59.94, 18.91 55.78, 30.45 80.29, 15.27 85.98, 8.98 76.8, 4.2 78.96, 18.16 107.4, 4.6 114.25, -5.72 94.09, -14.15 98.18, -5.52 116.49, 13.72 154.12, 31.96 189.6, 38.45 187.01, 36.49 182.55, 81.74 161.43, 67.7 133.26, 46.23 90.22
-  ]
-  wallType "highrise"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 745.07 0 -17.73
-  name "building(547)"
-  corners [
-    0 0, -30.63 13.57, -18.71 36.62, -10.64 31.98, -5.39 43.28, 6.34 38.51, 7.93 42.41, -10.14 51.09, -2.19 68.53, 15.62 58.88, 17.08 62.3, 6.04 67.23, 9.38 76.97, 15.69 74.8, 13.76 70.89, 16.97 68.94, 21.4 71.24, 21.27 74.55, 14.87 78.11, 17.41 82.51, 23.81 79.37, 23.2 74.86, 26.5 75.4, 27.12 82.69, 34.01 94.09, 19.37 100.54, 11.85 85.11, -0.09 90.09, 5.5 101.53, -22.35 113.35, -17.95 121.74, -28.39 127.78, -46.15 138.12, -65.82 151.61, -73.55 156.11, -76.79 151.96, -83.38 155.38, -62.54 187.79, -57.16 183.87, -45.71 202.55, -42.05 206, -17.66 190.73, 11.87 173.48, 44.12 153.7, 67.99 140.29, 50.71 104.55, 44.47 91.64, 24.33 49.77
-  ]
-  wallType "classic building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 301.73 0 -475.15
-  name "building(548)"
-  corners [
-    0 0, -41.75 22.61, -4.49 88.58, 26.81 144.5, 48.89 131.92, 88.27 110.24, 116.86 94.85, 111.76 85.14, 95.45 93.72, 82.91 72.51, 61.17 83.91, 63.65 89.58, 58.88 91.99, 57.4 90.22, 52.41 92.19, 48.43 85.53, 80.85 67.5, 76.37 59, 79.42 56.45, 70.03 39.96, 62.52 44.36, 64.79 49.92, 37.68 66.73, 32.69 56.59, 68.28 35.39, 59.1 18.89, 22.87 39.76
-  ]
-  wallType "residential building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 580.12 0 -199.25
-  name "building(549)"
-  corners [
-    0 0
-    35.54 75.1
-    58.23 123.61
-    40.73 131.01
-    37.12 121.89
-    34.43 122.11
-    34.53 116.44
-    28.56 104.3
-    18.95 84.67
-    16.92 84.9
-    16.76 78.42
-    5.57 57.41
-    -25.88 62.65
-    -38.38 69.19
-    -46.08 55.54
-    -31.69 48.5
-    -19.8 45.87
-    -4.55 43.3
-    6.99 38.1
-    1.25 27.59
-    -48 49.82
-    -57.21 30.61
-    -20.15 12.61
-    -21.98 9.2
-  ]
-  wallType "orange building"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 659.29 0 -41.93
-  name "building(550)"
-  corners [
-    0 0
-    13.07 30.51
-    -32.96 51.4
-    -36.15 42.17
-    -37.88 42.41
-    -44.58 27.15
-    -47.17 27.37
-    -51.13 17.78
-    -0.65 -7.19
-    1.85 -2.39
-  ]
-  wallType "tall house"
-  roofShape "flat roof"
-}
-SimpleBuilding {
-  translation 791.5 0 -185.17
-  name "Albergo delle povere"
-  corners [
-    0 0
-    -60.28 29.09
-    -57.14 36.59
-    -80.94 48.99
-    -115.41 -21.27
-    -149.69 -90.51
-    -124.72 -101.43
-    -120.98 -96.31
-    -81.6 -114.99
-    -87.72 -121.03
-    -63.62 -131.14
-    -34.3 -73.21
-    -31.23 -74.14
-    -33.13 -77.83
-    -22.48 -83.87
-    -21.48 -71.63
-    -30.42 -66.18
-    -29.27 -63.55
-    -11.16 -26.33
   ]
   wallType "highrise"
   roofShape "flat roof"
@@ -34267,8 +31825,14 @@ DEF water Transform {
   ]
 }
 Mavic2Pro {
-  translation 0 0.1 0
-  rotation 0 -0.7071067811865475 -0.7071067811865475 -3.14159
+  hidden translation_8 0.0412774 -0.00469654 -0.00405862
+  hidden rotation_8 0 0 1 0
+  hidden translation_9 0.000625212 -0.00530346 -0.0207448
+  hidden rotation_9 0 1 0 0
+  hidden translation_10 0.00754686 0.0160388 -0.00586401
+  hidden rotation_10 1 0 0 0
+  translation -0.13238705232845258 1.963633336054823 -0.1474459402645062
+  rotation -0.24427020947051487 0.6868745898336702 0.684496429943983 2.6681840213854766
   name "Mavic 2 PRO_0"
   controller "base_controller"
   bodySlot [
