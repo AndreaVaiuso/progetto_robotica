@@ -1,20 +1,26 @@
 #VRML_SIM R2021b utf8
 WorldInfo {
   info [
-    "World generated using the Open Street Map to Webots importer"
-    "Author: David Mansolino <david.mansolino@epfl.ch>"
+    "Progetto di robotica"
+    "Uno stormo di droni effettua consegne nel terreno di UNIPA"
   ]
+  title "DJI Mavic - Consegne ad UNIPA"
+  basicTimeStep 8
+  defaultDamping Damping {
+    linear 0.5
+    angular 0.5
+  }
   coordinateSystem "NUE"
-  gpsCoordinateSystem "WGS84"
-  gpsReference 38.103449999999995 13.3484 0
-  lineScale 7
 }
 Viewpoint {
-  orientation 0.24327720053723917 -0.9332408914480113 -0.2643437955165307 4.560831640318403
-  position 3.6966653622279737 2.1072009556785445 0.4347539945450863
-  near 3
+  orientation 0.261432643206383 -0.9368965654640188 -0.23211591648969213 4.762844060971555
+  position 2.619250291351114 1.9390444113453011 0.5768907443511581
+  near 0.2
+  follow "Mavic 2 PRO_0"
+  followSmoothness 0.2
 }
 TexturedBackground {
+  luminosity 3
 }
 TexturedBackgroundLight {
 }
@@ -34261,14 +34267,21 @@ DEF water Transform {
   ]
 }
 Mavic2Pro {
-  translation 0.09 0.25 -1.83669e-06
-  rotation -1 0 0 1.57081
+  translation 0 0.1 0
+  rotation 0 -0.7071067811865475 -0.7071067811865475 -3.14159
   name "Mavic 2 PRO_0"
   controller "base_controller"
   bodySlot [
+    Receiver {
+    }
     Emitter {
     }
-    Receiver {
+  ]
+  cameraSlot [
+    Camera {
+      width 400
+      height 240
+      near 0.2
     }
   ]
 }
