@@ -153,6 +153,7 @@ while robot.step(timestep) != -1:
         if not near(bearing,target_angle):
             yaw_disturbance = 0.3
         else :
+            #fare la stabilizzazioe della rotazione 
             print("Rotazione Complatata !")
             yaw_disturbance = 0.0
             state= 'test3'
