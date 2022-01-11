@@ -7,4 +7,4 @@ centralWidgetVisible: 1
 orthographicViewHeight: 1
 textFiles: 0 "controllers/base_controller/base_controller.py"
 consoles: Console:All:All
-renderingDevicePerspectives: Mavic 2 PRO_0:camera;1;1;0;0
+renderingDevicePerspectives: Mavic 2 PRO_0:camera;0;1;0.268935;0.284367

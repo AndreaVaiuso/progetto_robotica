@@ -120,6 +120,9 @@ k_pitch_p = 30
 
 state = "test1"
 
+x1,y1=[0,0]
+x2,y2=[0,0]
+
 
 while robot.step(timestep) != -1:
     t = robot.getTime()
@@ -134,33 +137,43 @@ while robot.step(timestep) != -1:
     pitch_disturbance = 0
     yaw_disturbance = 0
     target_altitude = 0    
+    error_disturbance = 5 # il cono di disturbance deve essere il più piccolo possibile 
 
     if state == "test1":
+        print(f"State : {state}")
         target_altitude = 1.5
         if near(altitude,target_altitude):
             print("La mia posizione è: ",drone_gps.getValues())
+            x1,y1 = [-2.89147,0.789242] # riportare valore negativo della y per avere lo stesso riferimento della bussola 
+            x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
             state = "test2"
     elif state == "test2":
+        print(f"State : {state}")
         target_altitude =1.5
-        x1,y1 = [20,15]
-        x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
-        print(f'coefficiente angolare : {str((y2-y1)/(x2-x1))}')
-        print(f'arctan : {str(math.atan((y2-y1)/(x2-x1)))}')
-        print(f'arctan_degrees : {str(math.degrees(math.atan((y2-y1)/(x2-x1))))}')
+        target_angle=0        
         print(f'bearing : {bearing}')
-        target_angle = (90 - math.degrees(math.atan((y2-y1)/(x2-x1))))
-        print(f'{target_angle} Angolo')
-        if not near(bearing,target_angle):
-            yaw_disturbance = 0.3
-        else :
-            #fare la stabilizzazioe della rotazione 
+        if (x1>0 and y1 >0) or (x1>0 and y1<0):
+            target_angle = (math.degrees(math.atan((y2-y1)/(x2-x1))))
+        elif (x1<0 and y1<0) or (x1<0 and y1>0):
+            target_angle = 180+(math.degrees(math.atan((y2-y1)/(x2-x1))))
+        if target_angle<0:
+            target_angle =  360 + target_angle
+        print(f"target_angle: {target_angle}")
+        if target_angle- error_disturbance<bearing and target_angle+ error_disturbance> bearing :
+            #fare la funzione dinamica della yaw_disturbance e decidere se girare dx o sx
             print("Rotazione Complatata !")
             yaw_disturbance = 0.0
-            state= 'test3'
+            state = 'test3'
+        elif bearing > target_angle + error_disturbance:
+            yaw_disturbance = 0.3
+            print
+        elif  bearing < target_angle - error_disturbance:
+            yaw_disturbance = - 0.3
+
     elif state=='test3':
+        print(f"State : {state}")
         target_altitude = 1.5
-        print(f'braring : {bearing}')
-        
+        print(f'braring : {bearing} rotazione completata')         
     elif state== "check_new_orders":
         if len(orders) != 0:
             state = "move_near_base"
