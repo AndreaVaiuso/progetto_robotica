@@ -28,7 +28,7 @@ current_order =''
 score_dict={}
 
 def gen_yaw_disturbance(baring, target_angle, error_disturbance):
-        return ((math.log(abs(bearing-target_angle), 4 )-math.log(error_disturbance, 4)))/10
+        return ((math.log(abs(bearing-target_angle), 4.5 )-math.log(error_disturbance, 4.5)))/10
 
 def get_bearing_in_degrees(values):
     rad = math.atan2(values[0],values[1])
@@ -143,22 +143,23 @@ while robot.step(timestep) != -1:
     roll_disturbance = 0
     pitch_disturbance = 0
     yaw_disturbance = 0
-    target_altitude = 0    
-    error_disturbance = 1 # il cono di disturbance deve essere il più piccolo possibile 
+    target_altitude = 0  
+    target_angle=0   
+    error_disturbance = 0.5 # il cono di disturbance deve essere il più piccolo possibile 
 
     if state == "test1":
         print(f"State : {state}")
         target_altitude = 1.5
         if near(altitude,target_altitude):
             print("La mia posizione è: ",drone_gps.getValues())
-            x1,y1 = [box_position[0],-box_position[2]] # riportare valore negativo della y per avere lo stesso riferimento della bussola 
-            x2,y2 = [0,0]
+            # riportare valore negativo della y per avere lo stesso riferimento della bussola             
             state = "test2"
     elif state == "test2":
         print(f"State : {state}")
-
+        x1,y1 = [box_position[0],box_position[2]]
+        x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
         target_altitude =1.5
-        target_angle=0        
+               
         print(f'bearing : {bearing}')
         if (x1>0 and y1 >0) or (x1>0 and y1<0):
             target_angle = (math.degrees(math.atan((y2-y1)/(x2-x1))))
@@ -172,9 +173,10 @@ while robot.step(timestep) != -1:
             print("Rotazione Complatata !")          
         
         elif (bearing>target_angle + error_disturbance) or (bearing<target_angle - error_disturbance):
-            
+           
             next_bearing= (bearing+180)%360
             
+            print(f"bearing : {bearing} ; next_bearing : {next_bearing}") 
             if bearing< next_bearing and bearing:
                 if bearing<= target_angle and next_bearing> target_angle :
                     yaw_disturbance = -gen_yaw_disturbance(bearing,target_angle,error_disturbance)
