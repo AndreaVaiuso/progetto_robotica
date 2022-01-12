@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.15389685644958265 0.9762956201032179 0.15219270594285886 4.580144145591733
-  position -5.125913226958029 1.5441706402328137 -0.33027998620078236
+  orientation 0.9999047672712602 0.009511507139826701 0.009999380987634322 4.662293862369324
+  position 0.005608664375803207 7.387542247573452 -0.20312788078660698
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -73,8 +73,8 @@ SmallManor {
 SquareManhole {
   translation 0 -0.03 0
 }
-CardboardBox {
-  translation -2.89147 0.3 -0.789242
+DEF box CardboardBox {
+  translation -1.14625 0.34 -0.526844
   rotation 0 1 0 -0.261795307179586
 }
 TeslaModel3Simple {
@@ -136,10 +136,11 @@ Forest {
   minRadius 3
 }
 Mavic2Pro {
-  translation 0 0.1 0
-  rotation -0.9351136144125264 0.2505628966821648 0.2505608966829895 1.63783
+  translation 0 0.0999964 0
+  rotation -0.8628559982596194 0.35740699927911007 0.35740699927911007 1.71777
   name "Mavic 2 PRO_0"
   controller "base_controller"
+  supervisor TRUE
   bodySlot [
     Receiver {
     }

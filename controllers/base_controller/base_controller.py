@@ -7,11 +7,15 @@ import modules.communication as comm
 import time
 import math
 import operator
+from controller import Supervisor
 
+
+robot = Supervisor()
+box_position = robot.getFromDef("box").getField("translation").getSFVec3f()
 orders = []
 battery = 100
 BASE_COORDS = {"0":[1,2,3]}
-robot = Robot()
+
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
 emitter = robot.getDevice("emitter")
@@ -22,6 +26,9 @@ receiver.setChannel(canale_di_ricezione)
 state = "check_new_orders"
 current_order =''
 score_dict={}
+
+def gen_yaw_disturbance(baring, target_angle, error_disturbance):
+        return ((math.log(abs(bearing-target_angle), 4 )-math.log(error_disturbance, 4)))/10
 
 def get_bearing_in_degrees(values):
     rad = math.atan2(values[0],values[1])
@@ -137,18 +144,19 @@ while robot.step(timestep) != -1:
     pitch_disturbance = 0
     yaw_disturbance = 0
     target_altitude = 0    
-    error_disturbance = 5 # il cono di disturbance deve essere il più piccolo possibile 
+    error_disturbance = 1 # il cono di disturbance deve essere il più piccolo possibile 
 
     if state == "test1":
         print(f"State : {state}")
         target_altitude = 1.5
         if near(altitude,target_altitude):
             print("La mia posizione è: ",drone_gps.getValues())
-            x1,y1 = [-2.89147,0.789242] # riportare valore negativo della y per avere lo stesso riferimento della bussola 
-            x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
+            x1,y1 = [box_position[0],-box_position[2]] # riportare valore negativo della y per avere lo stesso riferimento della bussola 
+            x2,y2 = [0,0]
             state = "test2"
     elif state == "test2":
         print(f"State : {state}")
+
         target_altitude =1.5
         target_angle=0        
         print(f'bearing : {bearing}')
@@ -161,14 +169,23 @@ while robot.step(timestep) != -1:
         print(f"target_angle: {target_angle}")
         if target_angle- error_disturbance<bearing and target_angle+ error_disturbance> bearing :
             #fare la funzione dinamica della yaw_disturbance e decidere se girare dx o sx
-            print("Rotazione Complatata !")
-            yaw_disturbance = 0.0
-            state = 'test3'
-        elif bearing > target_angle + error_disturbance:
-            yaw_disturbance = 0.3
-            print
-        elif  bearing < target_angle - error_disturbance:
-            yaw_disturbance = - 0.3
+            print("Rotazione Complatata !")          
+        
+        elif (bearing>target_angle + error_disturbance) or (bearing<target_angle - error_disturbance):
+            
+            next_bearing= (bearing+180)%360
+            
+            if bearing< next_bearing and bearing:
+                if bearing<= target_angle and next_bearing> target_angle :
+                    yaw_disturbance = -gen_yaw_disturbance(bearing,target_angle,error_disturbance)
+                else:
+                    yaw_disturbance = gen_yaw_disturbance(bearing,target_angle,error_disturbance)
+            else:
+                if next_bearing<= target_angle and bearing> target_angle :
+                    yaw_disturbance = gen_yaw_disturbance(bearing,target_angle,error_disturbance)
+                else:
+                    yaw_disturbance = -gen_yaw_disturbance(bearing,target_angle,error_disturbance)
+            
 
     elif state=='test3':
         print(f"State : {state}")
