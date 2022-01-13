@@ -11,6 +11,7 @@ from controller import Supervisor
 
 
 robot = Supervisor()
+
 box_position = robot.getFromDef("box").getField("translation").getSFVec3f()
 orders = []
 battery = 100
@@ -27,8 +28,28 @@ state = "check_new_orders"
 current_order =''
 score_dict={}
 
-def gen_yaw_disturbance(baring, target_angle, error_disturbance):
-        return ((math.log(abs(bearing-target_angle), 4.5 )-math.log(error_disturbance, 4.5)))/10
+def f(x):
+    return math.log(x+1,4)/10
+
+def getTargetAngle(x1,x2,y1,y2):
+    x0 = x2-x1
+    y0 = y2-y1
+    if x0>=0 and y0>=0:
+        return 270 + math.degrees(math.atan((y2-y1)/(x2-x1)))
+    elif x0>=0 and y0<0:
+        return 270 + math.degrees(math.atan((y2-y1)/(x2-x1)))
+    elif x0<0 and y0>=0:
+        return 90 + math.degrees(math.atan((y2-y1)/(x2-x1)))
+    elif x0<0 and y0<0:
+        return 90 + math.degrees(math.atan((y2-y1)/(x2-x1)))
+
+def getYawDisturbanceGain(bearing,targetAngle):
+    diff = (bearing-targetAngle) % 360
+    print("DIFF:",diff)
+    if diff < 180 and diff > 0:
+        return f(diff)
+    else :
+        return -f(-diff+360)
 
 def get_bearing_in_degrees(values):
     rad = math.atan2(values[0],values[1])
@@ -139,60 +160,30 @@ while robot.step(timestep) != -1:
     roll_acceleration = drone_gyroscope.getValues()[0]
     pitch_acceleration = drone_gyroscope.getValues()[1]
     bearing = get_bearing_in_degrees(drone_compass.getValues())
-
+    maxYaw = 1
     roll_disturbance = 0
     pitch_disturbance = 0
     yaw_disturbance = 0
     target_altitude = 0  
     target_angle=0   
     error_disturbance = 0.5 # il cono di disturbance deve essere il più piccolo possibile 
-
+    if state == "test" :
+        target_altitude = 1
+        y1,x1 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
+        y2,x2 = [box_position[0],box_position[2]]
+        targetAngle = getTargetAngle(x1,x2,y1,y2)
+        g = getYawDisturbanceGain(bearing,targetAngle)
+        yaw_disturbance = maxYaw * g
+        print("Bearing: ",bearing)
+        print("Target Angle:", targetAngle);
+        print("Gain:", g)
+        print("Yaw:", yaw_disturbance)
+        print()
     if state == "test1":
-        print(f"State : {state}")
-        target_altitude = 1.5
+        target_altitude = 1
         if near(altitude,target_altitude):
-            print("La mia posizione è: ",drone_gps.getValues())
-            # riportare valore negativo della y per avere lo stesso riferimento della bussola             
-            state = "test2"
-    elif state == "test2":
-        print(f"State : {state}")
-        x1,y1 = [box_position[0],box_position[2]]
-        x2,y2 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
-        target_altitude =1.5
-               
-        print(f'bearing : {bearing}')
-        if (x1>0 and y1 >0) or (x1>0 and y1<0):
-            target_angle = (math.degrees(math.atan((y2-y1)/(x2-x1))))
-        elif (x1<0 and y1<0) or (x1<0 and y1>0):
-            target_angle = 180+(math.degrees(math.atan((y2-y1)/(x2-x1))))
-        if target_angle<0:
-            target_angle =  360 + target_angle
-        print(f"target_angle: {target_angle}")
-        if target_angle- error_disturbance<bearing and target_angle+ error_disturbance> bearing :
-            #fare la funzione dinamica della yaw_disturbance e decidere se girare dx o sx
-            print("Rotazione Complatata !")          
-        
-        elif (bearing>target_angle + error_disturbance) or (bearing<target_angle - error_disturbance):
-           
-            next_bearing= (bearing+180)%360
-            
-            print(f"bearing : {bearing} ; next_bearing : {next_bearing}") 
-            if bearing< next_bearing and bearing:
-                if bearing<= target_angle and next_bearing> target_angle :
-                    yaw_disturbance = -gen_yaw_disturbance(bearing,target_angle,error_disturbance)
-                else:
-                    yaw_disturbance = gen_yaw_disturbance(bearing,target_angle,error_disturbance)
-            else:
-                if next_bearing<= target_angle and bearing> target_angle :
-                    yaw_disturbance = gen_yaw_disturbance(bearing,target_angle,error_disturbance)
-                else:
-                    yaw_disturbance = -gen_yaw_disturbance(bearing,target_angle,error_disturbance)
-            
-
-    elif state=='test3':
-        print(f"State : {state}")
-        target_altitude = 1.5
-        print(f'braring : {bearing} rotazione completata')         
+            print("Altezza raggiunta")
+            state = "test"        
     elif state== "check_new_orders":
         if len(orders) != 0:
             state = "move_near_base"
