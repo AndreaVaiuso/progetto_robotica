@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.569803600362859 0.5693496753363454 0.5925915998458982 4.1433676834431505
-  position -0.086174214307533 6.785512433714105 0.9610581690794076
+  orientation 0.2693997750713261 0.9254176720875585 0.26650683552127313 4.645724842959382
+  position -4.321595784425687 5.072073084147726 0.33155830575713063
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -29,6 +29,16 @@ Floor {
   tileSize 6 6
   appearance SandyGround {
   }
+}
+DEF SUPERVISOR Robot {
+  children [
+    Emitter {
+      model "A"
+    }
+  ]
+  name "supervisor"
+  controller "supervisor_controller"
+  supervisor TRUE
 }
 Road {
   translation -43.8 0.01 -9.2
@@ -70,11 +80,59 @@ SmallManor {
   translation -50.35 0 -11.25
   rotation 0 1 0 4.32
 }
-SquareManhole {
+DEF base_drone SquareManhole {
   translation 0 -0.03 0
+  name "base_drone"
+}
+DEF base_1 Solid {
+  translation 3.18 0 2.17
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/base1.png"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.1 1
+      }
+    }
+  ]
+  boundingObject Box {
+    size 1 0.1 1
+  }
+}
+DEF base_2 Solid {
+  translation 3.18 0 -1.76
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/base2.png"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.1 1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject Box {
+    size 1 0.1 1
+  }
 }
 DEF box CardboardBox {
-  translation 1.324 0.34 1.79
+  translation 3.18 0.36 -0.18
   rotation 0 1 0 4.07987e-06
 }
 TeslaModel3Simple {
@@ -136,15 +194,31 @@ Forest {
   minRadius 3
 }
 Mavic2Pro {
-  translation 0.0670003 0.0878014 0.01001
-  rotation -0.9987853246816859 -0.034838475404434445 0.03484473894282911 1.572010335673223
+  hidden linearVelocity_0 6.579193662527372e-07 1.8551446655903763e-05 2.0164343042568927e-09
+  hidden angularVelocity_0 1.730044462538942e-07 -3.24829867101626e-08 -3.910304840426096e-05
+  hidden translation_8 0.0412774 -0.00469654 -0.00405862
+  hidden rotation_8 0 0 1 0
+  hidden linearVelocity_8 1.8348006110756322e-06 1.366487193902391e-05 1.1282410942420937e-08
+  hidden angularVelocity_8 1.719170342217035e-07 -1.691238662638498e-08 -3.910304808183868e-05
+  hidden translation_9 0.000625212 -0.00530346 -0.0207448
+  hidden rotation_9 0 1 0 0
+  hidden linearVelocity_9 1.6407674907384751e-06 1.3725150534321982e-05 1.0403148906791039e-08
+  hidden angularVelocity_9 1.7191689431653473e-07 -1.6912480136786524e-08 -3.912199134882365e-05
+  hidden translation_10 0.00754686 0.0160388 -0.00586401
+  hidden rotation_10 1 0 0 0
+  hidden linearVelocity_10 1.3043151392456617e-06 1.3668565908553976e-05 8.960705553435003e-09
+  hidden angularVelocity_10 1.6015715875629683e-07 -1.773375266932891e-08 -3.9121991272352776e-05
+  translation 0.0670013053412058 0.0857157359792646 0.01001000545457908
+  rotation -0.9987858646969464 -0.034830887874105855 0.034836844453457874 1.5720097149541272
   name "Mavic 2 PRO_0"
   controller "base_controller"
   supervisor TRUE
   bodySlot [
     Receiver {
+      model "A"
     }
     Emitter {
+      model "A"
     }
   ]
   cameraSlot [
