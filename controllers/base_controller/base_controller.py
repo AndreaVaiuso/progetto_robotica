@@ -1,4 +1,5 @@
 """base_controller controller."""
+from turtle import distance
 from controller import Robot,Receiver,Emitter 
 import threading
 import random
@@ -7,15 +8,15 @@ import modules.communication as comm
 import time
 import math
 import operator
-from controller import Supervisor
 
 
-robot = Supervisor()
 
-box_position = robot.getFromDef("box").getField("translation").getSFVec3f()
+robot = Robot()
+
+
 orders = []
 battery = 100
-BASE_COORDS = {"0":[1,2,3]}
+BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1,76,3.18]}
 
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
@@ -28,10 +29,12 @@ state = "check_new_orders"
 current_order =''
 score_dict={}
 
+
+
 def f(x):
     return math.log(x+1,4)/10
 
-def getTargetAngle(x1,x2,y1,y2):
+def get_target_angle(x1,x2,y1,y2):
     x0 = x2-x1
     y0 = y2-y1
     if x0>=0 and y0>=0:
@@ -43,13 +46,32 @@ def getTargetAngle(x1,x2,y1,y2):
     elif x0<0 and y0<0:
         return 90 + math.degrees(math.atan((y2-y1)/(x2-x1)))
 
-def getYawDisturbanceGain(bearing,targetAngle):
+def get_yaw_disturbance_gain(bearing,targetAngle):
     diff = (bearing-targetAngle) % 360
     print("DIFF:",diff)
     if diff < 180 and diff > 0:
         return f(diff)
     else :
         return -f(-diff+360)
+
+def get_pitch_disturbance_gain(drone_x, drone_y, box_x, box_y):
+    drone_position=[drone_x, drone_y]
+    box_position = [box_x, box_y]
+    distance = math.dist(drone_position,box_position)
+    if distance < 0.1 :
+        return f(distance)
+    else:
+        return -f(distance)
+    
+    
+def gen_yaw_disturbance(bearing,maxYaw, target_angle):
+    g = get_yaw_disturbance_gain(bearing,targetAngle)
+    print("Bearing: ",bearing)
+    print("Target Angle:", targetAngle)
+    print("Gain:", g)
+    print("Yaw:", yaw_disturbance)
+    return maxYaw * g
+
 
 def get_bearing_in_degrees(values):
     rad = math.atan2(values[0],values[1])
@@ -77,7 +99,7 @@ def send_score(dataList):
     score = score_calculator(dataList)
     # fare la funzione 
     #ci serve anche ORDER_ID per capire quello score a cosa si riferisce
-    message = struct.pack("chd",'S', name, dataList[1],  score) #dataList è una tupla
+    message = struct.pack("ssss",'S'.encode('utf-8'), name.encode('utf-8'), dataList[1],  score.encode('utf-8')) #dataList è una tupla
     emitter.setChannel(Emitter.CHANNEL_BROADCAST) #dovrebbe inviare su tutti i canali cosi
     while emitter.send(message) != 1 : #se restituisce 0 significa che la coda di invio era piena e lo deve rifare
         print(f' sono il robot {name}, non sono riuscito a mandare il punteggio dello ordine {dataList[1]}, coda di invio piena')  
@@ -104,14 +126,14 @@ def update_orders():
     while True:
         if receiver.getQueueLength() > 0: #ma dobbiamo distinguere fra due tipi di dati in arrivo , i nuovi ordini, e i punteggi
             x = receiver.getData()
-            # [ "chd" , TYPE, ORDER_ID , WEIGHT , DESTINATION , BASE ]
-            dataList = struct.unpack("chd",x) #chd è il formato di compressione
-            if dataList[0] == 'NO':
+            # [ "chd" , TYPE, ORDER_ID , WEIGHT , DESTINATION_x, DESTINATION_y , BASE ]
+            dataList = struct.unpack("ssssss",x) #chd è il formato di compressione
+            if dataList[0].decode('utf-8') == 'NO':
                 send_score(dataList)
             # [ "chd" , TYPE, DRONE_ID ,ORDER_ID, score ]
-            elif dataList[0] == 'S':
-                if dataList[2] == current_order:
-                    score_dict[dataList[1]]=dataList[3]
+            elif dataList[0].decode('utf-8') == 'S':
+                if dataList[2].decode('utf-8') == current_order:
+                    score_dict[dataList[1].decode('utf-8')] = dataList[3].decode('utf-8')
                           
             receiver.nextPacket()
 
@@ -146,10 +168,14 @@ k_vertical_p = 3
 k_roll_p = 50
 k_pitch_p = 30
 
-state = "test1"
-
-x1,y1=[0,0]
-x2,y2=[0,0]
+#state = "test1"
+maxYaw = 1
+roll_disturbance = 0
+pitch_disturbance = 0
+yaw_disturbance = 0
+target_altitude = 0  
+target_angle=0   
+#error_disturbance = 0.5 # il cono di disturbance deve essere il più piccolo possibile 
 
 
 while robot.step(timestep) != -1:
@@ -160,38 +186,52 @@ while robot.step(timestep) != -1:
     roll_acceleration = drone_gyroscope.getValues()[0]
     pitch_acceleration = drone_gyroscope.getValues()[1]
     bearing = get_bearing_in_degrees(drone_compass.getValues())
-    maxYaw = 1
-    roll_disturbance = 0
-    pitch_disturbance = 0
-    yaw_disturbance = 0
-    target_altitude = 0  
-    target_angle=0   
-    error_disturbance = 0.5 # il cono di disturbance deve essere il più piccolo possibile 
+    y1,x1 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
+    y2,x2 = BASE_COORDS[current_order[5].decode('utf-8')]
+    targetAngle =get_target_angle(x1,x2,y1,y2)
+
+   
+    
     if state == "test" :
-        target_altitude = 1
-        y1,x1 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
-        y2,x2 = [box_position[0],box_position[2]]
-        targetAngle = getTargetAngle(x1,x2,y1,y2)
-        g = getYawDisturbanceGain(bearing,targetAngle)
-        yaw_disturbance = maxYaw * g
-        print("Bearing: ",bearing)
-        print("Target Angle:", targetAngle);
-        print("Gain:", g)
-        print("Yaw:", yaw_disturbance)
-        print()
+       pass
     if state == "test1":
+       pass    
+      
+    elif state== "check_new_orders":
+        if len(orders) != 0:
+            current_order = orders.pop()
+            state = "catch_quote"
+        else: continue
+    elif state== "catch_quote":
         target_altitude = 1
         if near(altitude,target_altitude):
             print("Altezza raggiunta")
-            state = "test"        
-    elif state== "check_new_orders":
-        if len(orders) != 0:
-            state = "move_near_base"
-        else: continue
-    elif state== "move_near_base":
-        #code
-        pass
+            state = "drone_rotation"
+
+    elif state=='drone_rotation':
+        yaw_disturbance = gen_yaw_disturbance(bearing, maxYaw, target_angle)
+        if abs(bearing-target_angle)<0.5:
+            state = 'move_near_base'
+        else:
+            continue
+    
+    elif state == 'move_near_base':
+        if abs(bearing-target_angle)>0.5:
+            state = 'drone_rotation'
+        else:
+            pitch_disturbance = get_pitch_disturbance_gain(x1,y1,x2,y2)
+            if math.dist([x1,y1], [x2,y2])< 0.1:
+                state ='land_on_box'
+            else:
+                continue            
+    
     elif state== "land_on_box":
+        
+        if math.dist([x1,y1],[x2,y2]):
+            state = 'move_near_base'
+        else: 
+            target_altitude = 0.3
+            state = 'lock_box'
         #code
         pass
     elif state== "lock_box":
