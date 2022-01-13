@@ -5,6 +5,6 @@ sceneTreePerspectives: 000000ff000000010000000200000220000000fc01000000060100000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 1 "controllers/base_controller/base_controller.py" "controllers/supervisor_controller/supervisor_controller.py"
+textFiles: 0 "controllers/base_controller/base_controller.py" "controllers/supervisor_controller/supervisor_controller.py"
 consoles: Console:All:All
 renderingDevicePerspectives: Mavic 2 PRO_0:camera;0;0.2725;0;0.284367
