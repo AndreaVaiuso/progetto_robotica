@@ -11,6 +11,8 @@ def createOrder(orderID,weight,position,base):
     while emitter.send(message) != 1 :
         continue
     xp,yp = BASE_COORDS[str(base)]
+    print(xp,yp)
+
     zp = 0.36
     root_node = supervisor.getRoot()
     children_field = root_node.getField("children")
@@ -22,10 +24,11 @@ emitter = supervisor.getDevice("emitter")
 emitter.setChannel(Emitter.CHANNEL_BROADCAST)
 
 createOrder(1,0.5,[10,10],1)
-time.sleep(20)
+time.sleep(2)
 createOrder(1,0.5,[20,-15],2)
 
 
 while supervisor.step(timestep) != -1:
-    pass
+    break
+       
 
