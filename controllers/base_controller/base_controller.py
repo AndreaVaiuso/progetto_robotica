@@ -1,5 +1,4 @@
 """base_controller controller."""
-from turtle import distance
 from controller import Robot,Receiver,Emitter 
 import threading
 import random
