@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.5182548628647956 0.6806256104666913 0.5178423268658481 4.337542239923087
-  position -1.487569089474143 7.243281161258567 0.28714146664218493
+  orientation 0.43781911746781693 0.8279524661164619 0.35044134206935523 4.746195518547953
+  position -4.150141374950501 4.826165862674004 1.0032414867109136
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -85,6 +85,10 @@ SmallManor {
 DEF base_drone SquareManhole {
   translation 0 -0.03 0
   name "base_drone"
+}
+DEF base_drone SquareManhole {
+  translation 0 -0.03 1
+  name "base_drone(1)"
 }
 DEF base_1 Solid {
   translation 3.18 0 2.17
@@ -191,11 +195,11 @@ Forest {
   maxRadius 6
   minRadius 3
 }
-Mavic2Pro {
-  translation 0.0670013053412058 0.0857157359792646 0.01001000545457908
+DEF DRONE Mavic2Pro {
+  translation 0 0.08 0
   rotation -0.9987858646969464 -0.034830887874105855 0.034836844453457874 1.5720097149541272
   name "Mavic 2 PRO_0"
-  controller "base_controller"
+  controller "base_controller_2"
   supervisor TRUE
   bodySlot [
     Receiver {
@@ -203,6 +207,30 @@ Mavic2Pro {
     }
     Emitter {
       model "A"
+      channel -1
+    }
+  ]
+  cameraSlot [
+    Camera {
+      width 400
+      height 240
+      near 0.2
+    }
+  ]
+}
+DEF DRONE Mavic2Pro {
+  translation 0 0.08 1
+  rotation -0.9987858646969464 -0.034830887874105855 0.034836844453457874 1.5720097149541272
+  name "Mavic 2 PRO_1"
+  controller "base_controller_2"
+  supervisor TRUE
+  bodySlot [
+    Receiver {
+      model "A"
+    }
+    Emitter {
+      model "A"
+      channel -1
     }
   ]
   cameraSlot [
