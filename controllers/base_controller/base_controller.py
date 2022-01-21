@@ -13,13 +13,15 @@ import operator
 robot = Robot()
 
 
-orders = [['','','','','','1']]
+orders = [['','','','','','2']]
 battery = 100
-BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1,76,3.18]}
+BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1.76,3.18]}
 
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
 emitter = robot.getDevice("emitter")
+magnetic =  robot.getDevice("magnetic")
+magnetic.enablePresence(timestep)
 receiver.enable(timestep)
 name = robot.getName()
 canale_di_ricezione =int(name[-1])
@@ -36,10 +38,10 @@ def euc_dist(drone_pos, dest_pos):
     return math.sqrt(math.pow((drone_pos[0]-dest_pos[0]),2)+math.pow((drone_pos[1]-dest_pos[1]),2))
 
 def get_subtraction(bearing, target_angle):
-    if bearing>targetAngle:
-       return  bearing-targetAngle
+    if bearing>target_angle:
+       return  bearing-target_angle
     else:
-        return targetAngle-bearing
+        return target_angle-bearing
         
 def get_target_angle(x1,x2,y1,y2):
     x0 = x2-x1
@@ -53,8 +55,8 @@ def get_target_angle(x1,x2,y1,y2):
     elif x0<0 and y0<0:
         return 90 + math.degrees(math.atan((y2-y1)/(x2-x1)))
 
-def get_yaw_disturbance_gain(bearing,targetAngle):
-    diff = (bearing-targetAngle) %360
+def get_yaw_disturbance_gain(bearing,target_angle):
+    diff = (bearing-target_angle) %360
     print("DIFF:",diff)
     if diff < 180 and diff > 0:
         return f(diff)
@@ -72,9 +74,9 @@ def get_pitch_disturbance_gain(drone_x, drone_y, box_x, box_y):
     
     
 def gen_yaw_disturbance(bearing,maxYaw, target_angle):
-    g = get_yaw_disturbance_gain(bearing,targetAngle)
+    g = get_yaw_disturbance_gain(bearing,target_angle)
     print("Bearing: ",bearing)
-    print("Target Angle:", targetAngle)
+    print("Target Angle:", target_angle)
     print("Gain:", g)
     print("Yaw:", yaw_disturbance)
     return maxYaw * g
@@ -184,14 +186,14 @@ maxYaw = 1
 maxPitch= 10
 roll_disturbance = 0
 target_altitude = 0  
-target_angle=0   
+ 
 #error_disturbance = 0.5 # il cono di disturbance deve essere il più piccolo possibile 
 
 
 while robot.step(timestep) != -1:
     pitch_disturbance = 0
     yaw_disturbance = 0
-   
+    a=1
     t = robot.getTime()
     roll = drone_imu.getRollPitchYaw()[0] + math.pi / 2
     pitch = drone_imu.getRollPitchYaw()[1]
@@ -200,12 +202,12 @@ while robot.step(timestep) != -1:
     pitch_acceleration = drone_gyroscope.getValues()[1]
     bearing = get_bearing_in_degrees(drone_compass.getValues())
     y1,x1 = [drone_gps.getValues()[0],drone_gps.getValues()[2]]
-    print(state)
+    print(f'stato: {state}')
     if current_order =='':
             y2,x2=[0,0]
     else: 
         x2,y2 = BASE_COORDS[current_order[5]] #decode
-    targetAngle =get_target_angle(x1,x2,y1,y2)
+    target_angle =get_target_angle(x1,x2,y1,y2)
 
    
     
@@ -241,28 +243,38 @@ while robot.step(timestep) != -1:
     elif state == 'move_near_base':
         diff = get_subtraction(bearing, target_angle)
         if diff>5:
-            state = 'drone_rotation'
-            
+            state = 'drone_rotation'            
         else:
             pitch_disturbance = -maxPitch*get_pitch_disturbance_gain(x1,y1,x2,y2)
             print(euc_dist([x1,y1], [x2,y2]), pitch_disturbance)
-            if euc_dist([x1,y1], [x2,y2])< 0.1:
+            if euc_dist([x1,y1], [x2,y2])<1:
                 state ='land_on_box'
             else:
                 print("NOT ARRIVED")            
     
-    elif state== "land_on_box":
-        
-        if euc_dist([x1,y1],[x2,y2]):
+    elif state == "land_on_box":  
+        dist =euc_dist([x1,y1],[x2,y2])
+        print(f'diastanza : {dist}')      
+        if dist>=0.5:
             state = 'move_near_base'
         else: 
             target_altitude = 0.3
-            state = 'lock_box'
+            if near(altitude,target_altitude):
+                state = 'lock_box'
+            else: 
+                print('NOT QUOTE YET')
         #code
         pass
-    elif state== "lock_box":
+    elif state == "lock_box":
+            magnetic.lock()
+            target_altitude = 2
+            if not(near(altitude, target_altitude)):
+                a=5
+            else:
+                print("NOT AT QUOTE")
+                
+            
         #code
-        pass
     elif state== "reach_quote":
         #code
         pass
@@ -294,10 +306,10 @@ while robot.step(timestep) != -1:
     front_right_motor_input = k_vertical_thrust + vertical_input + roll_input - pitch_input - yaw_input
     rear_left_motor_input = k_vertical_thrust + vertical_input - roll_input + pitch_input - yaw_input
     rear_right_motor_input = k_vertical_thrust + vertical_input + roll_input + pitch_input + yaw_input
-    drone_front_left_motor.setVelocity(front_left_motor_input)
-    drone_front_right_motor.setVelocity(-front_right_motor_input)
-    drone_rear_left_motor.setVelocity(-rear_left_motor_input)
-    drone_rear_right_motor.setVelocity(rear_right_motor_input)
+    drone_front_left_motor.setVelocity(front_left_motor_input*a)
+    drone_front_right_motor.setVelocity(-front_right_motor_input*a)
+    drone_rear_left_motor.setVelocity(-rear_left_motor_input*a)
+    drone_rear_right_motor.setVelocity(rear_right_motor_input*a)
     
    
   
