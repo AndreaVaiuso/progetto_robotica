@@ -13,7 +13,7 @@ import operator
 robot = Robot()
 
 
-orders = [['','','','','','2']]
+orders = [['','','','','','1']]
 battery = 100
 BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1.76,3.18]}
 
@@ -259,20 +259,14 @@ while robot.step(timestep) != -1:
             state = 'move_near_base'
         else: 
             target_altitude = 0.3
-            if near(altitude,target_altitude):
+            if near(altitude,target_altitude,error=0.05):
                 state = 'lock_box'
             else: 
                 print('NOT QUOTE YET')
-        #code
-        pass
+
     elif state == "lock_box":
             magnetic.lock()
-            target_altitude = 2
-            if not(near(altitude, target_altitude)):
-                a=5
-            else:
-                print("NOT AT QUOTE")
-                
+
             
         #code
     elif state== "reach_quote":

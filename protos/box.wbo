@@ -5,6 +5,7 @@ DEF order_box Solid {
     Connector {
       translation 0 0.11 3.3671e-08
       rotation 1 0 0 -1.5707996938995747
+      model "a"
       children [
         Shape {
           appearance PBRAppearance {
@@ -20,6 +21,9 @@ DEF order_box Solid {
       boundingObject USE MAGNETIC_GEOMETRY
       type "passive"
       autoLock TRUE
+      distanceTolerance 0.7
+      axisTolerance 1.5
+      rotationtolerance 1.5
     }
     Shape {
       appearance PBRAppearance {

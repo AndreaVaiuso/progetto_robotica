@@ -14,7 +14,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.0877012346212234 0.9933798225619609 0.07419583258297158 4.418950234284473
-  position -5.889345243576101 2.0805045189671856 -0.8017061809441969
+  position -6.079138938649667 2.1165442612916445 -0.8585214181910814
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -112,6 +112,8 @@ DEF base_1 Solid {
   boundingObject Box {
     size 1 0.1 1
   }
+  physics Physics {
+  }
 }
 DEF base_2 Solid {
   translation 3.18 0 -1.76
@@ -135,6 +137,8 @@ DEF base_2 Solid {
   name "solid(1)"
   boundingObject Box {
     size 1 0.1 1
+  }
+  physics Physics {
   }
 }
 TeslaModel3Simple {
@@ -196,15 +200,6 @@ Forest {
   minRadius 3
 }
 DEF DRONE Mavic2Pro {
-  hidden position_0_0 2.3242507317933853e-10
-  hidden translation_9 0.0412774 -0.00469654 -0.00405862
-  hidden rotation_9 0 0 1 0
-  hidden position_9_0 5.095541694813957e-10
-  hidden translation_10 0.000625212 -0.00530346 -0.0207448
-  hidden rotation_10 0 1 0 0
-  hidden position_10_0 -2.171402235416021e-09
-  hidden translation_11 0.00754686 0.0160388 -0.00586401
-  hidden rotation_11 1 0 0 0
   translation -1.4455443188426953e-06 0.0857090662244423 -5.4800301523625624e-09
   rotation -0.9987852726929972 -0.03483940908449021 0.03484529561101154 1.5720104339910512
   name "Mavic 2 PRO_0"
@@ -231,7 +226,7 @@ DEF DRONE Mavic2Pro {
       boundingObject USE MAGNETIC_GEOMETRY
       type "active"
       autoLock TRUE
-      distanceTolerance 0.4
+      distanceTolerance 0.3
       axisTolerance 1.5
       rotationTolerance 1.5
     }
