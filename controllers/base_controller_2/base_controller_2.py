@@ -258,14 +258,14 @@ while robot.step(timestep) != -1:
         target_posit.x = BASE_COORDS[current_order[2]][0]
         target_posit.y = BASE_COORDS[current_order[2]][1]
         pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x,posit.y,target_posit.x,target_posit.y)
-        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.5:
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) <= 0.5:
             chgState("land_on_box")
 
     elif state == "land_on_box":
-        target_altitude = 0.5
+        target_altitude = 0.2
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) <= 0.2:
             chgState("lock_box")
-        else: 
+        elif euc_dist(posit.getVec2d(), target_posit.getVec2d()) > 0.5: 
             chgState("go_near_box")
 
     elif state== "lock_box":

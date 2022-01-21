@@ -15,10 +15,14 @@ def createOrder(orderID,weight,position,base):
     xp = BASE_COORDS[str(base)][0]
     yp = BASE_COORDS[str(base)][1]
 
-    zp = 0.36
+    zp = 0.26
     root_node = supervisor.getRoot()
     children_field = root_node.getField("children")
-    children_field.importMFNodeFromString(-1,"CardboardBox { translation "+str(yp)+" "+str(zp)+" "+str(xp)+"}")
+    children_field.importMFNode(-1,"../../protos/box.wbo") 
+    node = children_field.getMFNode(-1) 
+    field = node.getField("translation") 
+    field.setSFVec3f([yp,zp,xp])
+
 
 def order():
     createOrder(1,0.5,[10,10],1)

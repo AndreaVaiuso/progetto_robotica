@@ -1,0 +1,46 @@
+#VRML_OBJ R2021b utf8
+DEF order_box Solid {
+  translation 3.18 0.41 0.68
+  children [
+    Connector {
+      translation 0 0.11 3.3671e-08
+      rotation 1 0 0 -1.5707996938995747
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry DEF MAGNETIC_GEOMETRY Box {
+            size 0.05 0.05 0.01
+          }
+        }
+      ]
+      boundingObject USE MAGNETIC_GEOMETRY
+      type "passive"
+      autoLock TRUE
+    }
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/amazon-texture.jpg"
+          ]
+          repeatS FALSE
+          repeatT FALSE
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry DEF BOX_GEOMETRY Box {
+        size 0.3 0.2 0.3
+      }
+    }
+  ]
+  name "box"
+  boundingObject USE BOX_GEOMETRY
+  physics Physics {
+    mass 0.01
+  }
+}

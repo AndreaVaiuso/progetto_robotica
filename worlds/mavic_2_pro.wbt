@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.19747963856112358 0.8279854659671068 0.5248255524467165 3.868508926708187
-  position -1.6944985780891455 3.550893690403786 -0.5184870437164578
+  orientation 0.0877012346212234 0.9933798225619609 0.07419583258297158 4.418950234284473
+  position -5.889345243576101 2.0805045189671856 -0.8017061809441969
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -197,10 +197,16 @@ Forest {
 }
 DEF DRONE Mavic2Pro {
   hidden position_0_0 2.3242507317933853e-10
+  hidden translation_9 0.0412774 -0.00469654 -0.00405862
+  hidden rotation_9 0 0 1 0
   hidden position_9_0 5.095541694813957e-10
+  hidden translation_10 0.000625212 -0.00530346 -0.0207448
+  hidden rotation_10 0 1 0 0
   hidden position_10_0 -2.171402235416021e-09
-  translation -1.2798151777793088e-06 0.0857097524395001 -4.376501543884835e-09
-  rotation -0.9987853336055836 -0.03483852777716125 0.03484443078460357 1.5720103461891508
+  hidden translation_11 0.00754686 0.0160388 -0.00586401
+  hidden rotation_11 1 0 0 0
+  translation -1.4455443188426953e-06 0.0857090662244423 -5.4800301523625624e-09
+  rotation -0.9987852726929972 -0.03483940908449021 0.03484529561101154 1.5720104339910512
   name "Mavic 2 PRO_0"
   controller "base_controller_2"
   supervisor TRUE
@@ -225,7 +231,7 @@ DEF DRONE Mavic2Pro {
       boundingObject USE MAGNETIC_GEOMETRY
       type "active"
       autoLock TRUE
-      distanceTolerance 0.1
+      distanceTolerance 0.4
       axisTolerance 1.5
       rotationTolerance 1.5
     }
@@ -244,49 +250,4 @@ DEF DRONE Mavic2Pro {
       near 0.2
     }
   ]
-}
-DEF order_box Solid {
-  translation 3.18 -2.1 0.68
-  children [
-    Connector {
-      translation 0 0.11 3.3671e-08
-      rotation 1 0 0 -1.5707996938995747
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 1 0 0
-            roughness 1
-            metalness 0
-          }
-          geometry DEF MAGNETIC_GEOMETRY Box {
-            size 0.05 0.05 0.01
-          }
-        }
-      ]
-      boundingObject USE MAGNETIC_GEOMETRY
-      type "passive"
-      autoLock TRUE
-    }
-    Shape {
-      appearance PBRAppearance {
-        baseColorMap ImageTexture {
-          url [
-            "../textures/amazon-texture.jpg"
-          ]
-          repeatS FALSE
-          repeatT FALSE
-        }
-        roughness 1
-        metalness 0
-      }
-      geometry DEF BOX_GEOMETRY Box {
-        size 0.3 0.2 0.3
-      }
-    }
-  ]
-  name "box"
-  boundingObject USE BOX_GEOMETRY
-}
-CardboardBox {
-  translation 3.18 0.36 2.17
 }
