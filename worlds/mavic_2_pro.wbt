@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.43781911746781693 0.8279524661164619 0.35044134206935523 4.746195518547953
-  position -4.150141374950501 4.826165862674004 1.0032414867109136
+  orientation 0.19747963856112358 0.8279854659671068 0.5248255524467165 3.868508926708187
+  position -1.6944985780891455 3.550893690403786 -0.5184870437164578
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -196,12 +196,39 @@ Forest {
   minRadius 3
 }
 DEF DRONE Mavic2Pro {
-  translation 0 0.08 0
-  rotation -0.9987858646969464 -0.034830887874105855 0.034836844453457874 1.5720097149541272
+  hidden position_0_0 2.3242507317933853e-10
+  hidden position_9_0 5.095541694813957e-10
+  hidden position_10_0 -2.171402235416021e-09
+  translation -1.2798151777793088e-06 0.0857097524395001 -4.376501543884835e-09
+  rotation -0.9987853336055836 -0.03483852777716125 0.03484443078460357 1.5720103461891508
   name "Mavic 2 PRO_0"
   controller "base_controller_2"
   supervisor TRUE
   bodySlot [
+    Connector {
+      translation -0.07 0 -0.06
+      rotation 0 1 0 -3.1
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 1 0
+            roughness 1
+            metalness 0
+          }
+          geometry DEF MAGNETIC_GEOMETRY Box {
+            size 0.05 0.05 0.01
+          }
+        }
+      ]
+      name "magnetic"
+      model "a"
+      boundingObject USE MAGNETIC_GEOMETRY
+      type "active"
+      autoLock TRUE
+      distanceTolerance 0.1
+      axisTolerance 1.5
+      rotationTolerance 1.5
+    }
     Receiver {
       model "A"
     }
@@ -218,26 +245,48 @@ DEF DRONE Mavic2Pro {
     }
   ]
 }
-DEF DRONE Mavic2Pro {
-  translation 0 0.08 1
-  rotation -0.9987858646969464 -0.034830887874105855 0.034836844453457874 1.5720097149541272
-  name "Mavic 2 PRO_1"
-  controller "base_controller_2"
-  supervisor TRUE
-  bodySlot [
-    Receiver {
-      model "A"
+DEF order_box Solid {
+  translation 3.18 -2.1 0.68
+  children [
+    Connector {
+      translation 0 0.11 3.3671e-08
+      rotation 1 0 0 -1.5707996938995747
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 1 0 0
+            roughness 1
+            metalness 0
+          }
+          geometry DEF MAGNETIC_GEOMETRY Box {
+            size 0.05 0.05 0.01
+          }
+        }
+      ]
+      boundingObject USE MAGNETIC_GEOMETRY
+      type "passive"
+      autoLock TRUE
     }
-    Emitter {
-      model "A"
-      channel -1
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/amazon-texture.jpg"
+          ]
+          repeatS FALSE
+          repeatT FALSE
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry DEF BOX_GEOMETRY Box {
+        size 0.3 0.2 0.3
+      }
     }
   ]
-  cameraSlot [
-    Camera {
-      width 400
-      height 240
-      near 0.2
-    }
-  ]
+  name "box"
+  boundingObject USE BOX_GEOMETRY
+}
+CardboardBox {
+  translation 3.18 0.36 2.17
 }

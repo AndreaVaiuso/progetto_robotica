@@ -3,7 +3,7 @@ import struct
 import threading
 from controller import Supervisor, Emitter
 
-BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1,76,3.18]}
+BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1.76,3.18]}
 
 def createOrder(orderID,weight,position,base):
     message = struct.pack("ciiddd",b"N",int(orderID),int(base),float(weight),float(position[0]),float(position[1]))

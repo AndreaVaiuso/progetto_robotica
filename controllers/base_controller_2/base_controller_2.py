@@ -160,8 +160,8 @@ def update_orders():
         if receiver.getQueueLength() > 0: #ma dobbiamo distinguere fra due tipi di dati in arrivo , i nuovi ordini, e i punteggi
             dPrint("Message received")
             x = receiver.getData()
-            # [ "chd" , [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y ]
-            # [ "chd" , [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] score, 0 , 0 ]
+            # [ [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y ]
+            # [ [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] score, 0 , 0 ]
             dataList = struct.unpack("ciiddd",x)
             if dataList[0].decode('utf-8') == 'N':
                 dPrint(f'New order received: [ ID:{dataList[1]}, BASE:{dataList[2]}, x:{dataList[4]}, y:{dataList[5]} ], sending score...')
@@ -185,12 +185,15 @@ drone_compass = robot.getDevice("compass")
 drone_compass.enable(timestep)
 drone_gyroscope = robot.getDevice("gyro")
 drone_gyroscope.enable(timestep)
+drone_magnetic = robot.getDevice("magnetic")
+drone_magnetic.enablePresence(timestep)
 drone_camera_roll_motor = robot.getDevice("camera roll")
 drone_camera_pitch_motor = robot.getDevice("camera pitch")
 drone_front_left_motor = robot.getDevice("front left propeller")
 drone_front_right_motor = robot.getDevice("front right propeller")
 drone_rear_left_motor = robot.getDevice("rear left propeller")
 drone_rear_right_motor = robot.getDevice("rear right propeller")
+
 motors = [drone_front_left_motor,drone_front_right_motor,drone_rear_left_motor,drone_rear_right_motor]
 
 for motor in motors:
@@ -237,8 +240,10 @@ while robot.step(timestep) != -1:
             target_posit.x = BASE_COORDS[0][0] + drone_ID
             target_posit.y = BASE_COORDS[0][1]
             chgState("go_to_recharge",verbose=False)
+
     elif state == "go_to_recharge":
         chgState("check_new_orders",verbose=False)
+        
     elif state == "reach_quota":
         target_altitude = 1
         target_angle = get_target_angle(posit.x,target_posit.x,posit.y,target_posit.y)
@@ -248,25 +253,27 @@ while robot.step(timestep) != -1:
             chgState("go_near_box")
 
     elif state == "go_near_box":
-        target_altitude = 1
         target_angle = get_target_angle(posit.x,target_posit.x,posit.y,target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
         target_posit.x = BASE_COORDS[current_order[2]][0]
         target_posit.y = BASE_COORDS[current_order[2]][1]
         pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x,posit.y,target_posit.x,target_posit.y)
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.5:
-                chgState("land_on_box")
+            chgState("land_on_box")
+
     elif state == "land_on_box":
-        #Utilizzare roll per posizionarsi sopra il pacco
-        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
-        #target_altitude = 0.72
-        if dist1d(posit.getVec2d(), target_posit.getVec2d()) > 0:
-            pitch_disturbance = MAX_PITCH * get_pitch_disturbance_gain(posit.x,posit.y,target_posit.x,target_posit.y) * 1.1
-        else:
-            pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x,posit.y,target_posit.x,target_posit.y) * 1.1
+        target_altitude = 0.5
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) <= 0.2:
+            chgState("lock_box")
+        else: 
+            chgState("go_near_box")
+
     elif state== "lock_box":
-        #code
-        pass
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 0.2:
+            chgState("land_on_box")
+        else: 
+            drone_magnetic.lock()
+            target_altitude = 3
     elif state== "reach_quote":
         #code
         pass
