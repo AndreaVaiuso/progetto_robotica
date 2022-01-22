@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.0877012346212234 0.9933798225619609 0.07419583258297158 4.418950234284473
-  position -6.079138938649667 2.1165442612916445 -0.8585214181910814
+  orientation 0.9150143686686435 0.2923035667009519 0.27804195730829123 4.673604043884299
+  position 2.634442748999693 7.567507948625009 -0.9515098829516646
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -78,10 +78,6 @@ Windmill {
   rotation 0 1 0 -1.5708
   name "windmill(3)"
 }
-SmallManor {
-  translation -50.35 0 -11.25
-  rotation 0 1 0 4.32
-}
 DEF base_drone SquareManhole {
   translation 0 -0.03 0
   name "base_drone"
@@ -91,8 +87,8 @@ DEF base_drone SquareManhole {
   name "base_drone(1)"
 }
 DEF base_1 Solid {
-  translation 3.18 0 2.17
-  rotation 0 1 0 -1.5707953071795862
+  translation 3.18 0.04019000001184178 2.17
+  rotation -8.870350380879304e-19 -0.9999999999999999 -1.7077399709178867e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -116,8 +112,8 @@ DEF base_1 Solid {
   }
 }
 DEF base_2 Solid {
-  translation 3.18 0 -1.76
-  rotation 0 1 0 -1.5707953071795862
+  translation 3.18 0.04018901900000001 -1.76
+  rotation -1.3267798107407827e-18 -0.9999999999999999 -7.429911041636712e-19 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -140,10 +136,6 @@ DEF base_2 Solid {
   }
   physics Physics {
   }
-}
-TeslaModel3Simple {
-  translation -41.5139 0.31 -4.34169
-  rotation 0 -1 0 -1.309
 }
 Pine {
   translation -14.0083 0 14.4828
@@ -200,8 +192,11 @@ Forest {
   minRadius 3
 }
 DEF DRONE Mavic2Pro {
-  translation -1.4455443188426953e-06 0.0857090662244423 -5.4800301523625624e-09
-  rotation -0.9987852726929972 -0.03483940908449021 0.03484529561101154 1.5720104339910512
+  hidden position_0_0 -1.44096207860304e-09
+  hidden position_9_0 -3.110467439171316e-09
+  hidden position_10_0 -1.197803510275314e-09
+  translation 0 0.1 0
+  rotation -0.9999939860836999 -0.002228268542236495 -0.002657558228264499 1.5705292118907654
   name "Mavic 2 PRO_0"
   controller "base_controller_2"
   supervisor TRUE

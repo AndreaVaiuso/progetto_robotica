@@ -28,16 +28,14 @@ state_history = []
 battery = 100
 box_locked = False
 
-BASE_COORDS = {0: [0, 0], 1: [2.17, 3.18], 2: [-1, 76, 3.18]}
+BASE_COORDS = {0: [0, 0], 1: [2.17, 3.18], 2: [-1.76, 3.18]}
 ROTATION_ANGLE_FOR_LOCK = 0
 MAX_YAW = 1
 MAX_PITCH = 10
 
-
 def getID(name):
     x = name.split("_")
     return int(x[1])
-
 
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
@@ -50,10 +48,8 @@ current_order = []
 pending_order = []
 score_dict = {}
 
-
 def dPrint(string):
     print(f"Drone ({name})> {string}")
-
 
 def chgState(newState, verbose=True):
     global state, state_history
@@ -61,9 +57,16 @@ def chgState(newState, verbose=True):
     if verbose: dPrint(f"State changed: {newState}")
     state_history.append(state)
 
+def chgValue(value,newValue):
+    return newValue, abs(newValue-value)
+
+def f2(x):
+    y = math.log(pow(x,3) + 1, 4) / 5
+    return y
 
 def f(x):
-    return math.log(x + 1, 4) / 10
+    y = math.log(x + 1, 4) / 10
+    return y
 
 
 def euc_dist(drone_pos, dest_pos):
@@ -93,6 +96,19 @@ def get_target_angle(x1, x2, y1, y2):
     elif x0 < 0 and y0 < 0:
         return 90 + math.degrees(math.atan((y2 - y1) / (x2 - x1)))
 
+def get_target_posit(x1, x2, y1, y2, a):
+    #FIRST PITCH, SECOND ROLL
+    a = math.radians(a)
+    x0 = (x2 - x1) * math.cos(a) - (y2 - y1) * math.sin(a)
+    y0 = (y2 - y1) * math.cos(a) + (x2 - x1) * math.sin(a)
+    if x0 >= 0 and y0 >= 0:
+        return [-1,-1]
+    elif x0 >= 0 and y0 < 0:
+        return [1,-1]
+    elif x0 < 0 and y0 >= 0:
+        return [-1,1]
+    elif x0 < 0 and y0 < 0:
+        return [1,1]
 
 def get_yaw_disturbance_gain(bearing, targetAngle):
     diff = (bearing - targetAngle) % 360
@@ -107,11 +123,21 @@ def get_pitch_disturbance_gain(drone_x, drone_y, box_x, box_y):
     box_position = [box_x, box_y]
     distance = euc_dist(drone_position, box_position)
     if distance > 10: return 1
-    if distance < 0.1:
+    if distance < 0:
         return f(distance)
     else:
         return -f(distance)
 
+def get_disturbance_gain(drone_x, drone_y, box_x, box_y, xaxis=True):
+    distance = 0
+    if xaxis:
+        distance = abs(drone_x - box_x)
+    else:
+        distance = abs(drone_y - box_y)
+    if distance < 0:
+        return f(distance)
+    else:
+        return -f(distance)
 
 def gen_yaw_disturbance(bearing, maxYaw, target_angle):
     g = get_yaw_disturbance_gain(bearing, target_angle)
@@ -238,6 +264,7 @@ target_angle = 0
 posit = Coordinate(0, 0)
 target_posit = Coordinate(0, 0)
 precision_counter = 0
+bearing = 0
 
 chgState("check_new_orders")
 
@@ -252,9 +279,17 @@ while robot.step(timestep) != -1:
     altitude = drone_gps.getValues()[1]
     roll_acceleration = drone_gyroscope.getValues()[0]
     pitch_acceleration = drone_gyroscope.getValues()[1]
-    bearing = get_bearing_in_degrees(drone_compass.getValues())
-    posit.y = drone_gps.getValues()[0]
-    posit.x = drone_gps.getValues()[2]
+    bearing, bearing_velocity = chgValue(bearing,get_bearing_in_degrees(drone_compass.getValues()))
+    bearing_velocity *= 333
+    posit.y, vel_y = chgValue(posit.y,drone_gps.getValues()[0])
+    posit.x, vel_x = chgValue(posit.x,drone_gps.getValues()[2])
+    x0 = vel_x * math.cos(math.radians(bearing)) - vel_y * math.sin(math.radians(bearing))
+    y0 = vel_y * math.cos(math.radians(bearing)) + vel_x * math.sin(math.radians(bearing))
+    vel_x = x0
+    vel_y = y0
+    drone_velocity = math.sqrt(pow(vel_y,2)+pow(vel_x,2)) * 30000
+
+    print("Velocity: ",drone_velocity, "Bearing velocity: ",bearing_velocity)
 
     if state == "check_new_orders":
         if len(orders) != 0:
@@ -284,18 +319,30 @@ while robot.step(timestep) != -1:
         target_posit.x = BASE_COORDS[current_order[2]][0]
         target_posit.y = BASE_COORDS[current_order[2]][1]
         pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
-        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.5:
+        print("Roll:",roll_disturbance,"\nPitch:",pitch_disturbance)
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.4:
             chgState("land_on_box")
 
     elif state == "land_on_box":
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
+        pg,rg = get_target_posit(posit.x, target_posit.x, posit.y, target_posit.y, bearing)
+        pitch_disturbance = pg * MAX_PITCH * get_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y,xaxis=False) * 9
+        roll_disturbance = - rg * MAX_PITCH * get_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y,xaxis=True) * 9
+        print("Roll:",roll_disturbance,"\nPitch:",pitch_disturbance)
+        
+
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 0.5:
             chgState('go_near_box')
+
+        """
         else:
             target_altitude = 0.3
             if near(altitude, target_altitude, error=0.1):
                 chgState('lock_box')
             else:
                 print('Landing on box')
+        """
+
 
     elif state == "lock_box":
         drone_magnetic.lock()
