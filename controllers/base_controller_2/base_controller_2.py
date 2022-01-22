@@ -331,7 +331,7 @@ while robot.step(timestep) != -1:
         print("Roll:",roll_disturbance,"\nPitch:",pitch_disturbance)
         
 
-        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 0.5:
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 1:
             chgState('go_near_box')
 
         """
