@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9150143686686435 0.2923035667009519 0.27804195730829123 4.673604043884299
-  position 2.634442748999693 7.567507948625009 -0.9515098829516646
+  orientation 0.30193267787793837 0.9063043261416829 0.2957179846514701 4.634884389092064
+  position -5.77010885789694 4.640887095685136 1.4963026784617264
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -105,6 +105,7 @@ DEF base_1 Solid {
       }
     }
   ]
+  contactMaterial "base"
   boundingObject Box {
     size 1 0.1 1
   }
@@ -131,6 +132,7 @@ DEF base_2 Solid {
     }
   ]
   name "solid(1)"
+  contactMaterial "base"
   boundingObject Box {
     size 1 0.1 1
   }
@@ -192,9 +194,6 @@ Forest {
   minRadius 3
 }
 DEF DRONE Mavic2Pro {
-  hidden position_0_0 -1.44096207860304e-09
-  hidden position_9_0 -3.110467439171316e-09
-  hidden position_10_0 -1.197803510275314e-09
   translation 0 0.1 0
   rotation -0.9999939860836999 -0.002228268542236495 -0.002657558228264499 1.5705292118907654
   name "Mavic 2 PRO_0"

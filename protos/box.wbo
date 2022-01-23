@@ -43,6 +43,7 @@ DEF order_box Solid {
     }
   ]
   name "box"
+  contactMaterial "box"
   boundingObject USE BOX_GEOMETRY
   physics Physics {
     mass 0.01
