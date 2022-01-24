@@ -6,18 +6,6 @@ DEF order_box Solid {
       translation 0 0.2 3.3671e-08
       rotation 1 0 0 -1.5707996938995747
       model "a"
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 1 0 0
-            roughness 1
-            metalness 0
-          }
-          geometry DEF MAGNETIC_GEOMETRY Box {
-            size 0.05 0.05 0.01
-          }
-        }
-      ]
       type "passive"
       autoLock TRUE
       distanceTolerance 0.7

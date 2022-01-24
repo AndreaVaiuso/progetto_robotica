@@ -54,6 +54,7 @@ def getID(name):
     x = name.split("_")
     return int(x[1])
 
+charging = False
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
 emitter = robot.getDevice("emitter")
@@ -65,6 +66,12 @@ current_order = []
 pending_order = []
 target_history = []
 score_dict = {}
+
+def deschargeBattery():
+    global charging, battery
+    if not charging:
+        time.sleep(60)
+        battery -= 1
 
 def rechargeBattery(value):
     global battery
@@ -241,7 +248,9 @@ def update_orders():
 
 
 th = threading.Thread(target=update_orders, args=())
+bat = threading.Thread(target=deschargeBattery, args=())
 th.start()
+bat.start()
 
 drone_camera = robot.getDevice("camera")
 drone_camera.enable(timestep)
@@ -311,6 +320,7 @@ while robot.step(timestep) != -1:
 
     if state == "check_new_orders":
         if len(orders) != 0:
+            charging = False
             current_order = orders.pop()
             target_posit = chgTarget(target_posit,[BASE_COORDS[current_order[2]][0],BASE_COORDS[current_order[2]][1]])
             chgState("reach_quota")
@@ -326,6 +336,7 @@ while robot.step(timestep) != -1:
                 counter = 0
                 chgState("check_new_orders", verbose=False)
     elif state == "recharge_battery":
+        charging = True
         counter += 1
         if counter > 1000:
             rechargeBattery(1)
