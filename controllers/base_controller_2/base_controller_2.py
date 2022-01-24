@@ -69,9 +69,10 @@ score_dict = {}
 
 def deschargeBattery():
     global charging, battery
+    time.sleep(40)
     if not charging:
-        time.sleep(60)
         battery -= 1
+        dPrint(f"Battery: {battery}%")
 
 def rechargeBattery(value):
     global battery
@@ -340,7 +341,7 @@ while robot.step(timestep) != -1:
         counter += 1
         if counter > 1000:
             rechargeBattery(1)
-            chgState("check_new_orders")
+            chgState("check_new_orders", verbose=False)
     elif state == "reach_quota":
         target_altitude = 1
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
