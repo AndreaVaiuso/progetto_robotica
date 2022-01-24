@@ -3,7 +3,7 @@ DEF order_box Solid {
   translation 3.18 0.41 0.68
   children [
     Connector {
-      translation 0 0.11 3.3671e-08
+      translation 0 0.2 3.3671e-08
       rotation 1 0 0 -1.5707996938995747
       model "a"
       children [

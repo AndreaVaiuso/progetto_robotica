@@ -90,10 +90,8 @@ def f(x):
 def euc_dist(drone_pos, dest_pos):
     return math.sqrt(math.pow((drone_pos[0] - dest_pos[0]), 2) + math.pow((drone_pos[1] - dest_pos[1]), 2))
 
-
 def dist1d(drone_pos, dest_pos):
     return dest_pos[0] - drone_pos[0]
-
 
 def get_subtraction(bearing, target_angle):
     if bearing > target_angle:
@@ -127,8 +125,8 @@ def get_stabilization_disturbance(x1, y1, x2, y2, a):
     y0 = (y2 - y1) * math.cos(a) + (x2 - x1) * math.sin(a)
     pd = - f2(x0)
     rd = f2(y0)
-    pd = limiter((pd * MAX_PITCH * 8),1.2)
-    rd = limiter((rd * MAX_PITCH * 8),1.2)
+    pd = limiter((pd * 80),1.2)
+    rd = limiter((rd * 80),1.2)
     return pd, rd
 
 def get_yaw_disturbance_gain(bearing, targetAngle):
@@ -138,16 +136,11 @@ def get_yaw_disturbance_gain(bearing, targetAngle):
     else:
         return -f(-diff + 360)
 
-
 def get_pitch_disturbance_gain(x1, y1, x2, y2):
     drone_position = [x1, y1]
     box_position = [x2, y2]
     distance = euc_dist(drone_position, box_position)
-    if distance > 10: return 1
-    if distance < 0:
-        return f(distance)
-    else:
-        return -f(distance)
+    return limiter(f(distance)*15,2)
 
 
 def gen_yaw_disturbance(bearing, maxYaw, target_angle):
@@ -330,7 +323,7 @@ while robot.step(timestep) != -1:
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
         target_posit.x = BASE_COORDS[current_order[2]][0]
         target_posit.y = BASE_COORDS[current_order[2]][1]
-        pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
+        pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.4:
             chgState("stabilize_on_position")
 
@@ -357,15 +350,15 @@ while robot.step(timestep) != -1:
                 chgState("reach_nav_altitude")
 
     elif state == "reach_nav_altitude":
-        dPrint("locked")
+        target_posit.x = current_order[4]
+        target_posit.y = current_order[5]
         target_altitude = 5
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
         if near(altitude, target_altitude, error = 0.2):
             chgState("reach_destination")
     elif state == "reach_destination":
-        target_posit.x = current_order[4]
-        target_posit.y = current_order[5]
-        pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
+        pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
 
