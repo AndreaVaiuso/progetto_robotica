@@ -359,9 +359,16 @@ while robot.step(timestep) != -1:
     elif state == "reach_nav_altitude":
         dPrint("locked")
         target_altitude = 5
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        if near(altitude, target_altitude, error = 0.2):
+            chgState("reach_destination")
     elif state == "reach_destination":
-        # code
-        pass
+        target_posit.x = current_order[4]
+        target_posit.y = current_order[5]
+        pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
+        target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
+
     elif state == "avoid_obstacles":
         # code
         pass

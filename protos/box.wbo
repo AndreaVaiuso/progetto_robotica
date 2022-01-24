@@ -18,7 +18,6 @@ DEF order_box Solid {
           }
         }
       ]
-      boundingObject USE MAGNETIC_GEOMETRY
       type "passive"
       autoLock TRUE
       distanceTolerance 0.7
