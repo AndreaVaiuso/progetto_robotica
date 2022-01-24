@@ -338,7 +338,7 @@ while robot.step(timestep) != -1:
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 0.4:
             chgState(state_history[-2])
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
-        roll_disturbance, pitch_disturbance  =  get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
         if stab_stack.isStable():
             dPrint("Stabilized")
             if not drone_magnetic.isLocked():
@@ -348,8 +348,8 @@ while robot.step(timestep) != -1:
 
     elif state == "lock_box":
         target_altitude = 0.35
-        if not stab_stack.isStable():
-            chgState("stabilize_on_position")
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
         if near(altitude, target_altitude, error=0.1):
             dPrint("locking...")
             drone_magnetic.lock()
@@ -358,8 +358,7 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_nav_altitude":
         dPrint("locked")
-        target_altitude = 10
-        powerGain = 1.2
+        target_altitude = 5
     elif state == "reach_destination":
         # code
         pass
