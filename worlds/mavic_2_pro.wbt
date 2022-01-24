@@ -83,6 +83,10 @@ DEF base_drone SquareManhole {
   name "base_drone"
 }
 DEF base_drone SquareManhole {
+  translation 10 -0.03 10
+  name "base_drone(2)"
+}
+DEF base_drone SquareManhole {
   translation 0 -0.03 1
   name "base_drone(1)"
 }

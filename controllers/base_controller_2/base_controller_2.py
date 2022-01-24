@@ -19,10 +19,11 @@ class StabilizationStack:
         self.stabilization_stack[-1] = value
     def getStabValue(self):
         return sum(self.stabilization_stack)
-    def isStable(self,tollerance=2):
+    def isStable(self,pos,target,tollerance=2):
+        dist = euc_dist(pos.getVec2d(),target.getVec2d())
         s = sum(self.stabilization_stack)
-        if s > tollerance: return False
-        else: return True
+        if s < tollerance and dist < 0.1: return True
+        return False
     def resetStabStack(self):
         self.stabilization_stack = [999] * self.stab_toll
 
@@ -62,7 +63,18 @@ drone_ID = getID(name)
 receiver.setChannel(drone_ID)
 current_order = []
 pending_order = []
+target_history = []
 score_dict = {}
+
+def rechargeBattery(value):
+    global battery
+    battery += value
+    if battery >= 100:
+        battery = 100
+    dPrint(f"Battery charged: {battery}%")
+
+def getBaseCoords():
+    return [BASE_COORDS[0][0] + drone_ID,BASE_COORDS[0][1]]
 
 def dPrint(string):
     print(f"Drone ({name})> {string}")
@@ -76,6 +88,10 @@ def chgState(newState, verbose=True):
 def chgValue(value,newValue):
     return newValue, abs(newValue-value)
 
+def chgTarget(old_target,new_target):
+    target_history.append(old_target)
+    return Coordinate(new_target[0],new_target[1])
+
 def f2(x):
     y = math.log(abs(x) + 1, 4) / 10
     if x > 0:
@@ -85,7 +101,6 @@ def f2(x):
 def f(x):
     y = math.log(x + 1, 4) / 10
     return y
-
 
 def euc_dist(drone_pos, dest_pos):
     return math.sqrt(math.pow((drone_pos[0] - dest_pos[0]), 2) + math.pow((drone_pos[1] - dest_pos[1]), 2))
@@ -132,15 +147,15 @@ def get_stabilization_disturbance(x1, y1, x2, y2, a):
 def get_yaw_disturbance_gain(bearing, targetAngle):
     diff = (bearing - targetAngle) % 360
     if diff < 180 and diff > 0:
-        return f(diff)
+        return f(diff) * 2
     else:
-        return -f(-diff + 360)
+        return -f(-diff + 360) * 2
 
 def get_pitch_disturbance_gain(x1, y1, x2, y2):
     drone_position = [x1, y1]
     box_position = [x2, y2]
     distance = euc_dist(drone_position, box_position)
-    return limiter(f(distance)*15,2)
+    return limiter(f(distance)*10,1.3)
 
 
 def gen_yaw_disturbance(bearing, maxYaw, target_angle):
@@ -195,12 +210,9 @@ def send_score(dataList):
 def make_topN(dataList):
     global score_dict, name
     time.sleep(5)
-    print(score_dict)
     sortedDict = sorted(score_dict.items(), key=operator.itemgetter(1))
     keylist = list(sortedDict)
-    print(keylist)
     winner = keylist[0][0]
-    print(winner)
     if winner == drone_ID:
         orders.append(dataList)
         dPrint(f'I win! Order {dataList[1]} taken')
@@ -270,6 +282,7 @@ target_posit = Coordinate(0, 0)
 precision_counter = 0
 bearing = 0
 stab_stack = StabilizationStack(20)
+counter = 0
 
 chgState("check_new_orders")
 
@@ -299,17 +312,24 @@ while robot.step(timestep) != -1:
     if state == "check_new_orders":
         if len(orders) != 0:
             current_order = orders.pop()
-            target_posit.x = BASE_COORDS[current_order[2]][0]
-            target_posit.y = BASE_COORDS[current_order[2]][1]
+            target_posit = chgTarget(target_posit,[BASE_COORDS[current_order[2]][0],BASE_COORDS[current_order[2]][1]])
             chgState("reach_quota")
         else:
-            target_posit.x = BASE_COORDS[0][0] + drone_ID
-            target_posit.y = BASE_COORDS[0][1]
-            chgState("go_to_recharge", verbose=False)
-
-    elif state == "go_to_recharge":
-        chgState("check_new_orders", verbose=False)
-
+            target_posit = chgTarget(target_posit,getBaseCoords())
+            chgState("recharge_battery", verbose=False)
+    elif state == "goto_recharge_battery":
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        counter += 1
+        if counter > 200:
+            target_altitude = 0
+            if near(altitude,target_altitude,error=0.1):
+                counter = 0
+                chgState("check_new_orders", verbose=False)
+    elif state == "recharge_battery":
+        counter += 1
+        if counter > 1000:
+            rechargeBattery(1)
+            chgState("check_new_orders")
     elif state == "reach_quota":
         target_altitude = 1
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
@@ -328,16 +348,14 @@ while robot.step(timestep) != -1:
             chgState("stabilize_on_position")
 
     elif state == "stabilize_on_position":
-        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 0.4:
-            chgState(state_history[-2])
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
-        if stab_stack.isStable():
+        if stab_stack.isStable(posit,target_posit):
             dPrint("Stabilized")
             if not drone_magnetic.isLocked():
                 chgState('lock_box')
             else:
-                chgState('unlock_box') 
+                chgState('land_on_delivery_station') 
 
     elif state == "lock_box":
         target_altitude = 0.35
@@ -347,35 +365,66 @@ while robot.step(timestep) != -1:
             dPrint("locking...")
             drone_magnetic.lock()
             if drone_magnetic.isLocked():
+                target_posit = chgTarget(target_posit,[current_order[4],current_order[5]])
                 chgState("reach_nav_altitude")
-
     elif state == "reach_nav_altitude":
-        target_posit.x = current_order[4]
-        target_posit.y = current_order[5]
-        target_altitude = 5
-        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
-        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
-        if near(altitude, target_altitude, error = 0.2):
-            chgState("reach_destination")
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_history[-1].x, target_history[-1].y, bearing)
+        counter += 1
+        if counter > 100:
+            counter = 0
+            target_altitude = 5
+            target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
+            yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
+            if near(altitude, target_altitude, error = 0.2):
+                chgState("reach_destination")
     elif state == "reach_destination":
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
-
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 2:
+            chgState("stabilize_on_position")
     elif state == "avoid_obstacles":
         # code
         pass
     elif state == "land_on_delivery_station":
-        # code
-        pass
-    elif state == "unlock_box":
-        # code
-        pass
+        target_altitude = 1
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
+        if near(altitude, target_altitude, error=0.3):
+            chgState("detach_box")
+    elif state == "detach_box":
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
+        counter += 1
+        if counter > 200:
+            target_altitude = 0.5
+            if near(altitude, target_altitude, error=0.1):
+                drone_magnetic.unlock()
+                if not drone_magnetic.isLocked():
+                    target_posit = chgTarget(target_posit,getBaseCoords())
+                    chgState("go_back_home")
     elif state == "go_back_home":
-        # Ricordarsi di eliminare l'ordine dalla lista orders
+        target_altitude = 5
+        pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
+        target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.4:
+            chgState("stabilize_before_land_on_base")
         pass
-
-        # Compute the roll, pitch, yaw and vertical inputs.
+    elif state == "stabilize_before_land_on_base":
+        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        if stab_stack.isStable(posit,target_posit):
+            chgState("land_on_base")
+    elif state == "land_on_base":
+        target_altitude = 1
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
+        if near(altitude, target_altitude, error=0.1):
+            dPrint("I'm at home!")
+            chgState("goto_recharge_battery")
+    else:
+        dPrint("ERROR, UNRECOGNIZED STATE:", state)
+        break
     roll_input = k_roll_p * clamp(roll, -1.0, 1.0) + roll_acceleration + roll_disturbance
     pitch_input = k_pitch_p * clamp(pitch, -1.0, 1.0) - pitch_acceleration + pitch_disturbance
     yaw_input = yaw_disturbance
