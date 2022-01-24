@@ -25,7 +25,7 @@ def createOrder(orderID,weight,position,base):
 
 
 def order():
-    createOrder(1,0.5,[10,10],1)
+    createOrder(1,0.5,[10,10],2)
 
 supervisor = Supervisor()
 timestep = int(supervisor.getBasicTimeStep())

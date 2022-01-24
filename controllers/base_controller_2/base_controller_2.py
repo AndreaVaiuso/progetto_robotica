@@ -125,7 +125,11 @@ def get_stabilization_disturbance(x1, y1, x2, y2, a):
     a = math.radians(a)
     x0 = (x2 - x1) * math.cos(a) - (y2 - y1) * math.sin(a)
     y0 = (y2 - y1) * math.cos(a) + (x2 - x1) * math.sin(a)
-    return - f2(x0), f2(y0)
+    pd = - f2(x0)
+    rd = f2(y0)
+    pd = limiter((pd * MAX_PITCH * 8),1.2)
+    rd = limiter((rd * MAX_PITCH * 8),1.2)
+    return pd, rd
 
 def get_yaw_disturbance_gain(bearing, targetAngle):
     diff = (bearing - targetAngle) % 360
@@ -296,6 +300,8 @@ while robot.step(timestep) != -1:
     vel_x = x0
     vel_y = y0
     drone_velocity = math.sqrt(pow(vel_y,2)+pow(vel_x,2)) * 30000
+    stab = abs((roll_acceleration+pitch_acceleration)*100)
+    stab_stack.pushIntoStabStack(stab)
 
     if state == "check_new_orders":
         if len(orders) != 0:
@@ -326,25 +332,24 @@ while robot.step(timestep) != -1:
         target_posit.y = BASE_COORDS[current_order[2]][1]
         pitch_disturbance = - MAX_PITCH * get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.4:
-            chgState("land_on_box")
+            chgState("stabilize_on_position")
 
-    elif state == "land_on_box":
+    elif state == "stabilize_on_position":
+        if euc_dist(posit.getVec2d(), target_posit.getVec2d()) >= 0.4:
+            chgState(state_history[-2])
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         roll_disturbance, pitch_disturbance  =  get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
-        pitch_disturbance = limiter((pitch_disturbance * MAX_PITCH * 8),1.2) 
-        roll_disturbance = limiter((roll_disturbance * MAX_PITCH * 8),1.2) 
-        stab = abs((roll_acceleration+pitch_acceleration)*100)
-        stab_stack.pushIntoStabStack(stab)
-        dPrint(f"Stabilization: {stab_stack.getStabValue()}")
-        if stab_stack.isStable() :
-            chgState('lock_box')
+        if stab_stack.isStable():
+            dPrint("Stabilized")
+            if not drone_magnetic.isLocked():
+                chgState('lock_box')
+            else:
+                chgState('unlock_box') 
 
     elif state == "lock_box":
         target_altitude = 0.35
-        yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
-        roll_disturbance, pitch_disturbance  =  get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
-        pitch_disturbance = limiter((pitch_disturbance * MAX_PITCH * 8),1.2) 
-        roll_disturbance = limiter((roll_disturbance * MAX_PITCH * 8),1.2) 
+        if not stab_stack.isStable():
+            chgState("stabilize_on_position")
         if near(altitude, target_altitude, error=0.1):
             dPrint("locking...")
             drone_magnetic.lock()
