@@ -294,6 +294,7 @@ precision_counter = 0
 bearing = 0
 stab_stack = StabilizationStack(20)
 counter = 0
+powerGain = 1
 
 chgState("check_new_orders")
 
@@ -301,7 +302,6 @@ while robot.step(timestep) != -1:
     pitch_disturbance = 0
     yaw_disturbance = 0
     target_angle = 0
-    powerGain = 1
     t = robot.getTime()
     roll = drone_imu.getRollPitchYaw()[0] + math.pi / 2
     pitch = drone_imu.getRollPitchYaw()[1]
@@ -338,6 +338,7 @@ while robot.step(timestep) != -1:
                 counter = 0
                 chgState("check_new_orders", verbose=False)
     elif state == "recharge_battery":
+        powerGain = 0
         charging = True
         counter += 1
         if counter > 1000:
@@ -345,6 +346,7 @@ while robot.step(timestep) != -1:
             rechargeBattery(1)
             chgState("check_new_orders", verbose=False)
     elif state == "reach_quota":
+        powerGain = 1
         target_altitude = 1
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
