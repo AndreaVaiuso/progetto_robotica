@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.30193267787793837 0.9063043261416829 0.2957179846514701 4.634884389092064
-  position -1.8230877441832514 1.5606585089590792 0.0799600856411532
+  orientation -0.31195255718211023 -0.8814383329851073 -0.35461537926601183 1.8224792303334099
+  position -2.6399067153601385 1.8422847480778977 -0.08485713819379402
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -198,12 +198,102 @@ Forest {
   minRadius 3
 }
 DEF DRONE Mavic2Pro {
-  translation 0 0.1 0
+  translation 4.71417e-05 0.21 3.01596e-05
   rotation -0.9999939860836999 -0.002228268542236495 -0.002657558228264499 1.5705292118907654
   name "Mavic 2 PRO_0"
   controller "base_controller_2"
   supervisor TRUE
   bodySlot [
+    DistanceSensor {
+      translation -0.0200002 0.04 -0.02
+      rotation 0.707108281185553 0.70710528118436 9.236343672883591e-09 -3.1415853071795863
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "left sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.0200002 -0.04 -0.02
+      rotation 0 0 -1 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "right sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.0386371 0 -0.0603528
+      rotation 0 1 0 1.309
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "lower sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.03 0 0.02
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "upper sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation 0.08 0 0.01
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front sensor"
+      type "sonar"
+      numberOfRays 5
+    }
     Connector {
       translation -0.07 0 -0.15
       rotation 0 1 0 -3.1
@@ -240,6 +330,9 @@ DEF DRONE Mavic2Pro {
       width 400
       height 240
       near 0.2
+      recognition Recognition {
+        segmentation TRUE
+      }
     }
   ]
 }
