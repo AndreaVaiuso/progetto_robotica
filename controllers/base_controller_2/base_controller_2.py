@@ -31,12 +31,15 @@ class StabilizationStack:
 class Coordinate:
     x = 0
     y = 0
-    def __init__(self, x, y) -> None:
+    z = 0
+    def __init__(self, x, y, z = 0.35) -> None:
         self.x = int(x)
         self.y = int(y)
-
+        self.z = int(z)
     def getVec2d(self) -> list:
         return [self.x, self.y]
+    def getVec3d(self) -> list:
+        return [self.x, self.y, self.z]
 
 
 robot = Robot()
@@ -45,8 +48,9 @@ orders = []
 state_history = []
 battery = 100
 box_locked = False
+anomaly = False
 
-BASE_COORDS = {0: [0, 0], 1: [2.17, 3.18], 2: [-1.76, 3.18]}
+BASE_COORDS = {0: [0, 0, 0.3], 1: [2.17, 3.18, 0.3], 2: [-1.76, 3.18, 0.3]}
 ROTATION_ANGLE_FOR_LOCK = 0
 MAX_YAW = 1
 MAX_PITCH = 10
@@ -68,6 +72,15 @@ pending_order = []
 target_history = []
 score_dict = {}
 
+def checkAnomaly():
+    global anomaly
+    while 1:
+        time.sleep(500)
+        anom = random.random()
+        if anom > 0.8:
+            anomaly = True
+            return
+
 def deschargeBattery():
     global charging, battery
     while 1:
@@ -84,7 +97,7 @@ def rechargeBattery(value):
     dPrint(f"Battery charged: {battery}%")
 
 def getBaseCoords():
-    return [BASE_COORDS[0][0] + drone_ID,BASE_COORDS[0][1]]
+    return [BASE_COORDS[0][0] + drone_ID,BASE_COORDS[0][1],BASE_COORDS[0][2]]
 
 def dPrint(string):
     print(f"Drone ({name})> {string}")
@@ -100,7 +113,10 @@ def chgValue(value,newValue):
 
 def chgTarget(old_target,new_target):
     target_history.append(old_target)
-    return Coordinate(new_target[0],new_target[1])
+    return Coordinate(new_target[0],new_target[1],new_target[2])
+
+def getNavigationAltitude():
+    return 5 # Valore reale = 10 + DRONE_ID * 2
 
 def f2(x):
     y = math.log(abs(x) + 1, 4) / 10
@@ -172,7 +188,6 @@ def gen_yaw_disturbance(bearing, maxYaw, target_angle):
     g = get_yaw_disturbance_gain(bearing, target_angle)
     return maxYaw * g
 
-
 def get_bearing_in_degrees(values):
     rad = math.atan2(values[0], values[1])
     bearing = (rad - 1.5708) / math.pi * 180.0
@@ -180,12 +195,10 @@ def get_bearing_in_degrees(values):
         bearing = bearing + 360.0
     return bearing
 
-
 def near(value, target, error=0.5):
     if value - error < target and value + error > target:
         return True
     return False
-
 
 def clamp(val, low, high):
     if val < low:
@@ -195,6 +208,10 @@ def clamp(val, low, high):
     else:
         return val
 
+def abort_current_order():
+    global current_order
+    abort_order(current_order,current=True)
+    current_order = []
 
 def score_calculator(dataList):
     global posit
@@ -202,12 +219,26 @@ def score_calculator(dataList):
     # Prima di lavorare con la batteria dobbiamo sapere quanta batteria ci vuole per percorrere tot metri
     return score
 
+def abort_order(order,current=False):
+    global posit, altitude
+    emitter.setChannel(Emitter.CHANNEL_BROADCAST)
+    if current:
+        message = struct.pack("ciidddddd",b"N",int(order[1]),-1,float(order[3]),float(order[4]),float(order[5]),float(posit.x),float(posit.y),float(altitude))
+    else:
+        message = struct.pack("ciidddddd",b"N",int(order[1]),int(order[2]),float(order[3]),float(order[4]),float(order[5]),0.0,0.0,0.0)
+    while emitter.send(message) != 1 :
+        continue
+
+def abort_all_pending_orders():
+    global orders
+    while len(orders) > 0:
+        abort_order(orders.pop())
 
 def send_score(dataList):
     global pending_order
     score = score_calculator(dataList)
     # [ "ciiddd" , TYPE , DRONE_ID , ORDER_ID ,  score, 0 , 0 ]
-    message = struct.pack("ciiddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0)
+    message = struct.pack("ciidddddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
     while emitter.send(message) != 1:
         dPrint(f'Waiting queue for sending message')
@@ -215,7 +246,6 @@ def send_score(dataList):
     score_dict[drone_ID] = score
     th = threading.Thread(target=make_topN, args=[dataList])
     th.start()
-
 
 def make_topN(dataList):
     global score_dict, name
@@ -226,19 +256,21 @@ def make_topN(dataList):
     if winner == drone_ID:
         orders.append(dataList)
         dPrint(f'I win! Order {dataList[1]} taken')
+    if anomaly:
+        abort_current_order()
     score_dict = {}
-
 
 def update_orders():
     dPrint("Updating orders")
     global battery, orders
     while True:
         if receiver.getQueueLength() > 0:  # ma dobbiamo distinguere fra due tipi di dati in arrivo , i nuovi ordini, e i punteggi
+            if anomaly : return
             dPrint("Message received")
             x = receiver.getData()
-            # [ [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y ]
-            # [ [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] score, 0 , 0 ]
-            dataList = struct.unpack("ciiddd", x)
+            # [ [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y , [6] ALT_BASE_x , [7] ALT_BASE_y ]
+            # [ [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] score, 0 , 0 , 0 , 0 ]
+            dataList = struct.unpack("ciidddddd", x)
             if dataList[0].decode('utf-8') == 'N':
                 dPrint(
                     f'New order received: [ ID:{dataList[1]}, BASE:{dataList[2]}, x:{dataList[4]}, y:{dataList[5]} ], sending score...')
@@ -249,11 +281,12 @@ def update_orders():
                     score_dict[dataList[1]] = dataList[3]
             receiver.nextPacket()
 
-
 th = threading.Thread(target=update_orders, args=())
 bat = threading.Thread(target=deschargeBattery, args=())
+ag = threading.Thread(target=checkAnomaly, args=())
 th.start()
 bat.start()
+ag.start()
 
 drone_distance_sensor_upper= robot.getDevice("upper sensor")
 drone_distance_sensor_upper.enable(timestep)
@@ -297,6 +330,7 @@ k_vertical_p = 3
 k_roll_p = 50
 k_pitch_p = 30
 
+altitude = 0
 roll_disturbance = 0
 target_altitude = 0
 target_angle = 0
@@ -329,14 +363,19 @@ while robot.step(timestep) != -1:
     vel_x = x0
     vel_y = y0
     drone_velocity = math.sqrt(pow(vel_y,2)+pow(vel_x,2)) * 30000
-    stab = abs((roll_acceleration+pitch_acceleration)*100)
+    stab = abs((roll_acceleration+pitch_acceleration) * 100)
     stab_stack.pushIntoStabStack(stab)
+
+    if anomaly: chgState("drone_anomaly_detected")
 
     if state == "check_new_orders":
         if len(orders) != 0:
             charging = False
             current_order = orders.pop()
-            target_posit = chgTarget(target_posit,[BASE_COORDS[current_order[2]][0],BASE_COORDS[current_order[2]][1]])
+            if current_order[2] != -1:
+                target_posit = chgTarget(target_posit,[BASE_COORDS[current_order[2]][0],BASE_COORDS[current_order[2]][1],BASE_COORDS[current_order[2]][2]])
+            else:
+                target_posit = chgTarget(target_posit,[current_order[6],current_order[7],current_order[8]])
             chgState("reach_quota")
         else:
             target_posit = chgTarget(target_posit,getBaseCoords())
@@ -386,21 +425,22 @@ while robot.step(timestep) != -1:
                 chgState('land_on_delivery_station') 
 
     elif state == "lock_box":
-        target_altitude = 0.35
+        target_altitude = target_posit.z
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
         if near(altitude, target_altitude, error=0.1):
             dPrint("locking...")
             drone_magnetic.lock()
             if drone_magnetic.isLocked():
-                target_posit = chgTarget(target_posit,[current_order[4],current_order[5]])
+                target_posit = chgTarget(target_posit,[current_order[4],current_order[5],0.3])
                 chgState("reach_nav_altitude")
+
     elif state == "reach_nav_altitude":
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_history[-1].x, target_history[-1].y, bearing)
         counter += 1
         if counter > 100:
             counter = 0
-            target_altitude = 5
+            target_altitude = getNavigationAltitude()
             target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
             yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
             if near(altitude, target_altitude, error = 0.2):
@@ -415,7 +455,7 @@ while robot.step(timestep) != -1:
         # code
         pass
     elif state == "land_on_delivery_station":
-        target_altitude = 1
+        target_altitude = target_posit.z + 1
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         if near(altitude, target_altitude, error=0.3):
@@ -425,14 +465,15 @@ while robot.step(timestep) != -1:
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         counter += 1
         if counter > 200:
-            target_altitude = 0.5
+            target_altitude = target_posit.z
             if near(altitude, target_altitude, error=0.1):
                 drone_magnetic.unlock()
                 if not drone_magnetic.isLocked():
                     target_posit = chgTarget(target_posit,getBaseCoords())
+                    current_order = []
                     chgState("go_back_home")
     elif state == "go_back_home":
-        target_altitude = 5
+        target_altitude = getNavigationAltitude()
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
@@ -445,11 +486,18 @@ while robot.step(timestep) != -1:
         if stab_stack.isStable(posit,target_posit):
             chgState("land_on_base")
     elif state == "land_on_base":
-        target_altitude = 1
+        target_altitude = target_posit.z + 1
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
         if near(altitude, target_altitude, error=0.1):
             dPrint("I'm at home!")
             chgState("goto_recharge_battery")
+    elif state == "drone_anomaly_detected":
+        if drone_magnetic.isLocked():
+            # atterrare
+            # if atterrato:
+            abort_current_order()
+            abort_all_pending_orders()
+        else: abort_all_pending_orders()
     else:
         dPrint("ERROR, UNRECOGNIZED STATE:", state)
         break
