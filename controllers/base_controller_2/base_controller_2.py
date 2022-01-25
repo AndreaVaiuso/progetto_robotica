@@ -33,9 +33,9 @@ class Coordinate:
     y = 0
     z = 0
     def __init__(self, x, y, z = 0.35) -> None:
-        self.x = int(x)
-        self.y = int(y)
-        self.z = int(z)
+        self.x = float(x)
+        self.y = float(y)
+        self.z = float(z)
     def getVec2d(self) -> list:
         return [self.x, self.y]
     def getVec3d(self) -> list:
@@ -50,7 +50,7 @@ battery = 100
 box_locked = False
 anomaly = False
 
-BASE_COORDS = {0: [0, 0, 0.3], 1: [2.17, 3.18, 0.3], 2: [-1.76, 3.18, 0.3]}
+BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.36], 2: [-1.76, 3.18, 0.36]}
 ROTATION_ANGLE_FOR_LOCK = 0
 MAX_YAW = 1
 MAX_PITCH = 10
@@ -408,8 +408,6 @@ while robot.step(timestep) != -1:
     elif state == "go_near_box":
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
-        target_posit.x = BASE_COORDS[current_order[2]][0]
-        target_posit.y = BASE_COORDS[current_order[2]][1]
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.4:
             chgState("stabilize_on_position")
@@ -428,7 +426,7 @@ while robot.step(timestep) != -1:
         target_altitude = target_posit.z
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
-        if near(altitude, target_altitude, error=0.1):
+        if near(altitude, target_altitude, error=0.15):
             dPrint("locking...")
             drone_magnetic.lock()
             if drone_magnetic.isLocked():
