@@ -265,7 +265,7 @@ drone_distance_sensor_right= robot.getDevice("right sensor")
 drone_distance_sensor_right.enable(timestep)
 drone_distance_sensor_left= robot.getDevice("left sensor")
 drone_distance_sensor_left.enable(timestep)
-
+#robot.batterySensorEnable(timestep)
 drone_camera = robot.getDevice("camera")
 drone_camera.enable(timestep)
 drone_imu = robot.getDevice("inertial unit")
@@ -311,6 +311,7 @@ powerGain = 1
 chgState("check_new_orders")
 
 while robot.step(timestep) != -1:
+    #dPrint(robot.batterySensorGetValue())
     pitch_disturbance = 0
     yaw_disturbance = 0
     target_angle = 0
