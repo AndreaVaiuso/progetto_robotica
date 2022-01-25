@@ -3,10 +3,10 @@ import struct
 import threading
 from controller import Supervisor, Emitter
 
-BASE_COORDS = {"0":[0,0],"1":[2.17,3.18],"2":[-1.76,3.18]}
+BASE_COORDS = {"0":[0,0,0.3],"1":[2.17,3.18,0.3],"2":[-1.76,3.18,0.3]}
 
 def createOrder(orderID,weight,position,base):
-    message = struct.pack("ciiddd",b"N",int(orderID),int(base),float(weight),float(position[0]),float(position[1]))
+    message = struct.pack("ciidddddd",b"N",int(orderID),int(base),float(weight),float(position[0]),float(position[1]),0.0,0.0,0.0)
     # message = struct.pack("cifffi","N",int(orderID),float(weight),float(position[0],float(position[1]),int(base)))
     # message = struct.pack("ssssss","NO".encode('utf-8'),str(orderID).encode('utf-8'),str(weight).encode('utf-8'),str(position[0]).encode('utf-8'),str(position[1]).encode('utf-8'),str(base).encode('utf-8')) 
     print("Nuovo pacco>> ID:", orderID, "position: [",position[0],",",position[1],"]","base:",base)
