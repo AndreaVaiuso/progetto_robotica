@@ -1,9 +1,10 @@
 """base_controller controller."""
 from controller import Robot, Receiver, Emitter
+import modules.avoid_obstacles as avob
+import modules.score_calculator as sccal
 import threading
 import random
 import struct
-import modules.communication as comm
 import time
 import math
 import operator
