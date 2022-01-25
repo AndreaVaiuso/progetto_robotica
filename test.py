@@ -6,9 +6,9 @@ def luca():
     pass
 
 def salvo():
-    pass
+    ciao sono salvo
 
-x = ""
+x = "salvo"
 
 while 1:
     if x == "andrea":
@@ -16,4 +16,4 @@ while 1:
     elif x == "luca":
         pass
     elif x == "salvo":
-        pass
+        okay sono salvo
