@@ -1,6 +1,6 @@
 
 def andrea():
-    pass
+    print("A Salvo piace fare la pull")
 
 def luca():
     pass
@@ -8,11 +8,11 @@ def luca():
 def salvo():
     pass
 
-x = ""
+x = "andrea"
 
 while 1:
     if x == "andrea":
-        pass
+        andrea()
     elif x == "luca":
         pass
     elif x == "salvo":
