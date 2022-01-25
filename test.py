@@ -3,17 +3,17 @@ def andrea():
     pass
 
 def luca():
-    pass
+    print('sono Luca')
 
 def salvo():
     pass
 
-x = ""
+x = "luca"
 
 while 1:
     if x == "andrea":
         pass
     elif x == "luca":
-        pass
+        luca()
     elif x == "salvo":
         pass
