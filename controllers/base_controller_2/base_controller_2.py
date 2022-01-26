@@ -49,7 +49,7 @@ state_history = []
 box_locked = False
 anomaly = False
 
-BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.34], 2: [-1.76, 3.18, 0.34]}
+BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.32], 2: [-1.76, 3.18, 0.32]}
 ROTATION_ANGLE_FOR_LOCK = 0
 MAX_YAW = 1
 MAX_PITCH = 10
@@ -74,7 +74,9 @@ score_dict = {}
 def checkAnomaly():
     global anomaly
     while 1:
-        time.sleep(500)
+        time.sleep(20)
+        anomaly = True
+        return
         anom = random.random()
         if anom > 0.8:
             anomaly = True
@@ -474,13 +476,20 @@ while robot.step(timestep) != -1:
     elif state == "drone_anomaly_detected":
         if drone_magnetic.isLocked():
             target_altitude = 0
-            if atterrato:
-                while drone_magnetic.isLocked():
-                    drone_magnetic.unlock()
-                abort_current_order()
-        else: 
-            abort_all_pending_orders()
-            chgState("deactivate")
+            print(drone_distance_sensor_lower.getValue())
+            
+            #if atterrato:
+            #    while drone_magnetic.isLocked():
+            #        drone_magnetic.unlock()
+            #    abort_current_order()
+        else:
+            print("low",drone_distance_sensor_lower.getValue())
+            print("up",drone_distance_sensor_upper.getValue())
+            print("rig",drone_distance_sensor_right.getValue())
+            print("lef",drone_distance_sensor_left.getValue())
+            print("fron",drone_distance_sensor_front.getValue())
+            # abort_all_pending_orders()
+            # chgState("deactivate")
     elif state == "deactivate":
         target_altitude = 0
         # Se il sensore di prossimità inferiore nota qualcosa, spegnere i motori
