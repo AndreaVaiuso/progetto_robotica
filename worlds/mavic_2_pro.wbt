@@ -14,7 +14,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.2569256657081811 -0.9119103752066338 -0.3200135464178115 1.8776541464939822
-  position -4.532880052839744 3.6883567955610057 -1.4102684122777709
+  position -5.946123774805997 4.954023610067244 -1.7397483392757958
   near 0.2
   followSmoothness 0.2
 }
@@ -30,10 +30,14 @@ Floor {
   }
 }
 Mavic2Pro {
-  translation -0.00478278 0.0857251 0.02
-  rotation -0.9987867003404933 -0.03482190478334482 0.03482186339369732 1.5720092451161503
+  translation -0.004785374911454365 0.0857087278743042 0.02000000383482182
+  rotation -0.9987852429767983 -0.03484279907696976 0.03484275770171151 1.5720107045450524
   name "Mavic 2 PRO_0"
   controller "base_controller_2"
+  battery [
+    50000, 100000, 100
+  ]
+  cpuConsumption 0
   bodySlot [
     Emitter {
       model "A"
@@ -314,7 +318,7 @@ Forest {
   minRadius 3
 }
 Solid {
-  translation 0.03 0.0399963 0.98
+  translation 0.03 0.0399991 0.03
   rotation 1 0 0 4.6928e-06
   children [
     Charger {
@@ -324,7 +328,7 @@ Solid {
             baseColor 1 0 0
             roughness 1
             metalness 0
-            emissiveColor 0 0.5519999861717224 0
+            emissiveColor 0 1 0
           }
           geometry Cylinder {
             height 0.01
@@ -334,7 +338,7 @@ Solid {
       ]
       name "charger 1"
       battery [
-        220.00000000001378, 500, 10
+        500000, 500000, 5000
       ]
       radius 0.45
     }
@@ -344,10 +348,10 @@ Solid {
     0 0 0
   ]
 }
-Mavic2Pro {
-  translation 0 0.1 0.97
-  rotation -1 0 0 1.5708
+Robot {
+  translation 0 0 1
   battery [
-    0, 100, 1
+    54.04118000000181, 500, 10
   ]
+  cpuConsumption 0.1
 }
