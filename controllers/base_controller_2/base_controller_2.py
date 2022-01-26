@@ -57,6 +57,7 @@ robot = Robot()
 orders = []
 state_history = []
 box_locked = False
+anomaly_detected = False
 anomaly = False
 
 BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.32], 2: [-1.76, 3.18, 0.32]}
@@ -85,14 +86,14 @@ score_dict = {}
 
 
 def checkAnomaly():
-    global anomaly
+    global anomaly_detected
     while 1:
-        time.sleep(20)
-        anomaly = True
+        time.sleep(60)
+        anomaly_detected = True
         return
         anom = random.random()
         if anom > 0.8:
-            anomaly = True
+            anomaly_detected = True
             return
 
 
@@ -292,7 +293,7 @@ def make_topN(dataList):
     if winner == drone_ID:
         orders.append(dataList)
         dPrint(f'I win! Order {dataList[1]} taken')
-    if anomaly:
+    if anomaly_detected or anomaly:
         abort_current_order()
     score_dict = {}
 
@@ -302,7 +303,7 @@ def update_orders():
     global orders
     while True:
         if receiver.getQueueLength() > 0:  # ma dobbiamo distinguere fra due tipi di dati in arrivo , i nuovi ordini, e i punteggi
-            if anomaly: return
+            if anomaly_detected or anomaly: return
             dPrint("Message received")
             x = receiver.getData()
             # [ [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y , [6] ALT_BASE_x , [7] ALT_BASE_y ]
@@ -367,6 +368,7 @@ k_roll_p = 50
 k_pitch_p = 30
 
 altitude = 0
+emergency_altitude_land = 0
 roll_disturbance = 0
 target_altitude = 0
 target_angle = 0
@@ -409,7 +411,7 @@ while robot.step(timestep) != -1:
     ########### definizione della funzione avoid_obstacle_full()###########
     #### def avoid_obstacles_full(left_sensor, right_sensor, upper_sensor, lower_sensor, front_sensor)####
 
-    if anomaly: chgState("drone_anomaly_detected")
+    if anomaly_detected: chgState("drone_anomaly_detected")
 
     if state == "check_new_orders":
         if len(orders) != 0:
@@ -486,7 +488,6 @@ while robot.step(timestep) != -1:
                                                                             target_history[-1].y, bearing)
         counter += 1
         if counter > 100:
-            counter = 0
             target_altitude = getNavigationAltitude()
             target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
             yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
@@ -527,6 +528,7 @@ while robot.step(timestep) != -1:
                 if not drone_magnetic.isLocked():
                     target_posit = chgTarget(target_posit, getBaseCoords())
                     current_order = []
+                    counter = 0
                     chgState("go_back_home")
     elif state == "go_back_home":
         target_altitude = getNavigationAltitude()
@@ -555,26 +557,45 @@ while robot.step(timestep) != -1:
         elif near(altitude, target_altitude, error=0.1):
             dPrint("I'm at home!")
             chgState("goto_recharge_battery")
+    elif state == "emergency_detach":
+        counter += 1
+        if counter > 200:
+            target_altitude = emergency_altitude_land + 0.3
+            if near(altitude,target_altitude,error=0.1):
+                while drone_magnetic.isLocked():
+                    drone_magnetic.unlock()
+                abort_current_order()
+                counter = 0
+                chgState("emergency_shutdown")
+    elif state == "emergency_shutdown":
+        pitch_disturbance = 1
+        counter += 1
+        if counter > 200:
+            pitch_disturbance = 0
+            target_altitude = emergency_altitude_land - 1
+            if near(altitude,emergency_altitude_land):
+                powerGain = 0
+                chgState("deactivate")
     elif state == "drone_anomaly_detected":
+        anomaly_detected = False
+        anomaly = True
         if drone_magnetic.isLocked():
             target_altitude = 0
-            print(drone_distance_sensor_lower.getValue())
-
-            # if atterrato:
-            #    while drone_magnetic.isLocked():
-            #        drone_magnetic.unlock()
-            #    abort_current_order()
+            if drone_distance_sensor_lower.getValue() < 2:
+                emergency_altitude_land = altitude - drone_distance_sensor_lower.getValue()
+                target_altitude = emergency_altitude_land + 1
+                chgState("emergency_detach")
         else:
-            print("low", drone_distance_sensor_lower.getValue())
-            print("up", drone_distance_sensor_upper.getValue())
-            print("rig", drone_distance_sensor_right.getValue())
-            print("lef", drone_distance_sensor_left.getValue())
-            print("fron", drone_distance_sensor_front.getValue())
-            # abort_all_pending_orders()
-            # chgState("deactivate")
+            target_altitude = 0
+            if drone_distance_sensor_lower.getValue() < 2:
+                emergency_altitude_land = altitude - drone_distance_sensor_lower.getValue()
+                target_altitude = emergency_altitude_land + 1
+                chgState("deactivate")
     elif state == "deactivate":
-        target_altitude = 0
-        # Se il sensore di prossimità inferiore nota qualcosa, spegnere i motori
+        target_altitude = emergency_altitude_land
+        if near(altitude,emergency_altitude_land):
+            powerGain = 0
+            abort_all_pending_orders()
     else:
         dPrint("ERROR, UNRECOGNIZED STATE:", state)
         break
