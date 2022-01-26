@@ -30,11 +30,8 @@ Floor {
   }
 }
 Mavic2Pro {
-  hidden position_0_0 1.3373605273699564e-09
-  hidden position_14_0 -3.112123891924057e-09
-  hidden position_15_0 1.1851495415047495e-09
-  translation -0.004785374911454365 0.0857087278743042 0.02000000383482182
-  rotation -0.9987852429767983 -0.03484279907696976 0.03484275770171151 1.5720107045450524
+  translation -0.00478278 0.0857251 0.02
+  rotation -0.9987867003404933 -0.03482190478334482 0.03482186339369732 1.5720092451161503
   name "Mavic 2 PRO_0"
   controller "base_controller_2"
   bodySlot [
@@ -211,7 +208,7 @@ DEF base_drone SquareManhole {
 }
 DEF base_1 Solid {
   translation 3.18 0.04019 2.17
-  rotation 1.4057796113349329e-18 -0.9999999999999999 -1.2632965782802954e-18 1.5707953071795862
+  rotation -1.9572678785283172e-18 -0.9999999999999999 -1.96402432472024e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -234,12 +231,10 @@ DEF base_1 Solid {
   }
   physics Physics {
   }
-  linearVelocity 2.671466538073522e-18 -1.8427469958982662e-16 2.64069195238033e-19
-  angularVelocity 3.924439319495078e-17 8.821390035672937e-19 -4.2414111460963625e-17
 }
 DEF base_2 Solid {
-  translation 3.18 0.040189018999999986 -1.76
-  rotation -6.800071135043973e-18 -0.9999999999999999 5.431471499640125e-18 1.5707953071795862
+  translation 3.18 0.04018901900015848 -1.76
+  rotation -4.173781057980377e-18 -0.9999999999999999 5.209939259302723e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -263,8 +258,6 @@ DEF base_2 Solid {
   }
   physics Physics {
   }
-  linearVelocity -7.368707901187463e-19 6.706369552522968e-17 -2.1341649849093593e-18
-  angularVelocity -4.597812825602895e-17 6.570396789523675e-19 2.6557226351465318e-17
 }
 Pine {
   translation -14.0083 0 14.4828
@@ -321,7 +314,7 @@ Forest {
   minRadius 3
 }
 Solid {
-  translation 0.03 0.04 0.0099999
+  translation 0.03 0.0399963 0.98
   rotation 1 0 0 4.6928e-06
   children [
     Charger {
@@ -331,7 +324,7 @@ Solid {
             baseColor 1 0 0
             roughness 1
             metalness 0
-            emissiveColor 0 0.40083199739456177 0
+            emissiveColor 0 0.5519999861717224 0
           }
           geometry Cylinder {
             height 0.01
@@ -341,7 +334,7 @@ Solid {
       ]
       name "charger 1"
       battery [
-        125.51999999999946, 500, 10
+        220.00000000001378, 500, 10
       ]
       radius 0.45
     }
@@ -351,42 +344,10 @@ Solid {
     0 0 0
   ]
 }
-DEF order_box Solid {
-  translation 3.18 0.19018803800000003 -1.76
-  rotation -0.012347912206131326 0.8535040752382838 -0.5209398454867814 3.8095234463548096e-17
-  children [
-    Connector {
-      translation 0 0.2 3.3671e-08
-      rotation 1 0 0 -1.5707996938995747
-      model "a"
-      type "passive"
-      autoLock TRUE
-      distanceTolerance 0.7
-      axisTolerance 1.5
-    }
-    Shape {
-      appearance PBRAppearance {
-        baseColorMap ImageTexture {
-          url [
-            "../textures/amazon-texture.jpg"
-          ]
-          repeatS FALSE
-          repeatT FALSE
-        }
-        roughness 1
-        metalness 0
-      }
-      geometry DEF BOX_GEOMETRY Box {
-        size 0.3 0.2 0.3
-      }
-    }
+Mavic2Pro {
+  translation 0 0.1 0.97
+  rotation -1 0 0 1.5708
+  battery [
+    0, 100, 1
   ]
-  name "box"
-  contactMaterial "box"
-  boundingObject USE BOX_GEOMETRY
-  physics Physics {
-    mass 0.01
-  }
-  linearVelocity 1.0733346104350752e-18 -1.026797821064395e-15 5.743545882884969e-18
-  angularVelocity 6.369713530176149e-17 2.0859551521602186e-17 3.184856765088074e-17
 }

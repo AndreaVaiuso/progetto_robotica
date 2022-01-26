@@ -46,7 +46,6 @@ robot = Robot()
 
 orders = []
 state_history = []
-battery = 100
 box_locked = False
 anomaly = False
 
@@ -80,21 +79,6 @@ def checkAnomaly():
         if anom > 0.8:
             anomaly = True
             return
-
-def deschargeBattery():
-    global charging, battery
-    while 1:
-        time.sleep(40)
-        if not charging:
-            battery -= 1
-            dPrint(f"Battery: {battery}%")
-
-def rechargeBattery(value):
-    global battery
-    battery += value
-    if battery >= 100:
-        battery = 100
-    dPrint(f"Battery charged: {battery}%")
 
 def getBaseCoords():
     return [BASE_COORDS[0][0] + drone_ID,BASE_COORDS[0][1],BASE_COORDS[0][2]]
@@ -262,7 +246,7 @@ def make_topN(dataList):
 
 def update_orders():
     dPrint("Updating orders")
-    global battery, orders
+    global orders
     while True:
         if receiver.getQueueLength() > 0:  # ma dobbiamo distinguere fra due tipi di dati in arrivo , i nuovi ordini, e i punteggi
             if anomaly : return
@@ -282,10 +266,8 @@ def update_orders():
             receiver.nextPacket()
 
 th = threading.Thread(target=update_orders, args=())
-bat = threading.Thread(target=deschargeBattery, args=())
 ag = threading.Thread(target=checkAnomaly, args=())
 th.start()
-bat.start()
 ag.start()
 
 drone_distance_sensor_upper= robot.getDevice("upper sensor")
@@ -379,8 +361,9 @@ while robot.step(timestep) != -1:
                 target_posit = chgTarget(target_posit,[current_order[6],current_order[7],current_order[8]])
             chgState("reach_quota")
         else:
+            charging = True
             target_posit = chgTarget(target_posit,getBaseCoords())
-            chgState("recharge_battery", verbose=False)
+            powerGain = 0
     elif state == "goto_recharge_battery":
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x, target_posit.y, bearing)
         counter += 1
@@ -389,14 +372,6 @@ while robot.step(timestep) != -1:
             if near(altitude,target_altitude,error=0.1):
                 counter = 0
                 chgState("check_new_orders", verbose=False)
-    elif state == "recharge_battery":
-        powerGain = 0
-        charging = True
-        counter += 1
-        if counter > 1000:
-            counter = 0
-            rechargeBattery(1)
-            chgState("check_new_orders", verbose=False)
     elif state == "reach_quota":
         powerGain = 1
         target_altitude = 1
