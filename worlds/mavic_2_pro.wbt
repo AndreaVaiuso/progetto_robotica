@@ -14,9 +14,8 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.2569256657081811 -0.9119103752066338 -0.3200135464178115 1.8776541464939822
-  position -11.319965615166206 9.252398533352551 -2.9125573559976843
+  position -4.532880052839744 3.6883567955610057 -1.4102684122777709
   near 0.2
-  follow "Mavic 2 PRO_0"
   followSmoothness 0.2
 }
 TexturedBackground {
@@ -29,6 +28,126 @@ Floor {
   tileSize 6 6
   appearance SandyGround {
   }
+}
+Mavic2Pro {
+  hidden position_0_0 1.3373605273699564e-09
+  hidden position_14_0 -3.112123891924057e-09
+  hidden position_15_0 1.1851495415047495e-09
+  translation -0.004785374911454365 0.0857087278743042 0.02000000383482182
+  rotation -0.9987852429767983 -0.03484279907696976 0.03484275770171151 1.5720107045450524
+  name "Mavic 2 PRO_0"
+  controller "base_controller_2"
+  bodySlot [
+    Emitter {
+      model "A"
+      channel -1
+    }
+    Receiver {
+      model "A"
+    }
+    Connector {
+      translation -0.07 0 -0.15
+      rotation 0 1 0 -3.1
+      name "magnetic"
+      model "a"
+      type "active"
+      autoLock TRUE
+      distanceTolerance 0.3
+      axisTolerance 1.5
+      rotationTolerance 1.5
+      snap FALSE
+    }
+    DistanceSensor {
+      translation 0.08 0 0.01
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.03 0 0.02
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "upper sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.0386371 0 -0.0603528
+      rotation 0 1 0 1.309
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "lower sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.0200002 -0.04 -0.02
+      rotation 0 0 -1 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "right sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.0200002 0.04 -0.02
+      rotation 0.707108281185553 0.70710528118436 9.236343672883591e-09 -3.1415853071795863
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "left sensor"
+      type "sonar"
+      numberOfRays 5
+    }
+  ]
 }
 DEF SUPERVISOR Robot {
   children [
@@ -91,8 +210,8 @@ DEF base_drone SquareManhole {
   name "base_drone(1)"
 }
 DEF base_1 Solid {
-  translation 3.18 0.04019000001184178 2.17
-  rotation -8.870350380879304e-19 -0.9999999999999999 -1.7077399709178867e-18 1.5707953071795862
+  translation 3.18 0.04019 2.17
+  rotation 1.4057796113349329e-18 -0.9999999999999999 -1.2632965782802954e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -115,10 +234,12 @@ DEF base_1 Solid {
   }
   physics Physics {
   }
+  linearVelocity 2.671466538073522e-18 -1.8427469958982662e-16 2.64069195238033e-19
+  angularVelocity 3.924439319495078e-17 8.821390035672937e-19 -4.2414111460963625e-17
 }
 DEF base_2 Solid {
-  translation 3.18 0.04018901900000001 -1.76
-  rotation -1.3267798107407827e-18 -0.9999999999999999 -7.429911041636712e-19 1.5707953071795862
+  translation 3.18 0.040189018999999986 -1.76
+  rotation -6.800071135043973e-18 -0.9999999999999999 5.431471499640125e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -142,6 +263,8 @@ DEF base_2 Solid {
   }
   physics Physics {
   }
+  linearVelocity -7.368707901187463e-19 6.706369552522968e-17 -2.1341649849093593e-18
+  angularVelocity -4.597812825602895e-17 6.570396789523675e-19 2.6557226351465318e-17
 }
 Pine {
   translation -14.0083 0 14.4828
@@ -197,134 +320,6 @@ Forest {
   maxRadius 6
   minRadius 3
 }
-DEF DRONE Mavic2Pro {
-  translation -4.28582e-06 0.09 -2.74162e-06
-  rotation -0.9999939860836999 -0.002228268542236495 -0.002657558228264499 1.5705292118907654
-  name "Mavic 2 PRO_0"
-  controller "base_controller_2"
-  supervisor TRUE
-  bodySlot [
-    DistanceSensor {
-      translation -0.0200002 0.04 -0.02
-      rotation 0.707108281185553 0.70710528118436 9.236343672883591e-09 -3.1415853071795863
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 0 0 1
-            roughness 1
-            metalness 0
-          }
-          geometry Box {
-            size 0.01 0.01 0.005
-          }
-        }
-      ]
-      name "left sensor"
-      type "sonar"
-      numberOfRays 5
-    }
-    DistanceSensor {
-      translation -0.0200002 -0.04 -0.02
-      rotation 0 0 -1 1.5708
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 0 0 1
-            roughness 1
-            metalness 0
-          }
-          geometry Box {
-            size 0.01 0.01 0.005
-          }
-        }
-      ]
-      name "right sensor"
-      type "sonar"
-      numberOfRays 5
-    }
-    DistanceSensor {
-      translation -0.0386371 0 -0.0603528
-      rotation 0 1 0 1.309
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 0 0 1
-            roughness 1
-            metalness 0
-          }
-          geometry Box {
-            size 0.01 0.01 0.01
-          }
-        }
-      ]
-      name "lower sensor"
-      type "sonar"
-      numberOfRays 5
-    }
-    DistanceSensor {
-      translation -0.03 0 0.02
-      rotation 0 1 0 -1.5707953071795862
-      children [
-        Shape {
-          appearance PBRAppearance {
-            baseColor 0 0 1
-          }
-          geometry Box {
-            size 0.01 0.01 0.005
-          }
-        }
-      ]
-      name "upper sensor"
-      type "sonar"
-      numberOfRays 5
-    }
-    DistanceSensor {
-      translation 0.08 0 0.01
-      children [
-        Shape {
-          appearance DEF App_s PBRAppearance {
-            baseColor 0 0 1
-          }
-          geometry DEF geo_sems Box {
-            size 0.01 0.01 0.005
-          }
-        }
-      ]
-      name "front sensor"
-      type "sonar"
-      numberOfRays 5
-    }
-    Connector {
-      translation -0.07 0 -0.15
-      rotation 0 1 0 -3.1
-      name "magnetic"
-      model "a"
-      type "active"
-      autoLock TRUE
-      distanceTolerance 0.3
-      axisTolerance 1.5
-      rotationTolerance 1.5
-      snap FALSE
-    }
-    Receiver {
-      model "A"
-    }
-    Emitter {
-      model "A"
-      channel -1
-    }
-  ]
-  cameraSlot [
-    Camera {
-      width 400
-      height 240
-      near 0.2
-      recognition Recognition {
-        segmentation TRUE
-      }
-    }
-  ]
-}
 Solid {
   translation 0.03 0.04 0.0099999
   rotation 1 0 0 4.6928e-06
@@ -336,7 +331,7 @@ Solid {
             baseColor 1 0 0
             roughness 1
             metalness 0
-            emissiveColor 0 0.20000000298023224 0
+            emissiveColor 0 0.40083199739456177 0
           }
           geometry Cylinder {
             height 0.01
@@ -346,7 +341,7 @@ Solid {
       ]
       name "charger 1"
       battery [
-        100, 500, 10
+        125.51999999999946, 500, 10
       ]
       radius 0.45
     }
@@ -355,4 +350,43 @@ Solid {
   recognitionColors [
     0 0 0
   ]
+}
+DEF order_box Solid {
+  translation 3.18 0.19018803800000003 -1.76
+  rotation -0.012347912206131326 0.8535040752382838 -0.5209398454867814 3.8095234463548096e-17
+  children [
+    Connector {
+      translation 0 0.2 3.3671e-08
+      rotation 1 0 0 -1.5707996938995747
+      model "a"
+      type "passive"
+      autoLock TRUE
+      distanceTolerance 0.7
+      axisTolerance 1.5
+    }
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/amazon-texture.jpg"
+          ]
+          repeatS FALSE
+          repeatT FALSE
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry DEF BOX_GEOMETRY Box {
+        size 0.3 0.2 0.3
+      }
+    }
+  ]
+  name "box"
+  contactMaterial "box"
+  boundingObject USE BOX_GEOMETRY
+  physics Physics {
+    mass 0.01
+  }
+  linearVelocity 1.0733346104350752e-18 -1.026797821064395e-15 5.743545882884969e-18
+  angularVelocity 6.369713530176149e-17 2.0859551521602186e-17 3.184856765088074e-17
 }

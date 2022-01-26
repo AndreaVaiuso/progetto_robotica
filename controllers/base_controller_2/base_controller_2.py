@@ -492,11 +492,17 @@ while robot.step(timestep) != -1:
             chgState("goto_recharge_battery")
     elif state == "drone_anomaly_detected":
         if drone_magnetic.isLocked():
-            # atterrare
-            # if atterrato:
-            abort_current_order()
+            target_altitude = 0
+            if atterrato:
+                while drone_magnetic.isLocked():
+                    drone_magnetic.unlock()
+                abort_current_order()
+        else: 
             abort_all_pending_orders()
-        else: abort_all_pending_orders()
+            chgState("deactivate")
+    elif state == "deactivate":
+        target_altitude = 0
+        # Se il sensore di prossimità inferiore nota qualcosa, spegnere i motori
     else:
         dPrint("ERROR, UNRECOGNIZED STATE:", state)
         break
