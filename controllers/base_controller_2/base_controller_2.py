@@ -49,7 +49,7 @@ state_history = []
 box_locked = False
 anomaly = False
 
-BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.36], 2: [-1.76, 3.18, 0.36]}
+BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.34], 2: [-1.76, 3.18, 0.34]}
 ROTATION_ANGLE_FOR_LOCK = 0
 MAX_YAW = 1
 MAX_PITCH = 10
@@ -84,7 +84,14 @@ def getBaseCoords():
     return [BASE_COORDS[0][0] + drone_ID,BASE_COORDS[0][1],BASE_COORDS[0][2]]
 
 def dPrint(string):
-    print(f"Drone ({name})> {string}")
+    perc = "--"
+    try:
+        perc = int(robot.batterySensorGetValue())
+        perc /= 1000
+        perc = str(int(perc))
+    except ValueError:
+        perc = "--"
+    print(f"Drone ({name} [{perc}%])> {string}")
 
 def chgState(newState, verbose=True):
     global state, state_history
@@ -280,7 +287,7 @@ drone_distance_sensor_right= robot.getDevice("right sensor")
 drone_distance_sensor_right.enable(timestep)
 drone_distance_sensor_left= robot.getDevice("left sensor")
 drone_distance_sensor_left.enable(timestep)
-#robot.batterySensorEnable(timestep)
+robot.batterySensorEnable(timestep)
 drone_camera = robot.getDevice("camera")
 drone_camera.enable(timestep)
 drone_imu = robot.getDevice("inertial unit")
@@ -327,7 +334,6 @@ powerGain = 1
 chgState("check_new_orders")
 
 while robot.step(timestep) != -1:
-    #dPrint(robot.batterySensorGetValue())
     pitch_disturbance = 0
     yaw_disturbance = 0
     target_angle = 0
@@ -439,7 +445,7 @@ while robot.step(timestep) != -1:
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
         counter += 1
         if counter > 200:
-            target_altitude = target_posit.z
+            target_altitude = 0.35
             if near(altitude, target_altitude, error=0.1):
                 drone_magnetic.unlock()
                 if not drone_magnetic.isLocked():
