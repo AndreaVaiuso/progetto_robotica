@@ -1,4 +1,5 @@
 """base_controller controller."""
+
 from controller import Robot, Receiver, Emitter
 import modules.avoid_obstacles as avob
 import modules.score_calculator as sccal
@@ -80,6 +81,7 @@ name = robot.getName()
 drone_ID = getID(name)
 receiver.setChannel(drone_ID)
 current_order = []
+battery_for_current= "" # batteria che mi serve per eseguire l'ordine corrente
 pending_order = []
 target_history = []
 score_dict = {}
@@ -113,7 +115,7 @@ def dPrint(string):
 
 
 def chgState(newState, verbose=True):
-    global state, state_history
+    global state, state_history # questa lista deve crescere e contenere gli stati che via via si attraversano da quando si prende in carico un ordine a quando se ne prende un altro, deve riazzerarsi ogni volta
     state = newState
     if verbose: dPrint(f"State changed: {newState}")
     state_history.append(state)
@@ -271,14 +273,17 @@ def abort_all_pending_orders():
 
 
 def send_score(dataList):
-    global pending_order
+    global pending_order, current_order, orders,state,  state_history, battery_for_current
+    y=drone_gps.getValues()[0]
+    x=drone_gps.getValues()[2]
+    b=int(robot.batterySensorGetValue())
+    #score = sccal(orders,current_order,dataList,[x,y],state, state_history, b, battery_for_current)
     score = score_calculator(dataList)
     # [ "ciiddd" , TYPE , DRONE_ID , ORDER_ID ,  score, 0 , 0 ]
     message = struct.pack("ciidddddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
     while emitter.send(message) != 1:
         dPrint(f'Waiting queue for sending message')
-    pending_order = dataList
     score_dict[drone_ID] = score
     th = threading.Thread(target=make_topN, args=[dataList])
     th.start()
@@ -312,6 +317,7 @@ def update_orders():
             if dataList[0].decode('utf-8') == 'N':
                 dPrint(
                     f'New order received: [ ID:{dataList[1]}, BASE:{dataList[2]}, x:{dataList[4]}, y:{dataList[5]} ], sending score...')
+                pending_order = dataList
                 send_score(dataList)
             elif dataList[0].decode('utf-8') == 'S':
                 dPrint(f"Score arrived from DRONE: {dataList[1]}")
