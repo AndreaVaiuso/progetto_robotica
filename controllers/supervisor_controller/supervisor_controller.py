@@ -23,20 +23,22 @@ def createOrder(orderID,weight,position,base):
     field = node.getField("translation") 
     field.setSFVec3f([yp,zp,xp])
 
-
-def order():
-    createOrder(1,0.5,[10,10],2)
-
 supervisor = Supervisor()
 timestep = int(supervisor.getBasicTimeStep())
 emitter = supervisor.getDevice("emitter")
 emitter.setChannel(Emitter.CHANNEL_BROADCAST)
 
-th = threading.Thread(target=order,args=[])
-th.start()
+counter = 0
+
+createOrder(88,0.5,[10,10],2)
+createOrder(99,0.5,[10,10],1)
 
 
 while supervisor.step(timestep) != -1:
-    break
+    counter +=1
+    if counter >= 500:
+        counter = 0
+        
+        break
        
 

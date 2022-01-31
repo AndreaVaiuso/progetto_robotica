@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.26722156011114834 -0.9267696395327484 -0.26398991089074514 1.6346359235658554
-  position -3.196201475503075 1.8598411931533005 0.8092036238954156
+  orientation -0.3296700036289484 -0.9284176647595495 -0.17134272225488345 1.0206916231230887
+  position -2.9103049774854566 0.7847072907115984 3.971517583220335
   near 0.2
   follow "Mavic 2 PRO_1"
   followSmoothness 0.2
@@ -31,12 +31,18 @@ Floor {
   }
 }
 Mavic2Pro {
-  translation -0.004785374911454365 0.0857087278743042 0.02000000383482182
-  rotation -0.9987852429767983 -0.03484279907696976 0.03484275770171151 1.5720107045450524
+  hidden translation_15 0.0412774 -0.00469654 -0.00405862
+  hidden rotation_15 0 0 1 0
+  hidden translation_16 0.000625212 -0.00530346 -0.0207448
+  hidden rotation_16 0 1 0 0
+  hidden translation_17 0.00754686 0.0160388 -0.00586401
+  hidden rotation_17 1 0 0 0
+  translation -0.004785375123381785 0.08570872836460687 0.0200000038442881
+  rotation -0.998785242864462 -0.0348428006901073 0.034842759308746384 1.5720107045141964
   name "Mavic 2 PRO_0"
-  controller "base_controller_2"
+  controller "base_controller_3"
   battery [
-    50000, 100000, 100
+    50000.79187921132, 100000, 100
   ]
   cpuConsumption 1
   bodySlot [
@@ -171,12 +177,18 @@ Mavic2Pro {
   ]
 }
 Mavic2Pro {
-  translation 0.0353604 0.0815264 0.98
-  rotation -0.9987852429767983 -0.03484279907696976 0.03484275770171151 1.5720107045450524
+  hidden translation_15 0.0412774 -0.00469654 -0.00405862
+  hidden rotation_15 0 0 1 0
+  hidden translation_16 0.000625212 -0.00530346 -0.0207448
+  hidden rotation_16 0 1 0 0
+  hidden translation_17 0.00754686 0.0160388 -0.00586401
+  hidden rotation_17 1 0 0 0
+  translation 0.03535830070889271 0.08235096756862546 0.9800000192656383
+  rotation -0.9987841313421092 -0.03485873329752738 0.03485868173181977 1.5720115245424473
   name "Mavic 2 PRO_1"
-  controller "base_controller_2"
+  controller "base_controller_3"
   battery [
-    50000, 100000, 100
+    50000.79172724805, 100000, 100
   ]
   cpuConsumption 1
   bodySlot [
@@ -197,6 +209,7 @@ Mavic2Pro {
     }
     Receiver {
       model "A"
+      channel 1
     }
     Connector {
       translation -0.07 0 -0.15
@@ -373,9 +386,9 @@ DEF Drone_Base Transform {
         Charger {
           name "charger 1"
           battery [
-            500000, 500000, 5000
+            499999.2, 500000, 5000
           ]
-          radius 1
+          radius 0.45
         }
       ]
       name "Charger_station"
@@ -397,9 +410,9 @@ DEF Drone_Base Transform {
         Charger {
           name "charger 1"
           battery [
-            500000, 500000, 5000
+            499999.2, 500000, 5000
           ]
-          radius 1
+          radius 0.45
         }
       ]
       name "Charger_station(1)"
@@ -414,7 +427,7 @@ DEF Drone_Base Transform {
 }
 DEF base_1 Solid {
   translation 3.18 0.04019 2.17
-  rotation -1.9572678785283172e-18 -0.9999999999999999 -1.96402432472024e-18 1.5707953071795862
+  rotation -1.4710035497787672e-18 -0.9999999999999999 -1.1535828402875905e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
@@ -439,8 +452,8 @@ DEF base_1 Solid {
   }
 }
 DEF base_2 Solid {
-  translation 3.18 0.04018901900015848 -1.76
-  rotation -4.173781057980377e-18 -0.9999999999999999 5.209939259302723e-18 1.5707953071795862
+  translation 3.18 0.04018906656378716 -1.76
+  rotation -4.335868726849804e-18 -0.9999999999999999 4.075321445525268e-18 1.5707953071795862
   children [
     Shape {
       appearance PBRAppearance {
