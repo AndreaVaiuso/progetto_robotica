@@ -71,7 +71,7 @@ def getID(name):
     return int(x[1])
 
 
-charging = False
+
 timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
 emitter = robot.getDevice("emitter")
@@ -85,6 +85,12 @@ pending_order = []
 target_history = []
 score_dict = {}
 
+def getOrderPosition():
+    global target_posit, current_order
+    if current_order[2] != -1:
+        return   chgTarget(target_posit,[BASE_COORDS[current_order[2]][0], BASE_COORDS[current_order[2]][1],BASE_COORDS[current_order[2]][2]])
+    else:
+        return   chgTarget(target_posit, [current_order[6], current_order[7], current_order[8]])
 
 def checkAnomaly():
     global anomaly_detected
@@ -310,7 +316,7 @@ def update_orders():
             if anomaly_detected or anomaly: return
             dPrint("Message received")
             x = receiver.getData()
-            # [ [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y , [6] ALT_BASE_x , [7] ALT_BASE_y ]
+            # [ [0] "N" , [1] ORDER_ID , [2] BASE , [3] WEIGHT , [4] DESTINATION_x , [5] DESTINATION_y , [6] ALT_BASE_x , [7] ALT_BASE_y, [8] ALT_BASE_z ]
             # [ [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] score, 0 , 0 , 0 , 0 ]
             dataList = struct.unpack("ciidddddd", x)
             if dataList[0].decode('utf-8') == 'N':
@@ -421,28 +427,32 @@ while robot.step(timestep) != -1:
 
     if state == "check_new_orders":
         if len(orders) != 0:
-            charging = False
             current_order = orders.pop()
-            if current_order[2] != -1:
-                target_posit = chgTarget(target_posit,
-                                         [BASE_COORDS[current_order[2]][0], BASE_COORDS[current_order[2]][1],
-                                          BASE_COORDS[current_order[2]][2]])
+            if check_battery():
+                target_posit= getOrderPosition()
+                state_history=[]
+                chgState("reach_quota")
             else:
-                target_posit = chgTarget(target_posit, [current_order[6], current_order[7], current_order[8]])
-            chgState("reach_quota")
-        else:
-            charging = True
-            target_posit = chgTarget(target_posit, getBaseCoords())
-            powerGain = 0
+                target_posit = chgTarget(target_posit, getBaseCoords())
+                if state_history[-2]== "go_back_home":
+                    chgState("stabilize_before_land_on_base")
+                else:
+                    chgState("recharge_battery")
+
     elif state == "goto_recharge_battery":
-        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x,
-                                                                            target_posit.y, bearing)
+        roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x,target_posit.y, bearing)
         counter += 1
         if counter > 200:
             target_altitude = 0
             if near(altitude, target_altitude, error=0.1):
                 counter = 0
-                chgState("check_new_orders", verbose=False)
+                chgState("recharge_battery", verbose=False)
+    elif state == "recharge_battery":
+        powerGain=0
+        if check_battery():
+            target_posit= getOrderPosition()
+            state_history=[]
+            chgState("reach_quota")
     elif state == "reach_quota":
         powerGain = 1
         target_altitude = 1
@@ -544,8 +554,8 @@ while robot.step(timestep) != -1:
         if avob.avoid_obstacles_full(left_sensor_value, right_sensor_value, upper_sensor_value, lower_sensor_value,
                                      front_sensor_value):
             chgState('avoid_obstalces')
-        elif euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 0.4:
-            chgState("stabilize_before_land_on_base")
+        elif euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 3:
+            chgState("check_new_orders")
 
     elif state == "stabilize_before_land_on_base":
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
