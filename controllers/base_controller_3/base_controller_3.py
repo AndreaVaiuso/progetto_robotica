@@ -12,9 +12,10 @@ import operator
 
 
 robot = Robot()
-
+state_history=[]
+state=""
+old_state=""
 orders = []
-state_history = []
 box_locked = False
 anomaly_detected = False
 anomaly = False
@@ -38,15 +39,32 @@ target_history = []
 score_dict = {}
 
 
-def check_battery():
-    try:
-        perc = int(robot.batterySensorGetValue())
-        perc /= 1000
-        perc = int(perc)
-    except ValueError:
-        perc = 0
-    if perc >= 47: return True
-    else: return False
+def check_battery(battery,posit):
+    global battery_for_current ,state_history, current_order
+    tempo_percorso=0
+    recharge_battery_to_reach_quote= 10
+    reach_quote_to_lock_box= 30
+    land_on_delivery_to_go_back_home= 30
+    ostacoli= 50 # stiamo 50 secondi a schivare ostacoli in media durante un tragitto
+    if current_order[2] != -1:
+        distanza= euc_dist([posit.x, posit.y], [current_order[4], current_order[5]])*2 #ogni metro impiego mediamente 1,7 s
+    else:
+        distanza_pacco= euc_dist([posit.x,posit.y], [current_order[6],current_order[7]]) # dalla base alla posizione del pacco
+        distanza_consegna = euc_dist([current_order[6],current_order[7]], [current_order[4], current_order[5]])# dalla posizione del pacco alla consegna
+        distanza_ritorno = euc_dist([posit.x, posit.y], [current_order[4], current_order[5]])# dalla consegna alla base
+        distanza = distanza_pacco+distanza_consegna+distanza_ritorno
+    
+    if old_state=="go_back_home":
+        tempo_percorso = distanza*1.7+reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+    else:
+        tempo_percorso = distanza*1.7 + recharge_battery_to_reach_quote+reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+    battery_for_current_temp = tempo_percorso*50  #ogni secondo il robot perde 50J di batteria
+    battery_for_current= battery_for_current_temp + ((battery_for_current_temp/100)*20) #20% in più per sicurezza
+    if battery>=battery_for_current:
+        return True
+    else:
+        return False 
+
 
 def getPickupPoint():
     global target_posit, current_order
@@ -81,9 +99,11 @@ def dPrint(string):
     print(f"Drone ({name} [{perc}%])> {string}")
 
 def chgState(newState, verbose=True):
-    global state, state_history
+    global state, state_history, old_state
     state = newState
     if verbose: dPrint(f"State changed: {newState}")
+    if len(state_history)>0:
+        old_state= state_history[-1]
     state_history.append(state)
 
 def chgValue(value, newValue):
@@ -352,18 +372,28 @@ while robot.step(timestep) != -1:
 
     if state == "check_new_orders":
         if len(orders) != 0:
-            current_order = orders.pop()
+            current_order = orders.pop(0)
             dPrint(current_order)
-            if check_battery():
+            battery= robot.batterySensorGetValue()
+            if check_battery(battery,posit):
                 target_posit = chgTarget(target_posit,getPickupPoint())
-                state_history = []
+                state_history = ["check_new_orders"]
+                dPrint(str(battery_for_current))
+                dPrint("Ho batteria a sufficienza")
                 chgState("reach_quota")
             else:
                 target_posit = chgTarget(target_posit, getBaseCoords())
-                if state_history[-2]== "go_back_home":
+                if old_state== "go_back_home":
+                    state_history = ["check_new_orders"]
                     chgState("stabilize_before_land_on_base")
                 else:
+                    state_history = ["check_new_orders"]
                     chgState("recharge_battery")
+        else:
+            target_posit = chgTarget(target_posit, getBaseCoords())
+            if old_state== "go_back_home":
+                state_history = ["check_new_orders"]
+                chgState("stabilize_before_land_on_base")
 
     elif state == "goto_recharge_battery":
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x,target_posit.y, bearing)
@@ -375,11 +405,12 @@ while robot.step(timestep) != -1:
                 chgState("recharge_battery")
 
     elif state == "recharge_battery":
+        dPrint("Mi sto ricaricando")
         powerGain = 0
-        if check_battery():
+        battery= robot.batterySensorGetValue()
+        if battery>=99900:
             target_posit = chgTarget(target_posit,getPickupPoint())
-            state_history=[]
-            chgState("reach_quota")
+            chgState("check_new_orders")
 
     elif state == "reach_quota":
         powerGain = 1
