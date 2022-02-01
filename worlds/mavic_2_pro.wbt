@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.3296700036289484 -0.9284176647595495 -0.17134272225488345 1.0206916231230887
-  position -2.6682857927547405 1.2700966552137727 3.9934297576345332
+  orientation -0.31942064366510603 -0.8957115813541665 -0.3093076388138319 1.648681786878276
+  position -2.9488143373591305 2.0484385428082024 0.5734350646776445
   near 0.2
   follow "Mavic 2 PRO_1"
   followSmoothness 0.2
@@ -363,6 +363,18 @@ Windmill {
 DEF base_drone SquareManhole {
   translation 10 -0.03 10
   name "base_drone(2)"
+}
+DEF base_drone SquareManhole {
+  translation -15 -0.03 35
+  name "base_drone(4)"
+}
+DEF base_drone SquareManhole {
+  translation 25 -0.03 -6
+  name "base_drone(1)"
+}
+DEF base_drone SquareManhole {
+  translation -16 -0.03 -11
+  name "base_drone(3)"
 }
 DEF Drone_Base Transform {
   translation 0 -0.03 0

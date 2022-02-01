@@ -10,8 +10,14 @@ import time
 import math
 import operator
 
+BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.32], 2: [-1.76, 3.18, 0.32]}
+ROTATION_ANGLE_FOR_LOCK = 0
+MAX_YAW = 1
+MAX_PITCH = 10
 
 robot = Robot()
+timestep = int(robot.getBasicTimeStep())
+robot.batterySensorEnable(timestep)
 state_history=[]
 state=""
 old_state=""
@@ -19,13 +25,6 @@ orders = []
 box_locked = False
 anomaly_detected = False
 anomaly = False
-
-BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.32], 2: [-1.76, 3.18, 0.32]}
-ROTATION_ANGLE_FOR_LOCK = 0
-MAX_YAW = 1
-MAX_PITCH = 10
-
-timestep = int(robot.getBasicTimeStep())
 receiver = robot.getDevice("receiver")
 emitter = robot.getDevice("emitter")
 receiver.enable(timestep)
@@ -292,7 +291,6 @@ drone_distance_sensor_left = robot.getDevice("left sensor")
 drone_distance_sensor_left.enable(timestep)
 drone_distance_sensor_lock= robot.getDevice("box sensor")
 drone_distance_sensor_lock.enable(timestep)
-robot.batterySensorEnable(timestep)
 drone_camera = robot.getDevice("camera")
 drone_camera.enable(timestep)
 drone_imu = robot.getDevice("inertial unit")
