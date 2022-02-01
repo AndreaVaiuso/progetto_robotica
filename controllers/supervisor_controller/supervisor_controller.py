@@ -44,9 +44,6 @@ def baseIsFree(base):
     return True
 
 def createOrder(orderID,weight,position,base):
-    print("ID",int(orderID))
-    print("weight",weight)
-    print("pos",position)
     root_node = supervisor.getRoot()
     children_field = root_node.getField("children")
     message = struct.pack("ciidddddd",b"N",int(orderID),int(base),float(weight),float(position[0]),float(position[1]),0.0,0.0,0.0)
@@ -74,6 +71,7 @@ ct = 0
 while supervisor.step(timestep) != -1:
     if state == "create_order":
         dest = random.randint(0,(len(DESTINATIONS_COORDS) - 1))
+        print(dest)
         state = "wait_for_free_base"
     if state == "wait_for_free_base":
         base = random.randint(1,(len(BASE_COORDS) - 1))
@@ -83,4 +81,4 @@ while supervisor.step(timestep) != -1:
             if baseIsFree(base):
                 createOrder(counter_id,0.5,DESTINATIONS_COORDS[dest],base)
                 counter_id +=1
-                state == "create_order"
+                state = "create_order"
