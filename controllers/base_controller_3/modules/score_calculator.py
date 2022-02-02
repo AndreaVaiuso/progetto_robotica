@@ -1,39 +1,58 @@
-import math
+from utils import euc_dist
 
+s_x=0 #cordinate della base di ciascun robot
+s_y=0
 
-ricarica_a_quota = 10
-prendere_ordine= 20
-lasciare_ordine= 25
-vel_media= 1.7 # per fare un metro impiega 1.7 sec
-ricarica = 1 #in un secondo si ricarica di 100J
-scarica = 2 #in due secondi si scarica di 200J
-evita_ostacoli= 50 # non posso sapere se nel tragitto di consegna incontretà ostacoli e perderà tempo, devo aggiungere un punteggio che tiene conto in media del tempo che si può perdere
-X_smistaggio=0 #dove si trova la base
-Y_smistaggio=0 
-def score_calculator(orders, current_order, pending_order, drone_pos, state, state_history, battery, recharge):
-    if "drone_anomaly_detected" in state_history :
-        score= 999999 # corrisponde ad un valore che non sarà mai superato, il drone non deve prendere più ordini in carico
-        return score
-    #pensare alle casistiche: prima mi occupo del current_order, poi ciclo su orders infine faccio le considerazioni su pending_order
+def sccal(orders,pending,current,state_history,posit):
+    orders_new = orders.copy()
+    orders_new.append(pending)
+    tempo_percorso=0
+    recharge_battery_to_reach_quote= 10
+    reach_quote_to_lock_box= 30
+    land_on_delivery_to_go_back_home= 30
+    ostacoli= 50 # stiamo 50 secondi a schivare ostacoli in media durante un tragitto
+    while(len(orders_new)>0):
+        order= orders_new.pop(0)
+        if order[2] != -1:
+            distanza= euc_dist([s_x, s_y], [order[4], order[5]])*2 #ogni metro impiego mediamente 1,7 s
+        else:
+            distanza_pacco= euc_dist([s_x,s_y], [order[6],order[7]]) # dalla base alla posizione del pacco
+            distanza_consegna = euc_dist([order[6],order[7]], [order[4], order[5]])# dalla posizione del pacco alla consegna
+            distanza_ritorno = euc_dist([s_x, s_y], [order[4], order[5]])# dalla consegna alla base
+            distanza = distanza_pacco+distanza_consegna+distanza_ritorno
+        tempo_percorso = tempo_percorso + distanza*1.7 + recharge_battery_to_reach_quote+reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+    
+    if current==[]:
+        return tempo_percorso
     else:
-        x_order=pending_order[4]
-        y_order=pending_order[5]
-        if current_order == [] and orders == [] and (state=="check_new_orders" or state=="check_battery" or state=="recharge_battery"): #caso base, qua considero solo pending_order, ricorda che tutti gli ordini nsono stati pending_order a loro volta e hanno influito cosi nel punteggio
-            distanza_da_percorrere= math.sqrt(math.pow((drone_pos[0] - x_order), 2) + math.pow((drone_pos[1] - y_order), 2))*2
-            t_p= distanza_da_percorrere*vel_media
-            score = t_p+ricarica_a_quota+prendere_ordine+lasciare_ordine+evita_ostacoli
-            return score
-        elif current_order != [] and (state=="recharge_battery" or state=="check_battery"): #non può essere nello stato check_new_orders e avere current_order diverso dalla lista vuota
-            t_r=(recharge-battery)/100 #secondi che occorrono per ricaricarsi
-            distanza_da_percorrere_1= math.sqrt(math.pow((drone_pos[0] - current_order[4]), 2) + math.pow((drone_pos[1] - current_order[5]), 2))*2
-            t_p_1= distanza_da_percorrere_1*vel_media
-            pass #ricarica_a_quota, prendere_ordine, lasciare_ordine, vel_media; evita_ostacoli
-        elif current_order != [] and state=="reach_quota":
-            pass #ricarica_a_quota, prendere_ordine, lasciare_ordine, vel_media; evita_ostacoli
-        elif current_order != [] and (state=="go_near_box" or state=="stabilize_on_position" or state=="lock_box"):
-            pass #prendere_ordine, lasciare_ordine, vel_media; evita_ostacoli
-        elif current_order != [] and ("reach_nav_altitude" in state_history):
-            pass #lasciare_ordine, vel_media; evita_ostacoli
-        elif current_order == [] and ("go_back_home" in state_history):  #se current_order è vuoto: 1) sto tornando alla base perche l'ho appena consegnato;  2)non ho ordini da esguire 
-            pass #vel_media; evita_ostacoli
-        return score
+        if "go_back_home" in state_history:
+            distanza_ritorno = euc_dist([s_x, s_y], [posit.x, posit.y])# da dove si trova il robot  alla base
+            tempo_percorso= tempo_percorso+distanza_ritorno*1.7+(ostacoli/2)
+        elif "land_on_delivery_station" in state_history:
+            distanza_ritorno = euc_dist([s_x, s_y], [posit.x, posit.y])# da dove si trova il robot  alla base
+            tempo_percorso= tempo_percorso+distanza_ritorno*1.7+land_on_delivery_to_go_back_home+(ostacoli/2)
+        elif "reach_destination" in state_history:
+            distanza_consegna = euc_dist([posit.x,posit.y], [current[4], current[5]])# dalla posizione del drone alla consegna
+            distanza_ritorno = euc_dist([s_x, s_y], [current[4], current[5]])# dalla consegna alla base
+            tempo_percorso= tempo_percorso+distanza_consegna*1.7+land_on_delivery_to_go_back_home+distanza_ritorno*1.7+(ostacoli/1.5)
+        elif "reach_quote" in state_history:
+            if current[2]!=-1:
+                distanza= euc_dist([s_x, s_y], [current[4], current[5]])*2 #ogni metro impiego mediamente 1,7 s
+                tempo_percorso = tempo_percorso + distanza*1.7 +reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+            else:
+                distanza_pacco= euc_dist([s_x,s_y], [current[6],current[7]]) # dalla base alla posizione del pacco
+                distanza_consegna = euc_dist([current[6],current[7]], [current[4], current[5]])# dalla posizione del pacco alla consegna
+                distanza_ritorno = euc_dist([s_x, s_y], [current[4], current[5]])# dalla consegna alla base
+                distanza = distanza_pacco+distanza_consegna+distanza_ritorno
+                tempo_percorso = tempo_percorso + distanza*1.7 +reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+        elif "check_new_orders" in state_history:
+            if current[2]!=-1:
+                distanza= euc_dist([s_x, s_y], [current[4], current[5]])*2 #ogni metro impiego mediamente 1,7 s
+                tempo_percorso = tempo_percorso + distanza*1.7+recharge_battery_to_reach_quote+reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+            else:
+                distanza_pacco= euc_dist([s_x,s_y], [current[6],current[7]]) # dalla base alla posizione del pacco
+                distanza_consegna = euc_dist([current[6],current[7]], [current[4], current[5]])# dalla posizione del pacco alla consegna
+                distanza_ritorno = euc_dist([s_x, s_y], [current[4], current[5]])# dalla consegna alla base
+                distanza = distanza_pacco+distanza_consegna+distanza_ritorno
+                tempo_percorso = tempo_percorso + distanza*1.7+recharge_battery_to_reach_quote+reach_quote_to_lock_box+land_on_delivery_to_go_back_home+ostacoli
+        return tempo_percorso

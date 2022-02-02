@@ -18,8 +18,8 @@ MAX_PITCH = 10
 robot = Robot()
 timestep = int(robot.getBasicTimeStep())
 robot.batterySensorEnable(timestep)
-state_history=[]
-state=""
+state_history=["check_new_orders"]
+state="check_new_orders"
 old_state=""
 orders = []
 box_locked = False
@@ -39,7 +39,7 @@ score_dict = {}
 
 
 def check_battery(battery,posit):
-    global battery_for_current ,state_history, current_order
+    global battery_for_current , current_order, old_state
     tempo_percorso=0
     recharge_battery_to_reach_quote= 10
     reach_quote_to_lock_box= 30
@@ -229,6 +229,8 @@ def abort_all_pending_orders():
 
 def send_score(dataList):
     order_ID = dataList[1]
+    #global orders,pending_order,current_order,state_history,posit
+    #score= sccal(orders, pending_order, current_order, state_history, posit)
     score = score_calculator(dataList)
     message = struct.pack("ciidddddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
@@ -335,7 +337,7 @@ stab_stack = StabilizationStack(20)
 counter = 0
 powerGain = 0
 
-chgState("check_new_orders")
+#chgState("check_new_orders") gia inseriti in state e state_history di default, vedi su
 
 while robot.step(timestep) != -1:
     pitch_disturbance = 0
@@ -371,6 +373,7 @@ while robot.step(timestep) != -1:
     if state == "check_new_orders":
         if len(orders) != 0:
             current_order = orders.pop(0)
+            dPrint("Ho un nuovo ordine da consegnare:")
             dPrint(current_order)
             battery= robot.batterySensorGetValue()
             if check_battery(battery,posit):
@@ -380,6 +383,7 @@ while robot.step(timestep) != -1:
                 dPrint("Ho batteria a sufficienza")
                 chgState("reach_quota")
             else:
+                dPrint("Non ho batteria a sufficienza")
                 target_posit = chgTarget(target_posit, getBaseCoords())
                 if old_state== "go_back_home":
                     state_history = ["check_new_orders"]
@@ -388,6 +392,7 @@ while robot.step(timestep) != -1:
                     state_history = ["check_new_orders"]
                     chgState("recharge_battery")
         else:
+            dPrint("Non ho ordini da consegnare")
             target_posit = chgTarget(target_posit, getBaseCoords())
             if old_state== "go_back_home":
                 state_history = ["check_new_orders"]
@@ -403,7 +408,6 @@ while robot.step(timestep) != -1:
                 chgState("recharge_battery")
 
     elif state == "recharge_battery":
-        dPrint("Mi sto ricaricando")
         powerGain = 0
         battery= robot.batterySensorGetValue()
         if battery>=99900:
