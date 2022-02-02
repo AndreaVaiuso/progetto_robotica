@@ -71,7 +71,6 @@ ct = 0
 while supervisor.step(timestep) != -1:
     if state == "create_order":
         dest = random.randint(0,(len(DESTINATIONS_COORDS) - 1))
-        print(dest)
         state = "wait_for_free_base"
     if state == "wait_for_free_base":
         base = random.randint(1,(len(BASE_COORDS) - 1))
