@@ -1,0 +1,27 @@
+#VRML_OBJ R2021b utf8
+DEF base_1 Solid {
+  translation 3.18 0.04019 2.17
+  rotation -1.4710035497787672e-18 -0.9999999999999999 -1.1535828402875905e-18 1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/base1.png"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.1 1
+      }
+    }
+  ]
+  contactMaterial "base"
+  boundingObject Box {
+    size 1 0.1 1
+  }
+  physics Physics {
+  }
+}

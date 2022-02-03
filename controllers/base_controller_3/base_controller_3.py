@@ -401,7 +401,6 @@ while robot.step(timestep) != -1:
         powerGain = 0
         battery= robot.batterySensorGetValue()
         if battery >= 99900:
-            target_posit = chgTarget(target_posit,getPickupPoint())
             chgState("check_new_orders")
 
     elif state == "reach_quota":

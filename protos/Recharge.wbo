@@ -1,0 +1,25 @@
+#VRML_OBJ R2021b utf8
+DEF Drone_Base Transform {
+  translation 0 -0.03 0
+  children [
+    Solid {
+      translation 0 0.05 0.0100002
+      rotation 1 0 0 4.6928e-06
+      children [
+        Charger {
+          name "charger 1"
+          battery [
+            499999.2, 500000, 5000
+          ]
+          radius 0.45
+        }
+      ]
+      name "Charger_station"
+      recognitionColors [
+        0 0 0
+      ]
+    }
+    SquareManhole {
+    }
+  ]
+}
