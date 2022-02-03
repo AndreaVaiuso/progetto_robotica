@@ -1,9 +1,8 @@
 from utils import euc_dist
 
-s_x=0 #cordinate della base di ciascun robot
-s_y=0
-
-def sccal(orders,pending,current,state_history,posit):
+def sccal(orders,pending,current,state_history,posit,base_coords):
+    s_x = base_coords[0]
+    s_y = base_coords[1]
     orders_new = orders.copy()
     orders_new.append(pending)
     tempo_percorso=0
@@ -11,8 +10,8 @@ def sccal(orders,pending,current,state_history,posit):
     reach_quote_to_lock_box= 30
     land_on_delivery_to_go_back_home= 30
     ostacoli= 50 # stiamo 50 secondi a schivare ostacoli in media durante un tragitto
-    while(len(orders_new)>0):
-        order= orders_new.pop(0)
+    while(len(orders_new) > 0):
+        order = orders_new.pop(0)
         if order[2] != -1:
             distanza= euc_dist([s_x, s_y], [order[4], order[5]])*2 #ogni metro impiego mediamente 1,7 s
         else:

@@ -2,7 +2,7 @@
 from controller import Robot, Receiver, Emitter
 import modules.avoid_obstacles as avob
 import modules.score_calculator as sccal
-from modules.utils import StabilizationStack, Coordinate, euc_dist, getID
+from utils import StabilizationStack, Coordinate, euc_dist, getID
 import threading
 import random
 import struct
@@ -16,6 +16,7 @@ MAX_YAW = 1
 MAX_PITCH = 10
 
 robot = Robot()
+posit = Coordinate(0, 0)
 timestep = int(robot.getBasicTimeStep())
 robot.batterySensorEnable(timestep)
 state_history=["check_new_orders"]
@@ -33,13 +34,12 @@ drone_ID = getID(name)
 receiver.setChannel(drone_ID)
 current_order = []
 battery_for_current= "" # batteria che mi serve per eseguire l'ordine corrente
-pending_order = []
 target_history = []
 score_dict = {}
 
-
-def check_battery(battery,posit):
-    global battery_for_current , current_order, old_state
+def check_battery():
+    global battery_for_current , current_order, old_state, posit
+    battery = robot.batterySensorGetValue()
     tempo_percorso=0
     recharge_battery_to_reach_quote= 10
     reach_quote_to_lock_box= 30
@@ -63,7 +63,6 @@ def check_battery(battery,posit):
         return True
     else:
         return False 
-
 
 def getPickupPoint():
     global target_posit, current_order
@@ -95,7 +94,9 @@ def dPrint(string):
         perc = str(int(perc))
     except ValueError:
         perc = "--"
-    print(f"Drone ({name} [{perc}%])> {string}")
+    if current_order != []: c = 1 
+    else: c = 0
+    print(f"Drone ({name} [{perc}%][{c+len(orders)}])> {string}")
 
 def chgState(newState, verbose=True):
     global state, state_history, old_state
@@ -206,12 +207,6 @@ def abort_current_order():
     abort_order(current_order,current=True)
     current_order = []
 
-def score_calculator(dataList):
-    global posit
-    score = euc_dist(posit.getVec2d(), [dataList[4], dataList[5]])
-    # Prima di lavorare con la batteria dobbiamo sapere quanta batteria ci vuole per percorrere tot metri
-    return score
-
 def abort_order(order,current=False):
     global posit, altitude
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
@@ -228,10 +223,10 @@ def abort_all_pending_orders():
         abort_order(orders.pop())
 
 def send_score(dataList):
+    global orders, current_order, state_history, posit
     order_ID = dataList[1]
-    #global orders,pending_order,current_order,state_history,posit
-    #score= sccal(orders, pending_order, current_order, state_history, posit)
-    score = score_calculator(dataList)
+    score = sccal.sccal(orders, dataList, current_order, state_history, posit, getBaseCoords())
+    dPrint("Score sent: " + str(score))
     message = struct.pack("ciidddddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
     while emitter.send(message) != 1:
@@ -329,7 +324,6 @@ emergency_altitude_land = 0
 roll_disturbance = 0
 target_altitude = 0
 target_angle = 0
-posit = Coordinate(0, 0)
 target_posit = Coordinate(0, 0)
 precision_counter = 0
 bearing = 0
@@ -371,19 +365,16 @@ while robot.step(timestep) != -1:
     if anomaly_detected: chgState("drone_anomaly_detected")
 
     if state == "check_new_orders":
-        if len(orders) != 0:
-            current_order = orders.pop(0)
-            dPrint("Ho un nuovo ordine da consegnare:")
-            dPrint(current_order)
-            battery= robot.batterySensorGetValue()
-            if check_battery(battery,posit):
+        if current_order != []: c = 1 
+        else: c = 0
+        if (len(orders) + c) != 0:
+            if current_order == []:
+                current_order = orders.pop(0)
+            if check_battery():
                 target_posit = chgTarget(target_posit,getPickupPoint())
                 state_history = ["check_new_orders"]
-                dPrint(str(battery_for_current))
-                dPrint("Ho batteria a sufficienza")
                 chgState("reach_quota")
             else:
-                dPrint("Non ho batteria a sufficienza")
                 target_posit = chgTarget(target_posit, getBaseCoords())
                 if old_state== "go_back_home":
                     state_history = ["check_new_orders"]
@@ -392,7 +383,6 @@ while robot.step(timestep) != -1:
                     state_history = ["check_new_orders"]
                     chgState("recharge_battery")
         else:
-            dPrint("Non ho ordini da consegnare")
             target_posit = chgTarget(target_posit, getBaseCoords())
             if old_state== "go_back_home":
                 state_history = ["check_new_orders"]
@@ -410,7 +400,7 @@ while robot.step(timestep) != -1:
     elif state == "recharge_battery":
         powerGain = 0
         battery= robot.batterySensorGetValue()
-        if battery>=99900:
+        if battery >= 99900:
             target_posit = chgTarget(target_posit,getPickupPoint())
             chgState("check_new_orders")
 
