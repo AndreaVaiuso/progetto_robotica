@@ -405,6 +405,7 @@ while robot.step(timestep) != -1:
             chgState("check_new_orders")
 
     elif state == "reach_quota":
+        # avoid obstacle
         powerGain = 1
         target_altitude = 1
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
@@ -416,6 +417,7 @@ while robot.step(timestep) != -1:
             chgState("go_near_box")
 
     elif state == "go_near_box":
+        # avoid obstacle
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
@@ -444,6 +446,7 @@ while robot.step(timestep) != -1:
                 chgState("reach_nav_altitude")
 
     elif state == "reach_nav_altitude":
+        # avoid obstacle
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, getPickupPoint()[0], getPickupPoint()[1], bearing)
         counter += 1
         if counter > 100:
@@ -455,15 +458,12 @@ while robot.step(timestep) != -1:
                 chgState("reach_destination")
 
     elif state == "reach_destination":
+        # avoid obstacle
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
         if euc_dist(posit.getVec2d(), target_posit.getVec2d()) < 2:
             chgState("stabilize_on_position")
-
-    elif state == "avoid_obstacles":
-        # code
-        pass
 
     elif state == "land_on_delivery_station":
         target_altitude = 0
@@ -492,6 +492,7 @@ while robot.step(timestep) != -1:
                 chgState("go_back_home")
                 
     elif state == "go_back_home":
+        # avoid obstacle
         target_altitude = getNavigationAltitude()
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
@@ -540,6 +541,7 @@ while robot.step(timestep) != -1:
     else:
         dPrint("ERROR, UNRECOGNIZED STATE:", state)
         break
+    
     roll_input = k_roll_p * clamp(roll, -1.0, 1.0) + roll_acceleration + roll_disturbance
     pitch_input = k_pitch_p * clamp(pitch, -1.0, 1.0) - pitch_acceleration + pitch_disturbance
     yaw_input = yaw_disturbance
