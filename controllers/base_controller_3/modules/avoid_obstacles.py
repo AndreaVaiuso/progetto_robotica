@@ -1,42 +1,21 @@
 # Questo modulo serve per implementare i comportamenti in caso di ostacoli del robot
+import math as m
 
 
-def avoid_obstacles_left(value):
-    if value is None or value >= 1.5:
+def function(x):
+    return m.log(m.sqrt(x) + 1, 13) * 1.065
+
+
+def limit(velocity, lim):
+    return function(velocity) * lim
+
+
+def avoid_obstacles_sensor(value, velocity):
+    if value is None or value >= limit(velocity, 2):
         return False
     else:
         return True
 
 
-def avoid_obstacles_right(value):
-    if value is None or value >= 1.5:
-        return False
-    else:
-        return True
-
-
-def avoid_obstacles_upper(value):
-    if value is None or value >= 1.5:
-        return False
-    else:
-        return True
-
-
-def avoid_obstacles_lower(value):
-    if value is None or value >= 1.5:
-        return False
-    else:
-        return True
-
-
-def avoid_obstacles_front(value):
-    if value is None or value >= 1.5:
-        return False
-    else:
-        return True
-
-
-def avoid_obstacles_full(left_sensor, right_sensor, upper_sensor, lower_sensor, front_sensor):
-    return avoid_obstacles_left(left_sensor) or avoid_obstacles_right(right_sensor) or avoid_obstacles_front(
-        front_sensor) or avoid_obstacles_front(front_sensor) or avoid_obstacles_lower(
-        lower_sensor) or avoid_obstacles_upper(upper_sensor)
+def avoid_obstacles_full(upper_sensor, front_sensor, velocity):
+    return avoid_obstacles_sensor(front_sensor, velocity[0]) or avoid_obstacles_sensor(upper_sensor, velocity[1])

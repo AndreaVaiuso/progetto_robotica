@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.31942064366510603 -0.8957115813541665 -0.3093076388138319 1.648681786878276
-  position -2.9488143373591305 2.0484385428082024 0.5734350646776445
+  orientation -0.07422332739073392 -0.9914850046645344 -0.10699711770144217 1.9366271058105993
+  position -9.906285554823807 5.005623843361853 -0.8552844603590604
   near 0.2
   follow "Mavic 2 PRO_1"
   followSmoothness 0.2
@@ -29,6 +29,24 @@ Floor {
   tileSize 6 6
   appearance SandyGround {
   }
+}
+Solid {
+  translation 7.04007 0.66 6.66993
+  rotation 0 1 0 0.785398
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.333333 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF obstacle Box {
+        size 5 5 1
+      }
+    }
+  ]
+  name "obstacle"
+  boundingObject USE obstacle
 }
 Mavic2Pro {
   translation -0.004785375123381785 0.08570872836460687 0.0200000038442881
@@ -176,7 +194,7 @@ Mavic2Pro {
   name "Mavic 2 PRO_1"
   controller "base_controller_3"
   battery [
-    8000, 100000, 100
+    99000, 100000, 100
   ]
   cpuConsumption 1
   bodySlot [
