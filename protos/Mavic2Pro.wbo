@@ -1,0 +1,141 @@
+#VRML_OBJ R2021b utf8
+Mavic2Pro {
+  translation -0.004785375123381785 0.08570872836460687 0.0200000038442881
+  rotation -0.998785242864462 -0.0348428006901073 0.034842759308746384 1.5720107045141964
+  name "Mavic 2 PRO_0"
+  controller "base_controller_3"
+  battery [
+    50000.79187921132, 100000, 100
+  ]
+  cpuConsumption 1
+  bodySlot [
+    DistanceSensor {
+      translation -0.053814 0 -0.041034
+      rotation 0 1 0 1.5708
+      name "box sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      aperture 0.4
+    }
+    Emitter {
+      model "A"
+      channel -1
+    }
+    Receiver {
+      model "A"
+    }
+    Connector {
+      translation -0.07 0 -0.15
+      rotation 0 1 0 -3.1
+      name "magnetic"
+      model "a"
+      type "active"
+      autoLock TRUE
+      distanceTolerance 0.3
+      axisTolerance 1.5
+      rotationTolerance 1.5
+      snap FALSE
+    }
+    DistanceSensor {
+      translation 0.08 0 0.01
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.03 0 0.02
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "upper sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.233814 0 -0.0110337
+      rotation 0 1 0 1.5708
+      name "lower sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      aperture 0.4
+    }
+    DistanceSensor {
+      translation -0.0200002 -0.04 -0.02
+      rotation 0 0 -1 1.5708
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "right sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+    }
+    DistanceSensor {
+      translation -0.0200002 0.04 -0.02
+      rotation 0.707108281185553 0.70710528118436 9.236343672883591e-09 -3.1415853071795863
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0 0 1
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "left sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+    }
+  ]
+}
