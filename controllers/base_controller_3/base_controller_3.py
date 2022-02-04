@@ -34,11 +34,12 @@ drone_ID = getID(name)
 receiver.setChannel(drone_ID)
 current_order = []
 battery_for_current = ""  # batteria che mi serve per eseguire l'ordine corrente
+last_score= 0
 target_history = []
 score_dict = {}
 
 
-def check_battery():
+def checkBattery():
     global battery_for_current, current_order, old_state, posit
     battery = robot.batterySensorGetValue()
     tempo_percorso = 0
@@ -68,6 +69,11 @@ def check_battery():
         return True
     else:
         return False
+
+def checkAllBattery():
+    battery_for_all= battery_for_current+last_score*50
+    return  battery_for_all
+
 
 
 def getPickupPoint():
@@ -255,9 +261,10 @@ def abort_all_pending_orders():
 
 
 def send_score(dataList):
-    global orders, current_order, state_history, posit
+    global orders, current_order, state_history, posit, last_score
     order_ID = dataList[1]
     score = sccal.sccal(orders, dataList, current_order, state_history, posit, getBaseCoords())
+    last_score=score
     dPrint("Score sent: " + str(score))
     message = struct.pack("ciidddddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
@@ -407,7 +414,7 @@ while robot.step(timestep) != -1:
         if (len(orders) + c) != 0:
             if current_order == []:
                 current_order = orders.pop(0)
-            if check_battery():
+            if checkBattery():
                 target_posit = chgTarget(target_posit, getPickupPoint())
                 state_history = ["check_new_orders"]
                 chgState("reach_quota")
@@ -438,7 +445,7 @@ while robot.step(timestep) != -1:
     elif state == "recharge_battery":
         powerGain = 0
         battery = robot.batterySensorGetValue()
-        if battery >= 99900:
+        if checkAllBattery()<= battery or battery >= 99900:
             chgState("check_new_orders")
 
     elif state == "reach_quota":
