@@ -595,7 +595,7 @@ DEF Obstacle Solid {
 }
 DEF Obstacle Solid {
   translation -11.51 7.56 -9.0744
-  rotation 0 1 0 0.523599
+  rotation 0 1 0 0.785398
   children [
     Shape {
       appearance PBRAppearance {

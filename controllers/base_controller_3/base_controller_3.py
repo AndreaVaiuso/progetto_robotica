@@ -465,7 +465,8 @@ while robot.step(timestep) != -1:
 
     elif state == "go_near_box":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, [drone_velocity, altitude_velocity]):
+        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+                                     [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
@@ -498,7 +499,8 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_nav_altitude":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, [drone_velocity, altitude_velocity]):
+        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+                                     [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, getPickupPoint()[0],
                                                                             getPickupPoint()[1], bearing)
@@ -513,7 +515,8 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_destination":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, [drone_velocity, altitude_velocity]):
+        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+                                     [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
@@ -552,13 +555,9 @@ while robot.step(timestep) != -1:
 
     elif state == "go_back_home":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, [drone_velocity, altitude_velocity]):
+        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+                                     [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
-        if lower_sensor_value < 2:
-            target_altitude = altitude + 0.1
-        else:
-            target_altitude = getNavigationAltitude()
-
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
@@ -606,27 +605,34 @@ while robot.step(timestep) != -1:
             abort_all_pending_orders()
 
     elif state == 'avoid_obstacles':
-        if not avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, [drone_velocity, altitude_velocity]):
+        if not avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+                                         [drone_velocity, altitude_velocity]):
             target_altitude = altitude + 1
             chgState(state_history[-2])
         else:
             if avob.avoid_obstacles_sensor(upper_sensor_value, altitude_velocity):
                 target_altitude = altitude - 0.1
                 roll_disturbance = 0.1
-                # print('upper_obstacles : ', upper_sensor_value)
+                string = 'upper sensor value : ' + str(upper_sensor_value)
+                dPrint(string)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
-                roll_disturbance = -0.2
-                # print('left_obstacles', left_sensor_value)
+                pitch_disturbance = 0
+                roll_disturbance = -0.1
+                string = 'left sensor value : ' + str(left_sensor_value)
+                dPrint(string)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
-                roll_disturbance = 0.2
-                # print('right_obstacles : ', right_sensor_value)
+                pitch_disturbance = 0
+                roll_disturbance = 0.1
+                string = 'right sensor value : ' + str(right_sensor_value)
+                dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
-                pitch_disturbance = -0.6
+                pitch_disturbance = -0.5
                 target_altitude += altitude + count_altitude
-                # print('front_obstacles :', front_sensor_value)
+                string = 'front sensor value : ' + str(front_sensor_value)
+                dPrint(string)
 
     else:
         dPrint("ERROR, UNRECOGNIZED STATE:", state)
