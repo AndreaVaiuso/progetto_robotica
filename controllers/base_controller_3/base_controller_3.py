@@ -31,7 +31,7 @@ emitter = robot.getDevice("emitter")
 receiver.enable(timestep)
 name = robot.getName()
 drone_ID = getID(name)
-receiver.setChannel(drone_ID)
+receiver.setChannel(int(drone_ID)+1)
 current_order = []
 battery_for_current = ""  # batteria che mi serve per eseguire l'ordine corrente
 last_score= 0
@@ -73,8 +73,6 @@ def checkBattery():
 def checkAllBattery():
     battery_for_all= battery_for_current+last_score*50
     return  battery_for_all
-
-
 
 def getPickupPoint():
     global target_posit, current_order
@@ -311,6 +309,12 @@ def update_orders():
                 score_dict[dataList[1], dataList[2]] = [dataList[2], dataList[3]]
             receiver.nextPacket()
 
+def completeDelivery(orderID):
+    message = struct.pack("ciidddddd", b"C", int(orderID) , 0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0 , 0.0)
+    emitter.setChannel(0)
+    while emitter.send(message) != 1:
+        dPrint(f'Waiting queue for sending message')
+
 
 th = threading.Thread(target=update_orders, args=())
 ag = threading.Thread(target=checkAnomaly, args=())
@@ -450,7 +454,6 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_quota":
         # avoid obstacle
-
         powerGain = 1
         target_altitude = 1
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
@@ -543,6 +546,7 @@ while robot.step(timestep) != -1:
                 counter = 0
                 chgState("emergency_shutdown")
             else:
+                completeDelivery(current_order[1])
                 current_order = []
                 chgState("go_back_home")
 
@@ -609,21 +613,20 @@ while robot.step(timestep) != -1:
             if avob.avoid_obstacles_sensor(upper_sensor_value, altitude_velocity):
                 target_altitude = altitude - 0.1
                 roll_disturbance = 0.1
-                print('upper_obstacles : ', upper_sensor_value)
+                # print('upper_obstacles : ', upper_sensor_value)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
                 roll_disturbance = -0.2
-                print('left_obstacles', left_sensor_value)
+                # print('left_obstacles', left_sensor_value)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
                 roll_disturbance = 0.2
-                print('right_obstacles : ', right_sensor_value)
+                # print('right_obstacles : ', right_sensor_value)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
                 pitch_disturbance = -0.6
                 target_altitude += altitude + count_altitude
-
-                print('front_obstacles :', front_sensor_value)
+                # print('front_obstacles :', front_sensor_value)
 
     else:
         dPrint("ERROR, UNRECOGNIZED STATE:", state)

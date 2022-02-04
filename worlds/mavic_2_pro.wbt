@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.5130856821368702 -0.6908203640844023 -0.5094215419006505 4.3573813947494395
-  position 5.540175240205983 22.994835806051697 0.8380807250606247
+  orientation 0.39462799704540474 0.8749314345948022 0.2806487639484869 4.918151336201098
+  position -9.363009494951568 11.44251166547983 4.992332395364469
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -318,6 +318,8 @@ Mavic2Pro {
 DEF SUPERVISOR Robot {
   translation 0 -3.35 -1.39
   children [
+    Receiver {
+    }
     Emitter {
       model "A"
       channel -1
