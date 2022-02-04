@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.5130856821368702 -0.6908203640844023 -0.5094215419006505 4.3573813947494395
-  position 5.540175240205983 22.994835806051697 0.8380807250606247
+  orientation 0.36331988508087054 -0.9148283122226714 -0.1763173850209943 5.307723863970173
+  position 9.9289803132149 16.123413816229547 6.303832088829226
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -593,7 +593,7 @@ DEF Obstacle Solid {
 }
 DEF Obstacle Solid {
   translation -11.51 7.56 -9.0744
-  rotation 0 1 0 0.523599
+  rotation 0 1 0 0.785398
   children [
     Shape {
       appearance PBRAppearance {

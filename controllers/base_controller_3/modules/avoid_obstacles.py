@@ -7,7 +7,11 @@ def function(x):
 
 
 def limit(velocity, lim):
-    return function(velocity) * lim
+    sensibility = function(velocity)
+    if sensibility * lim <= 1:
+        return 1
+    else:
+        return sensibility*lim
 
 
 def avoid_obstacles_sensor(value, velocity):
@@ -17,5 +21,6 @@ def avoid_obstacles_sensor(value, velocity):
         return True
 
 
-def avoid_obstacles_full(upper_sensor, front_sensor, velocity):
-    return avoid_obstacles_sensor(front_sensor, velocity[0]) or avoid_obstacles_sensor(upper_sensor, velocity[1])
+def avoid_obstacles_full(upper_sensor, front_sensor,left_sensor, right_sensor, velocity):
+    return avoid_obstacles_sensor(front_sensor, velocity[0]) or avoid_obstacles_sensor(upper_sensor, velocity[1]) or \
+           avoid_obstacles_sensor(left_sensor, velocity[0]) or avoid_obstacles_sensor(right_sensor, velocity[0])
