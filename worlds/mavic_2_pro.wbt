@@ -13,10 +13,10 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.07422332739073392 -0.9914850046645344 -0.10699711770144217 1.9366271058105993
-  position -9.906285554823807 5.005623843361853 -0.8552844603590604
+  orientation 0.5130856821368702 -0.6908203640844023 -0.5094215419006505 4.3573813947494395
+  position 5.540175240205983 22.994835806051697 0.8380807250606247
   near 0.2
-  follow "Mavic 2 PRO_1"
+  follow "Mavic 2 PRO_0"
   followSmoothness 0.2
 }
 TexturedBackground {
@@ -30,27 +30,9 @@ Floor {
   appearance SandyGround {
   }
 }
-Solid {
-  translation 7.04007 0.66 6.66993
-  rotation 0 1 0 0.785398
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 1 0.333333 0
-        roughness 1
-        metalness 0
-      }
-      geometry DEF obstacle Box {
-        size 5 5 1
-      }
-    }
-  ]
-  name "obstacle"
-  boundingObject USE obstacle
-}
 Mavic2Pro {
   translation -0.004785375123381785 0.08570872836460687 0.0200000038442881
-  rotation -0.998785242864462 -0.0348428006901073 0.034842759308746384 1.5720107045141964
+  rotation -0.9987852408827187 -0.03484280840323832 0.03484280840323832 1.57201
   name "Mavic 2 PRO_0"
   controller "base_controller_3"
   battery [
@@ -90,6 +72,7 @@ Mavic2Pro {
     }
     DistanceSensor {
       translation 0.08 0 0.01
+      rotation 1 0 0 1.5729603061004251
       children [
         Shape {
           appearance DEF App_s PBRAppearance {
@@ -107,6 +90,7 @@ Mavic2Pro {
       ]
       type "sonar"
       numberOfRays 5
+      aperture 2
     }
     DistanceSensor {
       translation -0.03 0 0.02
@@ -231,6 +215,7 @@ Mavic2Pro {
     }
     DistanceSensor {
       translation 0.08 0 0.01
+      rotation 1 0 0 1.57
       children [
         Shape {
           appearance DEF App_s PBRAppearance {
@@ -248,6 +233,7 @@ Mavic2Pro {
       ]
       type "sonar"
       numberOfRays 5
+      aperture 2
     }
     DistanceSensor {
       translation -0.03 0 0.02
@@ -415,6 +401,7 @@ DEF Drone_Base Transform {
       ]
     }
     SquareManhole {
+      rotation 1 0 0 4.692820414042842e-06
     }
   ]
 }
@@ -549,4 +536,76 @@ Forest {
   minHeight 6
   maxRadius 6
   minRadius 3
+}
+DEF Obstacle Solid {
+  translation 9.72 6.94 7.15576
+  rotation 0 1 0 0.523599
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.333333 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF Obstacle_geometry Box {
+        size 10 15 1
+      }
+    }
+  ]
+  name "obstacle"
+  boundingObject USE Obstacle_geometry
+}
+DEF Obstacle Solid {
+  translation 21.2642 7.5 -5.47924
+  rotation 0 1 0 1.5708
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.333333 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF Obstacle_geometry Box {
+        size 10 15 1
+      }
+    }
+  ]
+  name "obstacle(1)"
+  boundingObject USE Obstacle_geometry
+}
+DEF Obstacle Solid {
+  translation -15.6885 7.55 27.6204
+  rotation 0 1 0 4.07987e-06
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.333333 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF Obstacle_geometry Box {
+        size 10 15 1
+      }
+    }
+  ]
+  name "obstacle(2)"
+  boundingObject USE Obstacle_geometry
+}
+DEF Obstacle Solid {
+  translation -11.51 7.56 -9.0744
+  rotation 0 1 0 0.523599
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 1 0.333333 0
+        roughness 1
+        metalness 0
+      }
+      geometry DEF Obstacle_geometry Box {
+        size 10 15 1
+      }
+    }
+  ]
+  name "obstacle(3)"
+  boundingObject USE Obstacle_geometry
 }
