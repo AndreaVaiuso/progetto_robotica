@@ -1,4 +1,4 @@
-from utils import euc_dist
+from ..utils import euc_dist
 
 def sccal(orders,pending,current,state_history,posit,base_coords):
     s_x = base_coords[0]
