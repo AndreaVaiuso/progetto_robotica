@@ -4,7 +4,8 @@ def sccal(orders,pending,current,state_history,posit,base_coords):
     s_x = base_coords[0]
     s_y = base_coords[1]
     orders_new = orders.copy()
-    orders_new.append(pending)
+    if pending != []:
+        orders_new.append(pending)
     tempo_percorso=0
     recharge_battery_to_reach_quote= 10
     reach_quote_to_lock_box= 30

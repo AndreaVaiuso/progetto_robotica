@@ -34,7 +34,6 @@ drone_ID = getID(name)
 receiver.setChannel(int(drone_ID)+1)
 current_order = []
 battery_for_current = ""  # batteria che mi serve per eseguire l'ordine corrente
-last_score= 0
 target_history = []
 score_dict = {}
 
@@ -71,7 +70,9 @@ def checkBattery():
         return False
 
 def checkAllBattery():
-    battery_for_all= battery_for_current+last_score*50
+    global orders, state_history, posit
+    score_all = sccal.sccal(orders, [], [], state_history, posit, getBaseCoords())
+    battery_for_all= battery_for_current+ score_all*50
     return  battery_for_all
 
 def getPickupPoint():
@@ -259,10 +260,9 @@ def abort_all_pending_orders():
 
 
 def send_score(dataList):
-    global orders, current_order, state_history, posit, last_score
+    global orders, current_order, state_history, posit
     order_ID = dataList[1]
     score = sccal.sccal(orders, dataList, current_order, state_history, posit, getBaseCoords())
-    last_score=score
     dPrint("Score sent: " + str(score))
     message = struct.pack("ciidddddd", b"S", int(drone_ID), int(dataList[1]), float(score), 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
@@ -377,6 +377,7 @@ counter = 0
 powerGain = 0
 stabilization_position = Coordinate(0, 0, 0)
 count_altitude = 0
+count_lock_box= 0
 
 # chgState("check_new_orders") gia inseriti in state e state_history di default, vedi su
 
@@ -435,6 +436,9 @@ while robot.step(timestep) != -1:
             if old_state == "go_back_home":
                 state_history = ["check_new_orders"]
                 chgState("stabilize_before_land_on_base")
+            elif old_state== "lock_box":
+                target_altitude=1
+                chgState("go_back_home")
 
     elif state == "goto_recharge_battery":
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, target_posit.x,
@@ -480,10 +484,13 @@ while robot.step(timestep) != -1:
                                                                             target_posit.y, bearing)
         if stab_stack.isStable(posit, target_posit):
             dPrint("Stabilized")
-            if not drone_magnetic.isLocked():
-                chgState('lock_box')
-            else:
+            if old_state=="drone_anomaly_detected":
                 chgState('land_on_delivery_station')
+            else:
+                if not drone_magnetic.isLocked():
+                    chgState('lock_box')
+                else:
+                    chgState('land_on_delivery_station')
 
     elif state == "lock_box":
         target_altitude = target_posit.z
@@ -496,6 +503,11 @@ while robot.step(timestep) != -1:
             if drone_magnetic.isLocked():
                 target_posit = chgTarget(target_posit, [current_order[4], current_order[5], 0.3])
                 chgState("reach_nav_altitude")
+        if near(altitude, target_altitude):
+            count_lock_box+=1
+            if count_lock_box>500:
+                current_order=[]
+                chgState("check_new_orders")
 
     elif state == "reach_nav_altitude":
         # avoid obstacle
