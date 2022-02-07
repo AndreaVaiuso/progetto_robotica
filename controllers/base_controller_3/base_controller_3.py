@@ -408,7 +408,7 @@ while robot.step(timestep) != -1:
     vel_y = y0
     drone_velocity = math.sqrt(pow(vel_y, 2) + pow(vel_x, 2)) * 15000
     stab = abs((roll_acceleration + pitch_acceleration) * 100)
-    stab_stack.pushIntoStabStack(stab)
+    stab_stack.pushIntoStabArray(stab)
     left_sensor_value = drone_distance_sensor_left.getValue()
     right_sensor_value = drone_distance_sensor_right.getValue()
     front_sensor_value = drone_distance_sensor_front.getValue()
