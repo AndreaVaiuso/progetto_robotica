@@ -87,7 +87,7 @@ Mavic2Pro {
       name "front sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -109,7 +109,7 @@ Mavic2Pro {
       name "upper sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -120,7 +120,7 @@ Mavic2Pro {
       name "lower sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       aperture 0.4
@@ -143,7 +143,7 @@ Mavic2Pro {
       name "right sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -166,7 +166,7 @@ Mavic2Pro {
       name "left sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -230,7 +230,7 @@ Mavic2Pro {
       name "front sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -252,7 +252,7 @@ Mavic2Pro {
       name "upper sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -263,7 +263,7 @@ Mavic2Pro {
       name "lower sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       aperture 0.4
@@ -286,7 +286,7 @@ Mavic2Pro {
       name "right sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
@@ -309,7 +309,7 @@ Mavic2Pro {
       name "left sensor"
       lookupTable [
         0 0 0
-        3 3 0
+        2 2 0
       ]
       type "sonar"
       numberOfRays 5
