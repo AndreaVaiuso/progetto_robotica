@@ -15,7 +15,7 @@ def limit(velocity, lim):
 
 
 def avoid_obstacles_sensor(value, velocity):
-    if value is None or value >= limit(velocity, 1.99):
+    if value is None or value >= limit(velocity, 2.99):
         return False
     else:
         return True
