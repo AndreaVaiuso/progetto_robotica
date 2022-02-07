@@ -1,4 +1,6 @@
-from ..utils import euc_dist
+import math
+def euc_dist(drone_pos, dest_pos):
+    return math.sqrt(math.pow((drone_pos[0] - dest_pos[0]), 2) + math.pow((drone_pos[1] - dest_pos[1]), 2))
 
 def sccal(orders,pending,current,state_history,posit,base_coords):
     s_x = base_coords[0]

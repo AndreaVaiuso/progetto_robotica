@@ -458,6 +458,9 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_quota":
         # avoid obstacle
+        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+                                     [drone_velocity, altitude_velocity]):
+            chgState('avoid_obstacles')
         powerGain = 1
         target_altitude = 1
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
