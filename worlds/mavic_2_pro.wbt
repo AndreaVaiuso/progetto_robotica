@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.39462799704540474 0.8749314345948022 0.2806487639484869 4.918151336201098
-  position -9.363009494951568 11.44251166547983 4.992332395364469
+  orientation 0.5213094287113554 0.7403999933225492 0.4243163082237226 4.61783009489272
+  position -6.62322800023269 14.25720359384937 3.3459010878126803
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -57,6 +57,7 @@ Mavic2Pro {
     }
     Receiver {
       model "A"
+      channel 1
     }
     Connector {
       translation -0.07 0 -0.15
@@ -86,11 +87,11 @@ Mavic2Pro {
       name "front sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
-      aperture 2
+      aperture 1.57
     }
     DistanceSensor {
       translation -0.03 0 0.02
@@ -108,7 +109,7 @@ Mavic2Pro {
       name "upper sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
@@ -119,7 +120,7 @@ Mavic2Pro {
       name "lower sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       aperture 0.4
@@ -142,7 +143,7 @@ Mavic2Pro {
       name "right sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
@@ -165,7 +166,7 @@ Mavic2Pro {
       name "left sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
@@ -199,7 +200,7 @@ Mavic2Pro {
     }
     Receiver {
       model "A"
-      channel 1
+      channel 2
     }
     Connector {
       translation -0.07 0 -0.15
@@ -229,11 +230,11 @@ Mavic2Pro {
       name "front sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
-      aperture 2
+      aperture 1.57
     }
     DistanceSensor {
       translation -0.03 0 0.02
@@ -251,7 +252,7 @@ Mavic2Pro {
       name "upper sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
@@ -262,7 +263,7 @@ Mavic2Pro {
       name "lower sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       aperture 0.4
@@ -285,7 +286,7 @@ Mavic2Pro {
       name "right sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
@@ -308,7 +309,7 @@ Mavic2Pro {
       name "left sensor"
       lookupTable [
         0 0 0
-        2 2 0
+        3 3 0
       ]
       type "sonar"
       numberOfRays 5
