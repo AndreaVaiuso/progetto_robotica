@@ -2,7 +2,7 @@
 from controller import Robot, Receiver, Emitter
 import modules.avoid_obstacles as avob
 import modules.score_calculator as sccal
-from utils import StabilizationStack, Coordinate, euc_dist, getID
+from utils import StabilizationArray, Coordinate, euc_dist, euc_dist3, getID
 import threading
 import random
 import struct
@@ -99,15 +99,18 @@ def checkAnomaly():
 def getBaseCoords():
     return [BASE_COORDS[0][0] + drone_ID, BASE_COORDS[0][1], BASE_COORDS[0][2]]
 
-
-def dPrint(string):
-    perc = "--"
+def getBatteryPercent():
+    perc = -1
     try:
         perc = int(robot.batterySensorGetValue())
         perc /= 1000
-        perc = str(int(perc))
+        perc = int(perc)
     except ValueError:
-        perc = "--"
+        perc = -1
+    return perc
+
+def dPrint(string):
+    perc = str(getBatteryPercent())
     if current_order != []:
         c = 1
     else:
@@ -268,7 +271,7 @@ def send_score(dataList):
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
     while emitter.send(message) != 1:
         dPrint(f'Waiting queue for sending message')
-    # [ [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] score, 0 , 0 , 0 , 0 ]
+    # [ [0] "S" , [1] DRONE_ID , [2] ORDER_ID ,  [3] SCORE , 0 , 0 , 0 , 0 ]
     score_dict[drone_ID, order_ID] = [order_ID, score]
     time.sleep(3)
     score_for_order = []
@@ -372,7 +375,7 @@ target_angle = 0
 target_posit = Coordinate(0, 0)
 precision_counter = 0
 bearing = 0
-stab_stack = StabilizationStack(20)
+stab_stack = StabilizationArray(20)
 counter = 0
 powerGain = 0
 stabilization_position = Coordinate(0, 0, 0)
@@ -410,6 +413,8 @@ while robot.step(timestep) != -1:
     lower_sensor_value = drone_distance_sensor_lower.getValue()
 
     if anomaly_detected: chgState("drone_anomaly_detected")
+    if getBatteryPercent() < 3 and euc_dist3(posit.getVec3d,getBaseCoords()) > 10:
+        anomaly_detected = True
 
     if state == "check_new_orders":
         if current_order != []:

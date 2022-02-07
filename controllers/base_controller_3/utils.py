@@ -1,6 +1,6 @@
 import math
 
-class StabilizationStack:
+class StabilizationArray:
     def __init__(self, toll):
         self.stab_toll = toll
         self.stabilization_stack = [999] * toll
@@ -42,6 +42,10 @@ class Coordinate:
 
 def euc_dist(drone_pos, dest_pos):
     return math.sqrt(math.pow((drone_pos[0] - dest_pos[0]), 2) + math.pow((drone_pos[1] - dest_pos[1]), 2))
+
+def euc_dist3(drone_pos, dest_pos):
+    return math.sqrt(math.pow((drone_pos[0] - dest_pos[0]), 2) + math.pow((drone_pos[1] - dest_pos[1]), 2) + math.pow((drone_pos[2] - dest_pos[2]), 2))
+
 
 def getID(name):
     x = name.split("_")
