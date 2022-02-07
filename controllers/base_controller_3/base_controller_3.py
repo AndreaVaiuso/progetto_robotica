@@ -10,7 +10,7 @@ import time
 import math
 import operator
 
-BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.32], 2: [-1.76, 3.18, 0.32]}
+BASE_COORDS = {0: [0, 0, 0], 1: [2.17, 3.18, 0.32], 2: [-1.76, 3.18, 0.32], 3: [-5.69, 3.18, 0.32]}
 ROTATION_ANGLE_FOR_LOCK = 0
 MAX_YAW = 1
 MAX_PITCH = 10

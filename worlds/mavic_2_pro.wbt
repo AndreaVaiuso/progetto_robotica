@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.5213094287113554 0.7403999933225492 0.4243163082237226 4.61783009489272
-  position -6.62322800023269 14.25720359384937 3.3459010878126803
+  orientation 0.1134409932791736 0.990721980124257 0.07484049132993381 5.108229699891509
+  position -13.97875144313631 3.9012377531985636 17.42998059896015
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -479,6 +479,33 @@ DEF base_2 Solid {
     }
   ]
   name "solid(1)"
+  contactMaterial "base"
+  boundingObject Box {
+    size 1 0.1 1
+  }
+  physics Physics {
+  }
+}
+DEF base_2 Solid {
+  translation 3.18 0.0401891 -5.69
+  rotation -4.335868726849804e-18 -0.9999999999999999 4.075321445525268e-18 1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColorMap ImageTexture {
+          url [
+            "../textures/base3.png"
+          ]
+        }
+        roughness 1
+        metalness 0
+      }
+      geometry Box {
+        size 1 0.1 1
+      }
+    }
+  ]
+  name "solid(2)"
   contactMaterial "base"
   boundingObject Box {
     size 1 0.1 1
