@@ -678,17 +678,14 @@ while robot.step(timestep) != -1:
                                          [drone_velocity, altitude_velocity]):
             if state_history[-2] == ('land_on_delivery_station' or 'lock_box'):
                 target_altitude = altitude + 1.5
-                count_avoid = 0
                 chgState(state_history[-3])
             elif state_history[-2] == ('go_near_box' or 'stabilize_on_position'):
-                count_avoid = 0
+                target_altitude = altitude +1.5
                 chgState('dai_precedenza')
             elif state_history[-2] == 'reach_nav_altitude':
-                count_avoid = 0
                 chgState('reach_destination')
             else:
                 target_altitude = altitude + 1.5
-                count_avoid = 0
                 chgState(state_history[-2])
         else:
             if avob.avoid_obstacles_sensor(None, altitude_velocity):
@@ -698,19 +695,21 @@ while robot.step(timestep) != -1:
                 dPrint(string)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
-                roll_disturbance = -0.5
+                pitch_disturbance = 0
+                roll_disturbance = -0.3
                 string = 'left sensor value : ' + str(left_sensor_value)
                 dPrint(string)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
-                roll_disturbance = 0.5
+                pitch_disturbance = 0
+                roll_disturbance = 0.3
                 string = 'right sensor value : ' + str(right_sensor_value)
                 dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity) or avob.avoid_obstacles_sensor(
                     front_left_sensor_value, drone_velocity) or avob.avoid_obstacles_sensor(front_right_sensor_value,
                                                                                             drone_velocity):
-                pitch_disturbance = -0.5
+                pitch_disturbance = -0.3
                 target_altitude += 0.1
                 string = 'front sensor value : ' + str(front_sensor_value)
                 dPrint(string)
