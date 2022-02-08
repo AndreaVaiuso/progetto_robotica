@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9703686966853625 0.15939880160010797 0.18159464348267645 4.552626084434573
-  position 7.181172455046515 145.81458520113327 -5.348799160927749
+  orientation 0.49575694881897786 -0.796346053543589 -0.34649388263467 4.842519322076351
+  position 0.5310557827488989 0.47351240980661174 1.0226270401396724
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -40,6 +40,50 @@ Mavic2Pro {
   ]
   cpuConsumption 1
   bodySlot [
+    DistanceSensor {
+      translation 0.08 0.02 0.0100432
+      rotation 0.9352398985105774 0.250054972864786 0.2505969728059698 1.63986
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front left sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+      aperture 2
+    }
+    DistanceSensor {
+      translation 0.08 -0.02 0.00995672
+      rotation -0.9352398985105774 0.250054972864786 0.2505969728059698 -1.6398553071795865
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front right sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+      aperture 2
+    }
     DistanceSensor {
       translation -0.053814 0 -0.041034
       rotation 0 1 0 1.5708
@@ -183,6 +227,50 @@ Mavic2Pro {
   ]
   cpuConsumption 1
   bodySlot [
+    DistanceSensor {
+      translation 0.08 0.02 0.00998408
+      rotation 0.9350663322496984 0.250750089097039 0.2505500890259746 1.63709
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front left sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+      aperture 2
+    }
+    DistanceSensor {
+      translation 0.08 -0.02 0.010016
+      rotation -0.9350663322496984 0.250750089097039 0.2505500890259746 -1.6370853071795866
+      children [
+        Shape {
+          appearance DEF App_s PBRAppearance {
+            baseColor 0 0 1
+          }
+          geometry DEF geo_sems Box {
+            size 0.01 0.01 0.005
+          }
+        }
+      ]
+      name "front right sensor"
+      lookupTable [
+        0 0 0
+        2 2 0
+      ]
+      type "sonar"
+      numberOfRays 5
+      aperture 2
+    }
     DistanceSensor {
       translation -0.053814 0 -0.041034
       rotation 0 1 0 1.5708
