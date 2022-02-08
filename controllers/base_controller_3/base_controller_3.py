@@ -420,6 +420,8 @@ while robot.step(timestep) != -1:
     left_sensor_value = drone_distance_sensor_left.getValue()
     right_sensor_value = drone_distance_sensor_right.getValue()
     front_sensor_value = drone_distance_sensor_front.getValue()
+    front_left_sensor_value = drone_distance_sensor_front_left.getValue()
+    front_right_sensor_value = drone_distance_sensor_front_right.getValue()
     upper_sensor_value = drone_distance_sensor_upper.getValue()
     lower_sensor_value = drone_distance_sensor_lower.getValue()
 
@@ -474,7 +476,7 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_quota":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, None, None, None,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, None, None, None,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         powerGain = 1
@@ -488,7 +490,7 @@ while robot.step(timestep) != -1:
 
     elif state == "go_near_box":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
@@ -498,7 +500,7 @@ while robot.step(timestep) != -1:
             chgState("stabilize_on_position")
 
     elif state == "stabilize_on_position":
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, 0)
@@ -527,7 +529,7 @@ while robot.step(timestep) != -1:
 
 
     elif state == "lock_box":
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         target_altitude = target_posit.z
@@ -548,7 +550,7 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_nav_altitude":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         roll_disturbance, pitch_disturbance = get_stabilization_disturbance(posit.x, posit.y, getPickupPoint()[0],
@@ -565,7 +567,7 @@ while robot.step(timestep) != -1:
 
     elif state == "reach_destination":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         pitch_disturbance = get_pitch_disturbance_gain(posit.x, posit.y, target_posit.x, target_posit.y)
@@ -575,7 +577,7 @@ while robot.step(timestep) != -1:
             chgState("stabilize_on_position")
 
     elif state == "land_on_delivery_station":
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         target_altitude = target_posit.z + 0.5
@@ -608,7 +610,7 @@ while robot.step(timestep) != -1:
 
     elif state == "go_back_home":
         # avoid obstacle
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value,
                                      right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
@@ -619,7 +621,7 @@ while robot.step(timestep) != -1:
             chgState("check_new_orders")
 
     elif state == "stabilize_before_land_on_base":
-        if avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value,
+        if avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value,
                                      right_sensor_value,
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
@@ -663,7 +665,7 @@ while robot.step(timestep) != -1:
             abort_all_pending_orders()
 
     elif state == 'avoid_obstacles':
-        if not avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
+        if not avob.avoid_obstacles_full(front_left_sensor_value, front_right_sensor_value,upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
                                          [drone_velocity, altitude_velocity]):
             if state_history[-2] == ('land_on_delivery_station' or 'lock_box'):
                 target_altitude += 1.5
@@ -682,7 +684,7 @@ while robot.step(timestep) != -1:
         else:
             if avob.avoid_obstacles_sensor(upper_sensor_value, altitude_velocity):
                 target_altitude -= 0.2
-                roll_disturbance = -0.5
+                #roll_disturbance = -0.5
                 string = 'upper sensor value : ' + str(upper_sensor_value)
                 # dPrint(string)
 
@@ -700,8 +702,8 @@ while robot.step(timestep) != -1:
                 string = 'right sensor value : ' + str(right_sensor_value)
                 # dPrint(string)
 
-            if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
-                pitch_disturbance = -1
+            if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity) or avob.avoid_obstacles_sensor(front_left_sensor_value, drone_velocity) or avob.avoid_obstacles_sensor(front_right_sensor_value, drone_velocity):
+                pitch_disturbance = -0.1
                 target_altitude += 0.5
                 string = 'front sensor value : ' + str(front_sensor_value)
                 # dPrint(string)
