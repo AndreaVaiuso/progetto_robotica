@@ -7,7 +7,7 @@ from venv import create
 from controller import Supervisor, Emitter
 
 BASE_COORDS = {0:[0,0,0.3],1:[2.17,3.18,0.3],2:[-1.76,3.18,0.3],3:[-5.69, 3.18, 0.32]}
-DESTINATIONS_COORDS = {0:[10,10], 1:[10,10], 2:[10,10], 3:[10,10]}
+DESTINATIONS_COORDS = {0:[10,10], 1:[-6,25], 2:[-11,-16], 3:[35,-15]}
 
 supervisor = Supervisor()
 timestep = int(supervisor.getBasicTimeStep())

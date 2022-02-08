@@ -644,9 +644,9 @@ while robot.step(timestep) != -1:
             abort_all_pending_orders()
 
     elif state == 'avoid_obstacles':
-        count_avoid+=1
+        #count_avoid+=1
         if not avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
-                                         [drone_velocity, altitude_velocity]) and count_avoid>50:
+                                         [drone_velocity, altitude_velocity]): #and count_avoid>50:
             if state_history[-2] == ('land_on_delivery_station' or 'lock_box'):
                 target_altitude = altitude + 1
                 count_avoid=0
@@ -663,25 +663,27 @@ while robot.step(timestep) != -1:
                 target_altitude = altitude - 0.1
                 #roll_disturbance = 0.8
                 string = 'upper sensor value : ' + str(upper_sensor_value)
-                dPrint(string)
+                #dPrint(string)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
+                target_altitude += 0.2
                 pitch_disturbance = 0
-                roll_disturbance = -0.5
+                roll_disturbance = -0.3
                 string = 'left sensor value : ' + str(left_sensor_value)
-                dPrint(string)
+                #dPrint(string)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
+                target_altitude += 0.2
                 pitch_disturbance = 0
-                roll_disturbance = 0.5
+                roll_disturbance = 0.3
                 string = 'right sensor value : ' + str(right_sensor_value)
-                dPrint(string)
+                #dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
-                pitch_disturbance = -0.3
-                target_altitude += 0.1
+                pitch_disturbance = -0.2
+                target_altitude += 0.2
                 string = 'front sensor value : ' + str(front_sensor_value)
-                dPrint(string)
+                #dPrint(string)
 
 
     else:

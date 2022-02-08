@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.1134409932791736 0.990721980124257 0.07484049132993381 5.108229699891509
-  position -13.97875144313631 3.9012377531985636 17.42998059896015
+  orientation 0.5327977248053812 0.7504572612687791 0.3910760583967938 4.734554373762374
+  position -85.12450426522007 128.62409564059018 34.30760962121824
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -583,42 +583,6 @@ DEF Obstacle Solid {
     }
   ]
   name "obstacle"
-  boundingObject USE Obstacle_geometry
-}
-DEF Obstacle Solid {
-  translation 21.2642 7.5 -5.47924
-  rotation 0 1 0 1.5708
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 1 0.333333 0
-        roughness 1
-        metalness 0
-      }
-      geometry DEF Obstacle_geometry Box {
-        size 10 15 1
-      }
-    }
-  ]
-  name "obstacle(1)"
-  boundingObject USE Obstacle_geometry
-}
-DEF Obstacle Solid {
-  translation -15.6885 7.55 27.6204
-  rotation 0 1 0 4.07987e-06
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 1 0.333333 0
-        roughness 1
-        metalness 0
-      }
-      geometry DEF Obstacle_geometry Box {
-        size 10 15 1
-      }
-    }
-  ]
-  name "obstacle(2)"
   boundingObject USE Obstacle_geometry
 }
 DEF Obstacle Solid {
