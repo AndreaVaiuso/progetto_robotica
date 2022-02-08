@@ -13,10 +13,10 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.49575694881897786 -0.796346053543589 -0.34649388263467 4.842519322076351
-  position 2.339138395685668 2.5402193481131357 1.684260864870572
+  orientation 0.5084425283956846 -0.7843503129948182 -0.35536007347975124 4.8274553083522695
+  position 11.459180088001496 13.518875403572991 5.02156858710528
   near 0.2
-  follow "Mavic 2 PRO_1"
+  follow "Mavic 2 PRO_0"
   followSmoothness 0.2
 }
 TexturedBackground {
@@ -97,7 +97,6 @@ Mavic2Pro {
     }
     Emitter {
       model "A"
-      channel -1
     }
     Receiver {
       model "A"
@@ -285,7 +284,6 @@ Mavic2Pro {
     }
     Emitter {
       model "A"
-      channel -1
     }
     Receiver {
       model "A"
