@@ -16,7 +16,7 @@ Viewpoint {
   orientation 0.49575694881897786 -0.796346053543589 -0.34649388263467 4.842519322076351
   position 0.5310557827488989 0.47351240980661174 1.0226270401396724
   near 0.2
-  follow "Mavic 2 PRO_0"
+  follow "Mavic 2 PRO_1"
   followSmoothness 0.2
 }
 TexturedBackground {
@@ -157,6 +157,7 @@ Mavic2Pro {
       ]
       type "sonar"
       numberOfRays 5
+      aperture 0.5
     }
     DistanceSensor {
       translation -0.233814 0 -0.0110337
@@ -344,6 +345,7 @@ Mavic2Pro {
       ]
       type "sonar"
       numberOfRays 5
+      aperture 0.5
     }
     DistanceSensor {
       translation -0.233814 0 -0.0110337

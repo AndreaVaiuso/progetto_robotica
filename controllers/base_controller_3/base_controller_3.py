@@ -683,10 +683,10 @@ while robot.step(timestep) != -1:
                 chgState(state_history[-2])
         else:
             if avob.avoid_obstacles_sensor(upper_sensor_value, altitude_velocity):
-                target_altitude -= 0.2
+                target_altitude -= 0.1
                 #roll_disturbance = -0.5
                 string = 'upper sensor value : ' + str(upper_sensor_value)
-                # dPrint(string)
+                dPrint(string)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
                 target_altitude += 0.5
