@@ -685,19 +685,19 @@ while robot.step(timestep) != -1:
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
                 target_altitude += 0.5
                 pitch_disturbance = 0
-                roll_disturbance = -0.3
+                roll_disturbance = -0.5
                 string = 'left sensor value : ' + str(left_sensor_value)
                 # dPrint(string)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
                 target_altitude += 0.5
                 pitch_disturbance = 0
-                roll_disturbance = 0.3
+                roll_disturbance = 0.5
                 string = 'right sensor value : ' + str(right_sensor_value)
                 # dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
-                pitch_disturbance = -0.5
+                pitch_disturbance = -1
                 target_altitude += 0.5
                 string = 'front sensor value : ' + str(front_sensor_value)
                 # dPrint(string)
