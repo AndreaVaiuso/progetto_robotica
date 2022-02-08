@@ -6,7 +6,7 @@ import threading
 from venv import create
 from controller import Supervisor, Emitter
 
-BASE_COORDS = {0:[0,0,0.3],1:[2.17,3.18,0.3],2:[-1.76,3.18,0.3]}
+BASE_COORDS = {0:[0,0,0.3],1:[2.17,3.18,0.3],2:[-1.76,3.18,0.3],3:[-5.69, 3.18, 0.32]}
 DESTINATIONS_COORDS = {0:[10,10], 1:[10,10], 2:[10,10], 3:[10,10]}
 
 supervisor = Supervisor()
@@ -83,7 +83,7 @@ def baseIsFree(base):
 def createOrder(orderID,weight,position,base):
     root_node = supervisor.getRoot()
     children_field = root_node.getField("children")
-    message = struct.pack("ciidddddd",b"N",int(orderID),int(2),float(weight),float(position[0]),float(position[1]),0.0,0.0,0.0)
+    message = struct.pack("ciidddddd",b"N",int(orderID),int(base),float(weight),float(position[0]),float(position[1]),0.0,0.0,0.0)
     dPrint("New pickup ID: " + str(orderID) + " position: [ " + str(position[0]) +" , " + str(position[1]) + " ] base: " + str(base))
     while emitter.send(message) != 1 :
         continue
