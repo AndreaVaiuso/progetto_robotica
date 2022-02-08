@@ -13,8 +13,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.5327977248053812 0.7504572612687791 0.3910760583967938 4.734554373762374
-  position -85.12450426522007 128.62409564059018 34.30760962121824
+  orientation 1 0 0 4.71238898038469
+  position -0.014624287050951071 20.558969325720813 0.9830153199078072
   near 0.2
   follow "Mavic 2 PRO_0"
   followSmoothness 0.2
@@ -91,7 +91,7 @@ Mavic2Pro {
       ]
       type "sonar"
       numberOfRays 5
-      aperture 1.57
+      aperture 2
     }
     DistanceSensor {
       translation -0.03 0 0.02
@@ -234,7 +234,7 @@ Mavic2Pro {
       ]
       type "sonar"
       numberOfRays 5
-      aperture 1.57
+      aperture 2
     }
     DistanceSensor {
       translation -0.03 0 0.02

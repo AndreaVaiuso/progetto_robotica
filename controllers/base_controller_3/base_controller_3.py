@@ -646,7 +646,7 @@ while robot.step(timestep) != -1:
     elif state == 'avoid_obstacles':
         #count_avoid+=1
         if not avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
-                                         [drone_velocity, altitude_velocity]): #and count_avoid>50:
+                                         [drone_velocity, altitude_velocity]) and count_avoid>50:
             if state_history[-2] == ('land_on_delivery_station' or 'lock_box'):
                 target_altitude = altitude + 1
                 count_avoid=0
@@ -682,7 +682,7 @@ while robot.step(timestep) != -1:
                 #dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
-                pitch_disturbance = -0.2
+                pitch_disturbance = -0.5
                 target_altitude += 0.2
                 string = 'front sensor value : ' + str(front_sensor_value)
                 #dPrint(string)
