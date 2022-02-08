@@ -426,7 +426,7 @@ while robot.step(timestep) != -1:
     lower_sensor_value = drone_distance_sensor_lower.getValue()
 
     if anomaly_detected: chgState("drone_anomaly_detected")
-    if getBatteryPercent() < 3 and euc_dist3(posit.getVec3d, getBaseCoords()) > 10:
+    if getBatteryPercent() < 3 and euc_dist3(posit.getVec3d(), getBaseCoords()) > 10:
         anomaly_detected = True
 
     if state == "check_new_orders":
