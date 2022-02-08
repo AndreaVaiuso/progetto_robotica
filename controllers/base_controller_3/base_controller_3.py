@@ -101,6 +101,7 @@ def checkAnomaly():
 def getBaseCoords():
     return [BASE_COORDS[0][0] + drone_ID, BASE_COORDS[0][1], BASE_COORDS[0][2]]
 
+
 def getBatteryPercent():
     perc = -1
     try:
@@ -110,6 +111,7 @@ def getBatteryPercent():
     except ValueError:
         perc = -1
     return perc
+
 
 def dPrint(string):
     perc = str(getBatteryPercent())
@@ -384,7 +386,7 @@ powerGain = 0
 stabilization_position = Coordinate(0, 0, 0)
 count_altitude = 0
 count_lock_box = 0
-count_avoid=0
+count_avoid = 0
 
 # chgState("check_new_orders") gia inseriti in state e state_history di default, vedi su
 
@@ -417,7 +419,7 @@ while robot.step(timestep) != -1:
     lower_sensor_value = drone_distance_sensor_lower.getValue()
 
     if anomaly_detected: chgState("drone_anomaly_detected")
-    if getBatteryPercent() < 3 and euc_dist3(posit.getVec3d,getBaseCoords()) > 10:
+    if getBatteryPercent() < 3 and euc_dist3(posit.getVec3d, getBaseCoords()) > 10:
         anomaly_detected = True
 
     if state == "check_new_orders":
@@ -446,7 +448,7 @@ while robot.step(timestep) != -1:
                 state_history = ["check_new_orders"]
                 chgState("stabilize_before_land_on_base")
             elif old_state == "lock_box":
-                target_altitude = 1.5
+                target_altitude = 1 + drone_ID * 2
                 chgState("go_back_home")
 
     elif state == "goto_recharge_battery":
@@ -471,7 +473,7 @@ while robot.step(timestep) != -1:
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         powerGain = 1
-        target_altitude = 1.5
+        target_altitude = 1 + drone_ID * 2
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
 
@@ -536,7 +538,7 @@ while robot.step(timestep) != -1:
                                                                             getPickupPoint()[1], bearing)
         counter += 1
         if counter > 100:
-            pitch_disturbance=0.5
+            pitch_disturbance = 0.5
             target_altitude = getNavigationAltitude()
             target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
             yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
@@ -644,48 +646,48 @@ while robot.step(timestep) != -1:
             abort_all_pending_orders()
 
     elif state == 'avoid_obstacles':
-        #count_avoid+=1
+        # count_avoid+=1
         if not avob.avoid_obstacles_full(upper_sensor_value, front_sensor_value, left_sensor_value, right_sensor_value,
-                                         [drone_velocity, altitude_velocity]) and count_avoid>50:
+                                         [drone_velocity, altitude_velocity]) and count_avoid > 50:
             if state_history[-2] == ('land_on_delivery_station' or 'lock_box'):
                 target_altitude = altitude + 1
-                count_avoid=0
+                count_avoid = 0
                 chgState(state_history[-3])
             elif state_history[-2] == 'go_near_box':
-                count_avoid=0
+                count_avoid = 0
                 chgState(state_history[-2])
             elif state_history[-2] == 'reach_nav_altitude':
                 chgState('reach_destination')
             else:
                 target_altitude = altitude + 1
-                count_avoid=0
+                count_avoid = 0
                 chgState(state_history[-2])
         else:
             if avob.avoid_obstacles_sensor(upper_sensor_value, altitude_velocity):
-                target_altitude = altitude - 0.1
-                #roll_disturbance = 0.8
+                target_altitude -= 0.2
+                # roll_disturbance = 0.8
                 string = 'upper sensor value : ' + str(upper_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
                 target_altitude += 0.2
                 pitch_disturbance = 0
                 roll_disturbance = -0.3
                 string = 'left sensor value : ' + str(left_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
                 target_altitude += 0.2
                 pitch_disturbance = 0
                 roll_disturbance = 0.3
                 string = 'right sensor value : ' + str(right_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity):
                 pitch_disturbance = -0.5
                 target_altitude += 0.2
                 string = 'front sensor value : ' + str(front_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
 
     else:
