@@ -654,6 +654,8 @@ while robot.step(timestep) != -1:
             elif state_history[-2] == 'go_near_box':
                 count_avoid=0
                 chgState(state_history[-2])
+            elif state_history[-2] == 'reach_nav_altitude':
+                chgState('reach_destination')
             else:
                 target_altitude = altitude + 1
                 count_avoid=0
