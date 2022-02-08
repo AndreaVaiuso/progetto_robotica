@@ -448,7 +448,7 @@ while robot.step(timestep) != -1:
                 state_history = ["check_new_orders"]
                 chgState("stabilize_before_land_on_base")
             elif old_state == "lock_box":
-                target_altitude = 1 + drone_ID * 2
+                target_altitude = 1
                 chgState("go_back_home")
 
     elif state == "goto_recharge_battery":
@@ -473,7 +473,7 @@ while robot.step(timestep) != -1:
                                      [drone_velocity, altitude_velocity]):
             chgState('avoid_obstacles')
         powerGain = 1
-        target_altitude = 1 + drone_ID * 2
+        target_altitude = 1 
         target_angle = get_target_angle(posit.x, target_posit.x, posit.y, target_posit.y)
         yaw_disturbance = gen_yaw_disturbance(bearing, MAX_YAW, target_angle)
 
@@ -665,7 +665,7 @@ while robot.step(timestep) != -1:
         else:
             if avob.avoid_obstacles_sensor(upper_sensor_value, altitude_velocity):
                 target_altitude -= 0.2
-                # roll_disturbance = 0.8
+                roll_disturbance = -1
                 string = 'upper sensor value : ' + str(upper_sensor_value)
                 # dPrint(string)
 
