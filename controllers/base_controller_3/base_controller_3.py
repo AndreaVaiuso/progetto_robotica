@@ -141,7 +141,7 @@ def chgTarget(old_target, new_target):
 
 
 def getNavigationAltitude():
-    return 10 + drone_ID * 2
+    return 10
 
 
 def f2(x):
