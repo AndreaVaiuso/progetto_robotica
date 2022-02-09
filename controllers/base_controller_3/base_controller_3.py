@@ -243,6 +243,7 @@ def clamp(val, low, high):
 
 def abort_current_order():
     global current_order
+    if not current_order: return
     abort_order(current_order, current=True)
     current_order = []
 
@@ -680,7 +681,7 @@ while robot.step(timestep) != -1:
                 target_altitude = altitude + 1.5
                 chgState(state_history[-3])
             elif state_history[-2] == ('go_near_box' or 'stabilize_on_position'):
-                target_altitude = altitude +1.5
+                target_altitude = altitude + 1.5
                 chgState('dai_precedenza')
             elif state_history[-2] == 'reach_nav_altitude':
                 chgState('reach_destination')
@@ -692,19 +693,19 @@ while robot.step(timestep) != -1:
                 target_altitude -= 0.1
                 # roll_disturbance = -0.5
                 string = 'upper sensor value : ' + str(None)
-                #dPrint(string)
+                # dPrint(string)
 
             if avob.avoid_obstacles_sensor(left_sensor_value, drone_velocity):
                 pitch_disturbance = 0
                 roll_disturbance = -0.3
                 string = 'left sensor value : ' + str(left_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
             if avob.avoid_obstacles_sensor(right_sensor_value, drone_velocity):
                 pitch_disturbance = 0
                 roll_disturbance = 0.3
                 string = 'right sensor value : ' + str(right_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
             if avob.avoid_obstacles_sensor(front_sensor_value, drone_velocity) or avob.avoid_obstacles_sensor(
                     front_left_sensor_value, drone_velocity) or avob.avoid_obstacles_sensor(front_right_sensor_value,
@@ -712,7 +713,7 @@ while robot.step(timestep) != -1:
                 pitch_disturbance = -0.3
                 target_altitude += 0.1
                 string = 'front sensor value : ' + str(front_sensor_value)
-                #dPrint(string)
+                # dPrint(string)
 
 
     else:
