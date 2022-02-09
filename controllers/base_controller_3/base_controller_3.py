@@ -38,6 +38,7 @@ target_history = []
 score_dict = {}
 
 
+# funzione che verifica se c'è sufficiente battria per effettuare l'ordine
 def checkBattery():
     global battery_for_current, current_order, old_state, posit
     battery = robot.batterySensorGetValue()
@@ -70,6 +71,7 @@ def checkBattery():
         return False
 
 
+# ritorna la stima della batteria necessaria per effettuare tutti gli ordini
 def checkAllBattery():
     global orders, state_history, posit
     score_all = sccal.sccal(orders, [], [], state_history, posit, getBaseCoords())
@@ -77,6 +79,7 @@ def checkAllBattery():
     return battery_for_all
 
 
+# ritorna le coordinate del punto di ritiro del pacco
 def getPickupPoint():
     global target_posit, current_order
     if current_order[2] != -1:
@@ -85,23 +88,26 @@ def getPickupPoint():
         return [current_order[6], current_order[7], current_order[8]]
 
 
+# serve per simulare l'evento anomalo durente la consegna
 def checkAnomaly():
     global anomaly_detected
     while 1:
-        time.sleep(500)
+        time.sleep(700)
         # time.sleep(60)
         # anomaly_detected = True
         # return
         anom = random.random()
-        if anom > 0.8:
+        if anom > 0.95:
             anomaly_detected = True
             return
 
 
+# ritorna le coordinate della stazione di ricarica di un drone
 def getBaseCoords():
     return [BASE_COORDS[0][0] + drone_ID, BASE_COORDS[0][1], BASE_COORDS[0][2]]
 
 
+# ritorna la percentuale di batteria residua per ogni drone
 def getBatteryPercent():
     perc = -1
     try:
@@ -113,6 +119,7 @@ def getBatteryPercent():
     return perc
 
 
+# print personalizzata per ogni drone
 def dPrint(string):
     perc = str(getBatteryPercent())
     if current_order != []:
@@ -122,6 +129,7 @@ def dPrint(string):
     print(f"Drone ({name} [{perc}%][{c + len(orders)}])> {string}")
 
 
+# funzione per il cambio di stato
 def chgState(newState, verbose=True):
     global state, state_history, old_state
     state = newState
@@ -131,19 +139,23 @@ def chgState(newState, verbose=True):
     state_history.append(state)
 
 
+# ritorna il valore nuovo e la differenza con quello vecchio , sfruttato per il calcolo delle velocità
 def chgValue(value, newValue):
     return newValue, abs(newValue - value)
 
 
+# cambia il target del drone
 def chgTarget(old_target, new_target):
     target_history.append(old_target)
     return Coordinate(new_target[0], new_target[1], new_target[2])
 
 
+# altezza di navigazione
 def getNavigationAltitude():
     return 10
 
 
+# funzione logaritmica per il moto
 def f2(x):
     y = math.log(abs(x) + 1, 4) / 10
     if x > 0:
@@ -152,11 +164,13 @@ def f2(x):
         return -y
 
 
+# funzione logaritmica per il moto
 def f(x):
     y = math.log(x + 1, 4) / 10
     return y
 
 
+# calcola la differenza di angoli
 def get_subtraction(bearing, target_angle):
     if bearing > target_angle:
         return bearing - target_angle
@@ -164,6 +178,7 @@ def get_subtraction(bearing, target_angle):
         return target_angle - bearing
 
 
+# definisce un limite
 def limiter(value, limit):
     if abs(value) > limit:
         if value > 0:
@@ -174,6 +189,7 @@ def limiter(value, limit):
         return value
 
 
+# funzione che ritorna l'angolo target
 def get_target_angle(x1, x2, y1, y2):
     x0 = x2 - x1
     y0 = y2 - y1
@@ -187,6 +203,7 @@ def get_target_angle(x1, x2, y1, y2):
         return 90 + math.degrees(math.atan((y2 - y1) / (x2 - x1)))
 
 
+# ritorna pitch e row per la stabilizzazione
 def get_stabilization_disturbance(x1, y1, x2, y2, a):
     a = math.radians(a)
     x0 = (x2 - x1) * math.cos(a) - (y2 - y1) * math.sin(a)
@@ -198,6 +215,7 @@ def get_stabilization_disturbance(x1, y1, x2, y2, a):
     return pd, rd
 
 
+# ritorna il gain per l'imbardata
 def get_yaw_disturbance_gain(bearing, targetAngle):
     diff = (bearing - targetAngle) % 360
     if 180 > diff > 0:
@@ -206,6 +224,7 @@ def get_yaw_disturbance_gain(bearing, targetAngle):
         return -f(-diff + 360) * 2
 
 
+# ritorna il gain per il beccheggio
 def get_pitch_disturbance_gain(x1, y1, x2, y2):
     drone_position = [x1, y1]
     box_position = [x2, y2]
@@ -213,11 +232,13 @@ def get_pitch_disturbance_gain(x1, y1, x2, y2):
     return limiter(f(distance) * 10, 1.3)
 
 
+# ritorna l'imbardata
 def gen_yaw_disturbance(bearing, maxYaw, target_angle):
     g = get_yaw_disturbance_gain(bearing, target_angle)
     return maxYaw * g
 
 
+# converte l'angolo da radianti in gradi
 def get_bearing_in_degrees(values):
     rad = math.atan2(values[0], values[1])
     bearing = (rad - 1.5708) / math.pi * 180.0
@@ -226,6 +247,7 @@ def get_bearing_in_degrees(values):
     return bearing
 
 
+# funzione che serve per capire la vicinanza tra un valore e un valore target
 def near(value, target, error=0.5):
     if value - error < target < value + error:
         return True
@@ -241,6 +263,7 @@ def clamp(val, low, high):
         return val
 
 
+# funzione per l'aborto dell'ordine corrente in caso di anomalia
 def abort_current_order():
     global current_order
     if not current_order: return
@@ -248,6 +271,7 @@ def abort_current_order():
     current_order = []
 
 
+# funzione per l'aborto di ordini che vengono delegati agli altri droni in caso di anomalia
 def abort_order(order, current=False):
     global posit, altitude
     emitter.setChannel(Emitter.CHANNEL_BROADCAST)
@@ -261,12 +285,14 @@ def abort_order(order, current=False):
         continue
 
 
+# iterazione su tutti gli ordini in coda della funzione precedente
 def abort_all_pending_orders():
     global orders
     while len(orders) > 0:
         abort_order(orders.pop())
 
 
+# funzione che calcola il punteggio per un ordine e lo invia
 def send_score(dataList):
     global orders, current_order, state_history, posit
     order_ID = dataList[1]
@@ -296,6 +322,7 @@ def send_score(dataList):
             del score_dict[i]
 
 
+# funzione per le gestione di nuovi messaggi
 def update_orders():
     dPrint("Updating orders")
     global orders, thread_index, score_dict
@@ -318,6 +345,7 @@ def update_orders():
             receiver.nextPacket()
 
 
+# messaggio del completamento di un ordine
 def completeDelivery(orderID):
     message = struct.pack("ciidddddd", b"C", int(orderID), 0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     emitter.setChannel(0)
